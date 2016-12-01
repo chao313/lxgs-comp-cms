@@ -15,5 +15,5 @@ public class CmsBannerRequest extends BaseRequest{
 	private String image_url;//图片地址
 	private String image_link;//图片连接地址
 	private Integer image_order;//图片的顺序，
-	private Integer delete_flag;
+	
 }

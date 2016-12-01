@@ -24,6 +24,7 @@
     <module>sdxd-comp-cms-common</module>
     <module>sdxd-comp-cms-service</module>
     <module>sdxd-comp-cms</module>
+    <module>sdxd-comp-cms-test</module>
   </modules>
 	
 	

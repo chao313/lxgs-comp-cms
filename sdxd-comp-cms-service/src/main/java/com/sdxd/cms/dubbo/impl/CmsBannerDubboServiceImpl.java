@@ -1,5 +1,8 @@
 package com.sdxd.cms.dubbo.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
@@ -9,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.sdxd.cms.dubbo.api.CmsBannerDubboService;
+import com.sdxd.cms.dubbo.api.pojo.CmsBannerVo;
 import com.sdxd.cms.dubbo.api.request.CmsBannerRequest;
 import com.sdxd.cms.dubbo.api.request.DeleteCmsBannerRequest;
 import com.sdxd.cms.dubbo.api.request.QueryCmsBannerRequest;
@@ -33,6 +37,7 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 		CmsBannerResponse res = new CmsBannerResponse();
 		reponse.setError(Constants.System.SERVER_SUCCESS);
 		reponse.setStatus(Constants.System.OK);
+		
 		try {
 			CmsBanner cmsBanner = new CmsBanner();
 			BeanUtils.copyOnPropertyUtils(cmsBanner, request);
@@ -55,6 +60,12 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 		CmsBannerResponse res = new CmsBannerResponse();
 		reponse.setError(Constants.System.SERVER_SUCCESS);
 		reponse.setStatus(Constants.System.OK);
+		String id = request.getId();
+		if(StringUtils.isBlank(id)){
+			reponse.setError(Constants.System.PARAMS_INVALID);
+			reponse.setStatus(Constants.System.FAIL);
+			return reponse;
+		}
 		try {
 			CmsBanner cmsBanner = new CmsBanner();
 			BeanUtils.copyOnPropertyUtils(cmsBanner, request);
@@ -86,11 +97,11 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 		try {
 			CmsBanner cmsBanner = new CmsBanner();
 			cmsBanner.setId(id);
-			cmsBanner.setDelete_flag(1);
+			cmsBanner.setDeleteFlag(1);
 			cmsBannerService.update(cmsBanner);
 			res.setSuccess(true);
 		} catch (Exception e) {
-			LOGGER.error("updataCmsBanner error",e);
+			LOGGER.error("deleteCmsBanner error",e);
 			res.setSuccess(false);
 			reponse.setError(Constants.System.SYSTEM_ERROR_CODE);
 			reponse.setStatus(Constants.System.FAIL);
@@ -101,24 +112,28 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 
 	@Override
 	public DubboResponse<QueryCmdBannerResponse> queryCmsBanner(QueryCmsBannerRequest request) {
-		LOGGER.debug("deleteCmsBanner,requestParam:{}",JSONObject.toJSONString(request));
+		LOGGER.debug("queryCmsBanner,requestParam:{}",JSONObject.toJSONString(request));
 		 DubboResponse<QueryCmdBannerResponse>  reponse = new  DubboResponse<QueryCmdBannerResponse>();
 		reponse.setError(Constants.System.SERVER_SUCCESS);
 		reponse.setStatus(Constants.System.OK);
-		String id = request.getId();
-		if(StringUtils.isBlank(id)){
-			reponse.setError(Constants.System.PARAMS_INVALID);
-			reponse.setStatus(Constants.System.FAIL);
-			return reponse;
-		}
 		QueryCmdBannerResponse res = new QueryCmdBannerResponse();
 		try {
 			CmsBanner cmsBanner = new CmsBanner();
 			BeanUtils.copyOnPropertyUtils(cmsBanner, request);
-			cmsBanner.setDelete_flag(0);
-			cmsBannerService.findByObj(cmsBanner);
+			cmsBanner.setDeleteFlag(0);
+			List<CmsBanner> list = cmsBannerService.findByObj(cmsBanner);
+			List<CmsBannerVo> voLists = new ArrayList<CmsBannerVo>();
+			for(CmsBanner cb:list){
+				if(cb==null){
+					continue;
+				}
+				CmsBannerVo vo = new CmsBannerVo();
+				BeanUtils.copyOnPropertyUtils(vo, cb);
+				voLists.add(vo);
+			}
+			res.setList(voLists);
 		} catch (Exception e) {
-			LOGGER.error("updataCmsBanner error",e);
+			LOGGER.error("queryCmsBanner error",e);
 			reponse.setError(Constants.System.SYSTEM_ERROR_CODE);
 			reponse.setStatus(Constants.System.FAIL);
 		}

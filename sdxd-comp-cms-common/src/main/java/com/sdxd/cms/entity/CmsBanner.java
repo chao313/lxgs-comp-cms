@@ -14,10 +14,10 @@ import lombok.ToString;
 public class CmsBanner extends BaseEntity{
 	private String name;
 	private String type;
-	private String image_code;//图片code
-	private String image_url;//图片地址
-	private String image_link;//图片连接地址
-	private Integer  image_order;//图片的顺序，
-	private Integer delete_flag;
+	private String imageCode;//图片code
+	private String imageUrl;//图片地址
+	private String imageLink;//图片连接地址
+	private Integer  imageOrder;//图片的顺序，
+	private Integer deleteFlag;
  
 }
