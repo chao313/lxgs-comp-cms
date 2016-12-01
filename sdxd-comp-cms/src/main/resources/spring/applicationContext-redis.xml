@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	  xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+     ">
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+    	<!-- 最大连接数 -->
+        <property name="maxTotal" value="${redis.maxTotal}" />  
+        <!-- 最大空闲连接数 -->
+        <property name="maxIdle" value="${redis.maxIdle}" /> 
+        <!-- 逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1
+        <property name="numTestsPerEvictionRun" value="${redis.numTestsPerEvictionRun}" />  
+        <property name="timeBetweenEvictionRunsMillis" value="${redis.timeBetweenEvictionRunsMillis}" /> -->  
+        <!-- 逐出连接的最小空闲时间 默认1800000毫秒(30分钟)
+        <property name="minEvictableIdleTimeMillis" value="-1" /> --> 
+        <!-- 对象空闲多久后逐出, 当空闲时间>该值 且 空闲连接>最大空闲数 时直接逐出,不再根据MinEvictableIdleTimeMillis判断  (默认逐出策略)  
+        <property name="softMinEvictableIdleTimeMillis" value="10000" /> --> 
+        <!-- 获取连接时的最大等待毫秒数(如果设置为阻塞时BlockWhenExhausted),如果超时就抛异常, 小于零:阻塞不确定的时间,  默认-1  --> 
+        <property name="maxWaitMillis" value="1500" /> 
+        <!-- 在获取连接的时候检查有效性, 默认false  -->
+        <property name="testOnBorrow" value="true" /> 
+        <!-- 在空闲时检查有效性, 默认false --> 
+        <property name="testWhileIdle" value="true" /> 
+        <!--  在还会给pool时，是否提前进行validate操作--> 
+        <property name="testOnReturn" value="false" />  
+       <!--  <property name="jmxEnabled" value="true" />  
+      	<property name="jmxNamePrefix" value="youyuan" />   -->
+      	<!-- 连接耗尽时是否阻塞, false报异常,ture阻塞直到超时, 默认true -->
+        <property name="blockWhenExhausted" value="true" />  
+    </bean>  
+
+     <bean id="jedisShardInfo" class="redis.clients.jedis.JedisShardInfo">
+        <constructor-arg index="0" value="http://${redis.master.host}:${redis.master.port}/${redis.db}"/>
+        <property name="password" value="${redis.password}" />
+    </bean>
+
+    <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <constructor-arg index="1">
+            <list>
+                <ref bean="jedisShardInfo"  />
+            </list>
+        </constructor-arg>
+    </bean>  
+      
+    <context:component-scan base-package="com.sdxd.common.redis"/>
+</beans>
