@@ -33,16 +33,16 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
 	@Override
 	public DubboResponse<CmsNoticeResponse> addCmsNotic(CmsNoticeRequest request) {
 		LOGGER.debug("addCmsNotic,requestParam:{}",JSONObject.toJSONString(request));
-		DubboResponse<CmsNoticeResponse> reponse = new DubboResponse<CmsNoticeResponse>();
+		DubboResponse<CmsNoticeResponse> response = new DubboResponse<CmsNoticeResponse>();
 		CmsNoticeResponse res = new CmsNoticeResponse();
 		if(StringUtils.isBlank(request.getLink())||StringUtils.isBlank(request.getTitle())){
 			res.setSuccess(false);
-			reponse.setError(Constants.System.PARAMS_INVALID);
-			reponse.setStatus(Constants.System.FAIL);
-			return reponse;
+			response.setError(Constants.System.PARAMS_INVALID);
+			response.setStatus(Constants.System.FAIL);
+			return response;
 		}
-		reponse.setError(Constants.System.SERVER_SUCCESS);
-		reponse.setStatus(Constants.System.OK);
+		response.setError(Constants.System.SERVER_SUCCESS);
+		response.setStatus(Constants.System.OK);
 		try {
 			CmsNotice cmsNotice = new CmsNotice();
 			BeanUtils.copyOnPropertyUtils(cmsNotice, request);
@@ -51,24 +51,24 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
 		} catch (Exception e) {
 			LOGGER.error("addCmsNotic error",e);
 			res.setSuccess(false);
-			reponse.setError(Constants.System.SYSTEM_ERROR_CODE);
-			reponse.setStatus(Constants.System.FAIL);
+			response.setError(Constants.System.SYSTEM_ERROR_CODE);
+			response.setStatus(Constants.System.FAIL);
 		}
-		reponse.setData(res);
-		return reponse;
+		response.setData(res);
+		return response;
 	}
 
 	@Override
 	public DubboResponse<CmsNoticeResponse> deleteCmsNotic(CmsNoticeRequest request) {
 		LOGGER.debug("deleteCmsNotic,requestParam:{}",JSONObject.toJSONString(request));
-		DubboResponse<CmsNoticeResponse> reponse = new DubboResponse<CmsNoticeResponse>();
-		reponse.setError(Constants.System.SERVER_SUCCESS);
-		reponse.setStatus(Constants.System.OK);
+		DubboResponse<CmsNoticeResponse> response = new DubboResponse<CmsNoticeResponse>();
+		response.setError(Constants.System.SERVER_SUCCESS);
+		response.setStatus(Constants.System.OK);
 		String id = request.getId();
 		if(StringUtils.isBlank(id)){
-			reponse.setError(Constants.System.PARAMS_INVALID);
-			reponse.setStatus(Constants.System.FAIL);
-			return reponse;
+			response.setError(Constants.System.PARAMS_INVALID);
+			response.setStatus(Constants.System.FAIL);
+			return response;
 		}
 		CmsNoticeResponse res = new CmsNoticeResponse();
 		try {
@@ -80,25 +80,25 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
 		} catch (Exception e) {
 			LOGGER.error("deleteCmsNotic error",e);
 			res.setSuccess(false);
-			reponse.setError(Constants.System.SYSTEM_ERROR_CODE);
-			reponse.setStatus(Constants.System.FAIL);
+			response.setError(Constants.System.SYSTEM_ERROR_CODE);
+			response.setStatus(Constants.System.FAIL);
 		}
-		reponse.setData(res);
-		return reponse;
+		response.setData(res);
+		return response;
 	}
 
 	@Override
 	public DubboResponse<CmsNoticeResponse> updataCmsNotic(CmsNoticeRequest request) {
 		LOGGER.debug("updataCmsNotic,requestParam:{}",JSONObject.toJSONString(request));
-		DubboResponse<CmsNoticeResponse> reponse = new DubboResponse<CmsNoticeResponse>();
+		DubboResponse<CmsNoticeResponse> response = new DubboResponse<CmsNoticeResponse>();
 		CmsNoticeResponse res = new CmsNoticeResponse();
-		reponse.setError(Constants.System.SERVER_SUCCESS);
-		reponse.setStatus(Constants.System.OK);
+		response.setError(Constants.System.SERVER_SUCCESS);
+		response.setStatus(Constants.System.OK);
 		String id = request.getId();
 		if(StringUtils.isBlank(id)){
-			reponse.setError(Constants.System.PARAMS_INVALID);
-			reponse.setStatus(Constants.System.FAIL);
-			return reponse;
+			response.setError(Constants.System.PARAMS_INVALID);
+			response.setStatus(Constants.System.FAIL);
+			return response;
 		}
 		try {
 			CmsNotice cmsNotice = new CmsNotice();
@@ -108,19 +108,19 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
 		} catch (Exception e) {
 			LOGGER.error("updataCmsNotic error",e);
 			res.setSuccess(false);
-			reponse.setError(Constants.System.SYSTEM_ERROR_CODE);
-			reponse.setStatus(Constants.System.FAIL);
+			response.setError(Constants.System.SYSTEM_ERROR_CODE);
+			response.setStatus(Constants.System.FAIL);
 		}
-		reponse.setData(res);
-		return reponse;
+		response.setData(res);
+		return response;
 	}
 
 	@Override
 	public DubboResponse<QueryCmsNoticeResponse> queryCmsNotic(CmsNoticeRequest request) {
 		LOGGER.debug("queryCmsNotic,requestParam:{}",JSONObject.toJSONString(request));
-		DubboResponse<QueryCmsNoticeResponse>  reponse = new  DubboResponse<QueryCmsNoticeResponse>();
-		reponse.setError(Constants.System.SERVER_SUCCESS);
-		reponse.setStatus(Constants.System.OK);
+		DubboResponse<QueryCmsNoticeResponse>  response = new  DubboResponse<QueryCmsNoticeResponse>();
+		response.setError(Constants.System.SERVER_SUCCESS);
+		response.setStatus(Constants.System.OK);
 		QueryCmsNoticeResponse res = new QueryCmsNoticeResponse();
 		try {
 			CmsNotice cmsNotice = new CmsNotice();
@@ -139,11 +139,11 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
 			res.setList(voLists);
 		} catch (Exception e) {
 			LOGGER.error("queryCmsNotic error",e);
-			reponse.setError(Constants.System.SYSTEM_ERROR_CODE);
-			reponse.setStatus(Constants.System.FAIL);
+			response.setError(Constants.System.SYSTEM_ERROR_CODE);
+			response.setStatus(Constants.System.FAIL);
 		}
-		reponse.setData(res);
-		return reponse;
+		response.setData(res);
+		return response;
 	}
 	
 	

@@ -33,17 +33,17 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 	@Override
 	public DubboResponse<CmsBannerResponse> addCmsBanner(CmsBannerRequest request) {
 		LOGGER.debug("addCmsBanner,requestParam:{}",JSONObject.toJSONString(request));
-		DubboResponse<CmsBannerResponse> reponse = new DubboResponse<CmsBannerResponse>();
+		DubboResponse<CmsBannerResponse> response = new DubboResponse<CmsBannerResponse>();
 		CmsBannerResponse res = new CmsBannerResponse();
 		if(StringUtils.isBlank(request.getImage_link())||StringUtils.isBlank(request.getImage_code())
 				||StringUtils.isBlank(request.getImage_link())||StringUtils.isBlank(request.getType())){
 			res.setSuccess(false);
-			reponse.setError(Constants.System.PARAMS_INVALID);
-			reponse.setStatus(Constants.System.FAIL);
-			return reponse;
+			response.setError(Constants.System.PARAMS_INVALID);
+			response.setStatus(Constants.System.FAIL);
+			return response;
 		}
-		reponse.setError(Constants.System.SERVER_SUCCESS);
-		reponse.setStatus(Constants.System.OK);
+		response.setError(Constants.System.SERVER_SUCCESS);
+		response.setStatus(Constants.System.OK);
 		try {
 			CmsBanner cmsBanner = new CmsBanner();
 			BeanUtils.copyOnPropertyUtils(cmsBanner, request);
@@ -52,25 +52,25 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 		} catch (Exception e) {
 			LOGGER.error("addCmsBanner error",e);
 			res.setSuccess(false);
-			reponse.setError(Constants.System.SYSTEM_ERROR_CODE);
-			reponse.setStatus(Constants.System.FAIL);
+			response.setError(Constants.System.SYSTEM_ERROR_CODE);
+			response.setStatus(Constants.System.FAIL);
 		}
-		reponse.setData(res);
-		return reponse;
+		response.setData(res);
+		return response;
 	}
 
 	@Override
 	public DubboResponse<CmsBannerResponse> updataCmsBanner(CmsBannerRequest request) {
 		LOGGER.debug("updataCmsBanner,requestParam:{}",JSONObject.toJSONString(request));
-		DubboResponse<CmsBannerResponse> reponse = new DubboResponse<CmsBannerResponse>();
+		DubboResponse<CmsBannerResponse> response = new DubboResponse<CmsBannerResponse>();
 		CmsBannerResponse res = new CmsBannerResponse();
-		reponse.setError(Constants.System.SERVER_SUCCESS);
-		reponse.setStatus(Constants.System.OK);
+		response.setError(Constants.System.SERVER_SUCCESS);
+		response.setStatus(Constants.System.OK);
 		String id = request.getId();
 		if(StringUtils.isBlank(id)){
-			reponse.setError(Constants.System.PARAMS_INVALID);
-			reponse.setStatus(Constants.System.FAIL);
-			return reponse;
+			response.setError(Constants.System.PARAMS_INVALID);
+			response.setStatus(Constants.System.FAIL);
+			return response;
 		}
 		try {
 			CmsBanner cmsBanner = new CmsBanner();
@@ -80,24 +80,24 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 		} catch (Exception e) {
 			LOGGER.error("updataCmsBanner error",e);
 			res.setSuccess(false);
-			reponse.setError(Constants.System.SYSTEM_ERROR_CODE);
-			reponse.setStatus(Constants.System.FAIL);
+			response.setError(Constants.System.SYSTEM_ERROR_CODE);
+			response.setStatus(Constants.System.FAIL);
 		}
-		reponse.setData(res);
-		return reponse;
+		response.setData(res);
+		return response;
 	}
 
 	@Override
 	public DubboResponse<CmsBannerResponse> deleteCmsBanner(DeleteCmsBannerRequest request) {
 		LOGGER.debug("deleteCmsBanner,requestParam:{}",JSONObject.toJSONString(request));
-		DubboResponse<CmsBannerResponse> reponse = new DubboResponse<CmsBannerResponse>();
-		reponse.setError(Constants.System.SERVER_SUCCESS);
-		reponse.setStatus(Constants.System.OK);
+		DubboResponse<CmsBannerResponse> response = new DubboResponse<CmsBannerResponse>();
+		response.setError(Constants.System.SERVER_SUCCESS);
+		response.setStatus(Constants.System.OK);
 		String id = request.getId();
 		if(StringUtils.isBlank(id)){
-			reponse.setError(Constants.System.PARAMS_INVALID);
-			reponse.setStatus(Constants.System.FAIL);
-			return reponse;
+			response.setError(Constants.System.PARAMS_INVALID);
+			response.setStatus(Constants.System.FAIL);
+			return response;
 		}
 		CmsBannerResponse res = new CmsBannerResponse();
 		try {
@@ -109,19 +109,19 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 		} catch (Exception e) {
 			LOGGER.error("deleteCmsBanner error",e);
 			res.setSuccess(false);
-			reponse.setError(Constants.System.SYSTEM_ERROR_CODE);
-			reponse.setStatus(Constants.System.FAIL);
+			response.setError(Constants.System.SYSTEM_ERROR_CODE);
+			response.setStatus(Constants.System.FAIL);
 		}
-		reponse.setData(res);
-		return reponse;
+		response.setData(res);
+		return response;
 	}
 
 	@Override
 	public DubboResponse<QueryCmsBannerResponse> queryCmsBanner(QueryCmsBannerRequest request) {
 		LOGGER.debug("queryCmsBanner,requestParam:{}",JSONObject.toJSONString(request));
-		DubboResponse<QueryCmsBannerResponse>  reponse = new  DubboResponse<QueryCmsBannerResponse>();
-		reponse.setError(Constants.System.SERVER_SUCCESS);
-		reponse.setStatus(Constants.System.OK);
+		DubboResponse<QueryCmsBannerResponse>  response = new  DubboResponse<QueryCmsBannerResponse>();
+		response.setError(Constants.System.SERVER_SUCCESS);
+		response.setStatus(Constants.System.OK);
 		QueryCmsBannerResponse res = new QueryCmsBannerResponse();
 		try {
 			CmsBanner cmsBanner = new CmsBanner();
@@ -140,11 +140,11 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 			res.setList(voLists);
 		} catch (Exception e) {
 			LOGGER.error("queryCmsBanner error",e);
-			reponse.setError(Constants.System.SYSTEM_ERROR_CODE);
-			reponse.setStatus(Constants.System.FAIL);
+			response.setError(Constants.System.SYSTEM_ERROR_CODE);
+			response.setStatus(Constants.System.FAIL);
 		}
-		reponse.setData(res);
-		return reponse;
+		response.setData(res);
+		return response;
 	}
 
 }
