@@ -4,7 +4,7 @@ import com.sdxd.cms.dubbo.api.request.CmsBannerRequest;
 import com.sdxd.cms.dubbo.api.request.DeleteCmsBannerRequest;
 import com.sdxd.cms.dubbo.api.request.QueryCmsBannerRequest;
 import com.sdxd.cms.dubbo.api.response.CmsBannerResponse;
-import com.sdxd.cms.dubbo.api.response.QueryCmdBannerResponse;
+import com.sdxd.cms.dubbo.api.response.QueryCmsBannerResponse;
 import com.sdxd.framework.dubbo.DubboResponse;
 
 public interface CmsBannerDubboService {
@@ -24,7 +24,7 @@ public interface CmsBannerDubboService {
 	/*
 	 * 查询轮播图
 	 */
-	DubboResponse<QueryCmdBannerResponse> queryCmsBanner(QueryCmsBannerRequest request);
+	DubboResponse<QueryCmsBannerResponse> queryCmsBanner(QueryCmsBannerRequest request);
 	
 	
 	

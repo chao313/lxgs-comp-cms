@@ -17,7 +17,7 @@ import com.sdxd.cms.dubbo.api.request.CmsBannerRequest;
 import com.sdxd.cms.dubbo.api.request.DeleteCmsBannerRequest;
 import com.sdxd.cms.dubbo.api.request.QueryCmsBannerRequest;
 import com.sdxd.cms.dubbo.api.response.CmsBannerResponse;
-import com.sdxd.cms.dubbo.api.response.QueryCmdBannerResponse;
+import com.sdxd.cms.dubbo.api.response.QueryCmsBannerResponse;
 import com.sdxd.cms.entity.CmsBanner;
 import com.sdxd.cms.service.CmsBannerService;
 import com.sdxd.common.utils.BeanUtils;
@@ -35,9 +35,15 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 		LOGGER.debug("addCmsBanner,requestParam:{}",JSONObject.toJSONString(request));
 		DubboResponse<CmsBannerResponse> reponse = new DubboResponse<CmsBannerResponse>();
 		CmsBannerResponse res = new CmsBannerResponse();
+		if(StringUtils.isBlank(request.getImage_link())||StringUtils.isBlank(request.getImage_code())
+				||StringUtils.isBlank(request.getImage_link())||StringUtils.isBlank(request.getType())){
+			res.setSuccess(false);
+			reponse.setError(Constants.System.PARAMS_INVALID);
+			reponse.setStatus(Constants.System.FAIL);
+			return reponse;
+		}
 		reponse.setError(Constants.System.SERVER_SUCCESS);
 		reponse.setStatus(Constants.System.OK);
-		
 		try {
 			CmsBanner cmsBanner = new CmsBanner();
 			BeanUtils.copyOnPropertyUtils(cmsBanner, request);
@@ -111,12 +117,12 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 	}
 
 	@Override
-	public DubboResponse<QueryCmdBannerResponse> queryCmsBanner(QueryCmsBannerRequest request) {
+	public DubboResponse<QueryCmsBannerResponse> queryCmsBanner(QueryCmsBannerRequest request) {
 		LOGGER.debug("queryCmsBanner,requestParam:{}",JSONObject.toJSONString(request));
-		 DubboResponse<QueryCmdBannerResponse>  reponse = new  DubboResponse<QueryCmdBannerResponse>();
+		DubboResponse<QueryCmsBannerResponse>  reponse = new  DubboResponse<QueryCmsBannerResponse>();
 		reponse.setError(Constants.System.SERVER_SUCCESS);
 		reponse.setStatus(Constants.System.OK);
-		QueryCmdBannerResponse res = new QueryCmdBannerResponse();
+		QueryCmsBannerResponse res = new QueryCmsBannerResponse();
 		try {
 			CmsBanner cmsBanner = new CmsBanner();
 			BeanUtils.copyOnPropertyUtils(cmsBanner, request);
