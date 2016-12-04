@@ -176,7 +176,7 @@
 				<conf.mongodb.database.port>3717</conf.mongodb.database.port>
 				<conf.redis.db>8</conf.redis.db>
 				<conf.redis.password>sndaXD2016</conf.redis.password>
-				<conf.redis.master.host>118.178.247.210</conf.redis.master.host>
+				<conf.redis.master.host>r-tj79c532659ad844.redis.rds.aliyuncs.com</conf.redis.master.host>
 				<conf.redis.master.port>13679</conf.redis.master.port>
 				<conf.redis.slaver.host>r-tj79c532659ad844.redis.rds.aliyuncs.com</conf.redis.slaver.host>
 				<conf.redis.slaver.port>6379</conf.redis.slaver.port>
