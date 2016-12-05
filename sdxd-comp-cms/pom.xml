@@ -10,6 +10,11 @@
 	</parent>
 	<artifactId>sdxd-comp-cms</artifactId>
 	<packaging>war</packaging>
+	
+	<properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+	
 	<name>sdxd-comp-admin Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
