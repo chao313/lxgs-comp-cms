@@ -31,10 +31,10 @@ public class ServiceTest extends BaseTest{
 	public void testAddCmsBanner(){
 		CmsBannerRequest request = new CmsBannerRequest();
 		request.setRequestId(BillNoUtils.GenerateBillNo());
-		request.setImage_code("ewrwcxdsfe");
-		request.setImage_link("http://www.baidu.com");
-		request.setImage_order(3);
-		request.setImage_url("http://");
+		request.setImageCode("ewrwcxdsfe");
+		request.setImageLink("http://www.baidu.com");
+		request.setImageOrder(3);
+		request.setImageUrl("http://");
 		request.setName("hello");
 		request.setType(CmsBannerType.APP.toString());
 		DubboResponse<CmsBannerResponse> rt = cmsBannerService.addCmsBanner(request);
@@ -44,11 +44,11 @@ public class ServiceTest extends BaseTest{
 	public void testUpdataCmsBanner(){
 		CmsBannerRequest request = new CmsBannerRequest();
 		request.setRequestId(BillNoUtils.GenerateBillNo());
-		request.setImage_code("mmmmmwwww");
+		request.setImageCode("mmmmmwwww");
 		request.setId("c766563e86d942538e60fb5deb6ce7f6");
-		request.setImage_link("http://www.souhu.com");
-		request.setImage_order(2);
-		request.setImage_url("http://www.baiddu.com");
+		request.setImageLink("http://www.souhu.com");
+		request.setImageOrder(2);
+		request.setImageUrl("http://www.baiddu.com");
 		request.setType(CmsBannerType.APP.toString());
 		DubboResponse<CmsBannerResponse> rt = cmsBannerService.updataCmsBanner(request);
 		System.out.println(rt);

@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 	
-	<name>sdxd-comp-admin Maven Webapp</name>
+	<name>sdxd-comp-cms Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		 <dependency>
