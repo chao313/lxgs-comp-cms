@@ -35,8 +35,8 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 		LOGGER.debug("addCmsBanner,requestParam:{}",JSONObject.toJSONString(request));
 		DubboResponse<CmsBannerResponse> response = new DubboResponse<CmsBannerResponse>();
 		CmsBannerResponse res = new CmsBannerResponse();
-		if(StringUtils.isBlank(request.getImage_link())||StringUtils.isBlank(request.getImage_code())
-				||StringUtils.isBlank(request.getImage_link())||StringUtils.isBlank(request.getType())){
+		if(StringUtils.isBlank(request.getImageLink())||StringUtils.isBlank(request.getImageCode())
+				||StringUtils.isBlank(request.getType())){
 			res.setSuccess(false);
 			response.setError(Constants.System.PARAMS_INVALID);
 			response.setStatus(Constants.System.FAIL);

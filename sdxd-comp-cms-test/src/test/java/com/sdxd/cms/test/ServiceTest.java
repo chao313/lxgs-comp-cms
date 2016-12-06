@@ -31,11 +31,11 @@ public class ServiceTest extends BaseTest{
 	public void testAddCmsBanner(){
 		CmsBannerRequest request = new CmsBannerRequest();
 		request.setRequestId(BillNoUtils.GenerateBillNo());
-		request.setImage_code("mmmmmwwww");
+		request.setImage_code("ewrwcxdsfe");
 		request.setImage_link("http://www.baidu.com");
-		request.setImage_order(1);
+		request.setImage_order(3);
 		request.setImage_url("http://");
-		request.setName("中问");
+		request.setName("hello");
 		request.setType(CmsBannerType.APP.toString());
 		DubboResponse<CmsBannerResponse> rt = cmsBannerService.addCmsBanner(request);
 		System.out.println(rt);
