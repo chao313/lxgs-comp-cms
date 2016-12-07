@@ -31,9 +31,9 @@ public class ServiceTest extends BaseTest{
 	public void testAddCmsBanner(){
 		CmsBannerRequest request = new CmsBannerRequest();
 		request.setRequestId(BillNoUtils.GenerateBillNo());
-		request.setImageCode("ewrwcxdsfe");
+		request.setImageCode("ewrwcde4343e");
 		request.setImageLink("http://www.baidu.com");
-		request.setImageOrder(3);
+		request.setImageOrder(4);
 		request.setImageUrl("http://");
 		request.setName("hello");
 		request.setType(CmsBannerType.APP.toString());
