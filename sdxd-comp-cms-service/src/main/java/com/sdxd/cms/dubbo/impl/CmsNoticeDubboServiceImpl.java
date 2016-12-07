@@ -126,7 +126,7 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
 			CmsNotice cmsNotice = new CmsNotice();
 			BeanUtils.copyOnPropertyUtils(cmsNotice, request);
 			cmsNotice.setDeleteFlag(0);
-			List<CmsNotice> list = cmsNoticeService.findByObj(cmsNotice);
+			List<CmsNotice> list = cmsNoticeService.getByObj(cmsNotice);
 			List<CmsNoticeVo> voLists = new ArrayList<CmsNoticeVo>();
 			for(CmsNotice cn:list){
 				if(cn==null){

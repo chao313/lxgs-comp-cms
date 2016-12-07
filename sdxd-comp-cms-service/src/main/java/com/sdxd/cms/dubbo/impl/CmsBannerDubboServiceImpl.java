@@ -127,7 +127,7 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 			CmsBanner cmsBanner = new CmsBanner();
 			BeanUtils.copyOnPropertyUtils(cmsBanner, request);
 			cmsBanner.setDeleteFlag(0);
-			List<CmsBanner> list = cmsBannerService.findByObj(cmsBanner);
+			List<CmsBanner> list = cmsBannerService.getByObj(cmsBanner);
 			List<CmsBannerVo> voLists = new ArrayList<CmsBannerVo>();
 			for(CmsBanner cb:list){
 				if(cb==null){
