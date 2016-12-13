@@ -46,7 +46,11 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 		</dependency>
-		
+		<dependency>
+		    <groupId>de.siegmar</groupId>
+		    <artifactId>logback-gelf</artifactId>
+		    <version>1.0.2</version>
+		</dependency>
 		<dependency>
 			<groupId>com.sdxd.cms</groupId>
 			<artifactId>sdxd-comp-cms-service</artifactId>
