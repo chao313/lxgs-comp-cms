@@ -5,7 +5,7 @@
     <property name="USER_HOME" value="logs"/>
     <property scope="context" name="FILE_NAME" value="sdxd-cms-log"/>
     <property scope="context" name="FILE_SIZE" value="500MB"/>
-    <property name="system" value="CMS"/>
+    <property name="system" value="DEV_CMS"/>
     <property name="GELF-ADDRESS" value="10.253.106.15"/>
     <property name="GELF-PORT" value="12213"/>
 
