@@ -192,7 +192,7 @@
 				<conf.dubbo.application.name>cmp-cms</conf.dubbo.application.name>
 				<conf.dubbo.application.owner>wanghuamin</conf.dubbo.application.owner>
 				<conf.dubbo.registry.address>10.253.105.39:2181,10.253.105.39:2182,10.253.105.39:2183</conf.dubbo.registry.address>
-				<conf.dubbo.registry.file>${user.home}/output/cmp-approve.dubbo.cache</conf.dubbo.registry.file>
+				<conf.dubbo.registry.file>${user.home}/output/cmp-cms.dubbo.cache</conf.dubbo.registry.file>
 				<conf.dubbo.consumer.check>true</conf.dubbo.consumer.check>
 				<conf.dubbo.protocol.name>dubbo</conf.dubbo.protocol.name>
 				<conf.dubbo.protocol.port>20880</conf.dubbo.protocol.port>
@@ -228,7 +228,7 @@
 				<conf.dubbo.application.name>cmp-cms</conf.dubbo.application.name>
 				<conf.dubbo.application.owner>wanghuamin</conf.dubbo.application.owner>
 				<conf.dubbo.registry.address>10.253.107.222:2181,10.253.107.222:2182,10.253.107.222:2183</conf.dubbo.registry.address>
-				<conf.dubbo.registry.file>${user.home}/output/comp-auth.dubbo.cache</conf.dubbo.registry.file>
+				<conf.dubbo.registry.file>${user.home}/output/comp-cms.dubbo.cache</conf.dubbo.registry.file>
 				<conf.dubbo.consumer.check>true</conf.dubbo.consumer.check>
 				<conf.dubbo.protocol.name>dubbo</conf.dubbo.protocol.name>
 				<conf.dubbo.protocol.port>20880</conf.dubbo.protocol.port>
