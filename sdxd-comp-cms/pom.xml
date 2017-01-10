@@ -180,8 +180,8 @@
 				<conf.activitemq.brokerURL.host>failover://(ttp://192.168.4.166:7777/)</conf.activitemq.brokerURL.host>
 				<conf.mongodb.database.host>dds-j5e53d38eab1a9442.mongodb.rds.aliyuncs.com</conf.mongodb.database.host>
 				<conf.mongodb.database.name>sdxd-auth</conf.mongodb.database.name>
-				<conf.mongodb.database.user>sdxdauth</conf.mongodb.database.user>
-				<conf.mongodb.database.password>sdxd2016</conf.mongodb.database.password>
+				<conf.mongodb.database.user>root</conf.mongodb.database.user>
+				<conf.mongodb.database.password>atppiX0xuMjj2t</conf.mongodb.database.password>
 				<conf.mongodb.database.port>3717</conf.mongodb.database.port>
 				<conf.redis.db>9</conf.redis.db>
 				<conf.redis.password>sndaXD2016</conf.redis.password>
@@ -216,8 +216,8 @@
 				<conf.activitemq.brokerURL.host>failover://(ttp://192.168.4.166:7777/)</conf.activitemq.brokerURL.host>
 				<conf.mongodb.database.host>dds-j5e53d38eab1a9442.mongodb.rds.aliyuncs.com</conf.mongodb.database.host>
 				<conf.mongodb.database.name>sdxd-auth</conf.mongodb.database.name>
-				<conf.mongodb.database.user>sdxdauth</conf.mongodb.database.user>
-				<conf.mongodb.database.password>sdxd2016</conf.mongodb.database.password>
+				<conf.mongodb.database.user>root</conf.mongodb.database.user>
+				<conf.mongodb.database.password>atppiX0xuMjj2t</conf.mongodb.database.password>
 				<conf.mongodb.database.port>3717</conf.mongodb.database.port>
 				<conf.redis.db>9</conf.redis.db>
 				<conf.redis.password>devredis2017</conf.redis.password>
