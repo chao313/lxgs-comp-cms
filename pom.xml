@@ -25,6 +25,7 @@
     <module>sdxd-comp-cms-service</module>
     <module>sdxd-comp-cms</module>
     <module>sdxd-comp-cms-test</module>
+    <module>sdxd-comp-cms-zhuge-util</module>
   </modules>
 	
 	
