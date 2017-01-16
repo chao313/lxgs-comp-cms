@@ -1,5 +1,7 @@
 package com.sdxd.cms.dubbo.api.request.zhuge;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -12,11 +14,8 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class PersonPer {
+public class EventPr implements Serializable {
 
-  @NotNull(message = "手机号码不能为空")
-  private String mobile;
-  @NotNull(message = "姓名不能为空")
-  private String name;
+  private String pr;
 
 }

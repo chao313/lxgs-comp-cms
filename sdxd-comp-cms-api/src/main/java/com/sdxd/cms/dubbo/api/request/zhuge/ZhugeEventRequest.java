@@ -10,9 +10,9 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class ZhugeEventRequest extends ZhugeBaseRequest<EventPer> {
+public class ZhugeEventRequest extends ZhugeBaseRequest<EventPr> {
 //实时调试: 1为实时调试, 0或缺少此字段为正式数据
   private int debug;
-  private ZhugeEventData<EventPer>[] data;
+  private ZhugeEventData<EventPr>[] data;
 
 }

@@ -10,8 +10,8 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class ZhugePersonRequest extends ZhugeBaseRequest<PersonPer> {
+public class ZhugePersonRequest extends ZhugeBaseRequest<PersonPr> {
 //  private int debug;
-  private ZhugePersonData<PersonPer>[] data;
+  private ZhugePersonData<PersonPr>[] data;
 
 }

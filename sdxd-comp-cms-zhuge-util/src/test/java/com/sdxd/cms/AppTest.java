@@ -1,10 +1,9 @@
 package com.sdxd.cms;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.sdxd.cms.dubbo.api.request.zhuge.EventPer;
+import com.sdxd.cms.dubbo.api.request.zhuge.EventPr;
 import com.sdxd.cms.dubbo.api.request.zhuge.ZhugeEventRequest;
-import com.sdxd.cms.dubbo.api.request.zhuge.PersonPer;
+import com.sdxd.cms.dubbo.api.request.zhuge.PersonPr;
 import com.sdxd.cms.dubbo.api.request.zhuge.ZhugePersonRequest;
 import com.sdxd.cms.dubbo.api.request.zhuge.ZhugeEventData;
 import com.sdxd.cms.dubbo.api.request.zhuge.ZhugePersonData;
@@ -14,7 +13,6 @@ import com.sdxd.cms.zhuge.util.ZhugeUtil;
 
 import org.junit.Test;
 
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -34,23 +32,23 @@ public class AppTest
         eventRequest.setTs(ZhugeUtil.getTime(new Date()));
         eventRequest.setCuid("hello@zhuge.io");
         //data中的per属性
-        EventPer eventPer = new EventPer();
+        EventPr eventPer = new EventPr();
         //data属性值
-        ZhugeEventData<EventPer> zhugeEventData = new ZhugeEventData<>();
+        ZhugeEventData<EventPr> zhugeEventData = new ZhugeEventData<>();
         zhugeEventData.setTs(ZhugeUtil.getTime(new Date()));
         zhugeEventData.setEid("click");
 //      eventPer.setPer("click");
-        zhugeEventData.setPer(eventPer);
+        zhugeEventData.setPr(eventPer);
         eventRequest.setData(new ZhugeEventData[]{zhugeEventData});
 //用户per属性
 
-        PersonPer personPer = new PersonPer();
+        PersonPr personPer = new PersonPr();
         personPer.setName("hello");
         personPer.setMobile("13816978397");
-        ZhugePersonData<PersonPer> zhugePersonData = new ZhugePersonData<>();
+        ZhugePersonData<PersonPr> zhugePersonData = new ZhugePersonData<>();
         zhugePersonData.setTs(ZhugeUtil.getTime(new Date()));
         zhugePersonData.setCuid("hello@zhuge.io");
-        zhugePersonData.setPer(personPer);
+        zhugePersonData.setPr(personPer);
         //用户信息
         ZhugePersonRequest personRequest = new ZhugePersonRequest();
         personRequest.setCuid("hello@zhuge.io");

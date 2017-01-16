@@ -18,7 +18,7 @@ import lombok.ToString;
 public class ZhugeBaseRequest<T> extends BaseRequest{
 
   @NotNull(message = "上报时间不能为空")
-  private String ts;
+  private String ts;            //10位毫秒数
   @NotNull(message = "用户id不能为空")
   private String cuid;
   @NotNull(message = "AppKey不能为空")

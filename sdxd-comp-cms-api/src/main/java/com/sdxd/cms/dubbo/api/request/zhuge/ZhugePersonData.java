@@ -1,5 +1,7 @@
 package com.sdxd.cms.dubbo.api.request.zhuge;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -12,9 +14,9 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class ZhugePersonData<T> {
+public class ZhugePersonData<T> implements Serializable {
 
-  private PersonPer per;
+  private PersonPr pr;
 @NotNull(message = "用户信息不可为空")
   private String et =  "idf";
   @NotNull(message = "事件时间不可为空")

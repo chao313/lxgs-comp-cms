@@ -16,13 +16,13 @@ import org.springframework.stereotype.Service;
 public class ZhugeService {
 
   @Reference(version = "1.0.0")
-  private ZhugeIODubboService service;
+  private ZhugeIODubboService zhugeIODubboService;
 
   public DubboResponse<ZhugeResponse> RecordParams(ZhugeEventRequest request){
-    return service.RecordParams(request);
+    return zhugeIODubboService.RecordParams(request);
   }
   public DubboResponse<ZhugeResponse> RecordParams(ZhugePersonRequest request){
-    return service.RecordParams(request);
+    return zhugeIODubboService.RecordParams(request);
   }
 
 }

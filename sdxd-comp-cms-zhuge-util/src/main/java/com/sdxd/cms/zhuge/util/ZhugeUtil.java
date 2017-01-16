@@ -83,6 +83,14 @@ public class ZhugeUtil {
 //    }
 //    return response;
 //  }
+
+  /**
+   *
+   * @param apiUrl 地址
+   * @param params 参数的JSON字符串
+   * @return
+   */
+
   public static ZhugeResponse invoke(String apiUrl,String params) {
     ZhugeResponse response = null;
     //验证
