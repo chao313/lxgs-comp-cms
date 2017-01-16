@@ -16,5 +16,5 @@ public class ZhugeResponse extends BaseResponse {
 
   private Integer returnCode;
   private String returnMessage;
-
+  private String data;
 }

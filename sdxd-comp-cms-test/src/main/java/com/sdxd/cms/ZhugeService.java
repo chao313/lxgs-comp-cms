@@ -2,7 +2,8 @@ package com.sdxd.cms;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.sdxd.cms.dubbo.api.ZhugeIODubboService;
-import com.sdxd.cms.dubbo.api.request.zhuge.ZhugeDataRequest;
+import com.sdxd.cms.dubbo.api.request.zhuge.ZhugeEventRequest;
+import com.sdxd.cms.dubbo.api.request.zhuge.ZhugePersonRequest;
 import com.sdxd.cms.dubbo.api.response.ZhugeResponse;
 import com.sdxd.framework.dubbo.DubboResponse;
 
@@ -17,7 +18,10 @@ public class ZhugeService {
   @Reference(version = "1.0.0")
   private ZhugeIODubboService service;
 
-  public DubboResponse<ZhugeResponse> RecordParams(ZhugeDataRequest request){
+  public DubboResponse<ZhugeResponse> RecordParams(ZhugeEventRequest request){
+    return service.RecordParams(request);
+  }
+  public DubboResponse<ZhugeResponse> RecordParams(ZhugePersonRequest request){
     return service.RecordParams(request);
   }
 

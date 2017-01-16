@@ -1,31 +1,21 @@
 package com.sdxd.cms;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sdxd.cms.dubbo.api.request.zhuge.EventPer;
-import com.sdxd.cms.dubbo.api.request.zhuge.EventRequest;
+import com.sdxd.cms.dubbo.api.request.zhuge.ZhugeEventRequest;
 import com.sdxd.cms.dubbo.api.request.zhuge.PersonPer;
-import com.sdxd.cms.dubbo.api.request.zhuge.PersonRequest;
-import com.sdxd.cms.dubbo.api.request.zhuge.ZhugeDataRequest;
+import com.sdxd.cms.dubbo.api.request.zhuge.ZhugePersonRequest;
 import com.sdxd.cms.dubbo.api.request.zhuge.ZhugeEventData;
 import com.sdxd.cms.dubbo.api.request.zhuge.ZhugePersonData;
 import com.sdxd.cms.dubbo.api.response.ZhugeResponse;
 import com.sdxd.cms.zhuge.config.ZhugeConfig;
 import com.sdxd.cms.zhuge.util.ZhugeUtil;
-import com.sdxd.common.utils.BillNoUtils;
-
 
 import org.junit.Test;
 
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Map;
 
 /**
  * Unit test for simple App.
@@ -38,56 +28,54 @@ public class AppTest
     @Test
     public void AppTest()
     {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMddHHmm");
         //自定义事件
-        EventRequest eventRequest = new EventRequest();
+        ZhugeEventRequest eventRequest = new ZhugeEventRequest();
         eventRequest.setDebug(1);
-        eventRequest.setTs(dateFormat.format(Calendar.getInstance().getTime()));
+        eventRequest.setTs(ZhugeUtil.getTime(new Date()));
         eventRequest.setCuid("hello@zhuge.io");
         //data中的per属性
         EventPer eventPer = new EventPer();
         //data属性值
         ZhugeEventData<EventPer> zhugeEventData = new ZhugeEventData<>();
-        zhugeEventData.setTs(dateFormat.format(Calendar.getInstance().getTime()));
+        zhugeEventData.setTs(ZhugeUtil.getTime(new Date()));
         zhugeEventData.setEid("click");
+//      eventPer.setPer("click");
         zhugeEventData.setPer(eventPer);
         eventRequest.setData(new ZhugeEventData[]{zhugeEventData});
 //用户per属性
 
         PersonPer personPer = new PersonPer();
         personPer.setName("hello");
-        personPer.setMobile("18710002233");
+        personPer.setMobile("13816978397");
         ZhugePersonData<PersonPer> zhugePersonData = new ZhugePersonData<>();
-        zhugePersonData.setTs(dateFormat.format(Calendar.getInstance().getTime()));
+        zhugePersonData.setTs(ZhugeUtil.getTime(new Date()));
         zhugePersonData.setCuid("hello@zhuge.io");
         zhugePersonData.setPer(personPer);
         //用户信息
-        PersonRequest personRequest = new PersonRequest();
+        ZhugePersonRequest personRequest = new ZhugePersonRequest();
         personRequest.setCuid("hello@zhuge.io");
-        personRequest.setTs(dateFormat.format(Calendar.getInstance().getTime()));
+        personRequest.setTs(ZhugeUtil.getTime(new Date()));
+//      personRequest.setDebug(1);
         personRequest.setData(new ZhugePersonData[]{zhugePersonData});
 
-        ZhugeDataRequest request = new ZhugeDataRequest();
-        request.setEventRequest(eventRequest);
-        request.setPersonRequest(personRequest);
-        request.setRequestId(BillNoUtils.GenerateBillNo());
 
-        String json = JSON.toJSONString(request);
+        String json = JSON.toJSONString(eventRequest);
+        String json1 = JSON.toJSONString(personRequest);
         System.out.println(json);
-        JSONObject jsonObject = JSONObject.parseObject(json);
-        jsonObject.put("Authorization","dfb87d9e3e7a43189959f77789f3fd38:46051f26af7e4686b34c764b3e98a80b");
+//        JSONObject jsonObject = JSONObject.parseObject(json);
 //      jsonObject.put("data","["+jsonObject.getString("eventRequest")+","+jsonObject.getString("personRequest")+"]");
 
-      JSONArray array = new JSONArray();
-      array.add(jsonObject.get("personRequest"));
-      array.add(jsonObject.get("eventRequest"));
-      jsonObject.remove("personRequest");
-      jsonObject.remove("eventRequest");
-      jsonObject.put("data",array);
-      System.out.println(jsonObject.toJSONString());
+//      array.add(jsonObject.get("personRequest"));
+//      array.add(jsonObject.get("eventRequest"));
+//      System.out.println(jsonObject.toJSONString());
 //        ZhugeResponse response = ZhugeUtil.invoke(ZhugeConfig.apiUrl, jsonObject);
-        ZhugeResponse response = ZhugeUtil.invoke(ZhugeConfig.apiUrl, request);
+//      for (int i = 0; i < 50; i++) {
+        ZhugeResponse response = ZhugeUtil.invoke(ZhugeConfig.apiUrl, json);
         System.out.println(response);
+//      }
+
+        ZhugeResponse response2 = ZhugeUtil.invoke(ZhugeConfig.apiUrl, json1);
+        System.out.println(response2);
 
 //      for(Map.Entry set : jsonObject.entrySet()){
 //        System.out.println(set.getKey());
@@ -109,10 +97,13 @@ public class AppTest
 //      byte[] get = Base64.getDecoder().decode(text);
 //      System.out.println(get[1]);
 
-      JSONObject jsonObject = new JSONObject();
-      jsonObject.put("Authorization","dfb87d9e3e7a43189959f77789f3fd38:46051f26af7e4686b34c764b3e98a80b");
-      ZhugeResponse response = ZhugeUtil.invoke(ZhugeConfig.apiUrl, jsonObject);
-      System.out.println(response);
+//      JSONObject jsonObject = new JSONObject();
+//      jsonObject.put("Authorization","dfb87d9e3e7a43189959f77789f3fd38:46051f26af7e4686b34c764b3e98a80b");
+//      ZhugeResponse response = ZhugeUtil.invoke(ZhugeConfig.apiUrl, jsonObject);
+//      System.out.println(response);
+      System.out.println(ZhugeUtil.getTime(
+          new Date()
+      ));
     } catch (Exception e) {
       e.printStackTrace();
     }

@@ -1,6 +1,8 @@
 package com.sdxd.cms.dubbo.api;
 
-import com.sdxd.cms.dubbo.api.request.zhuge.ZhugeDataRequest;
+
+import com.sdxd.cms.dubbo.api.request.zhuge.ZhugeEventRequest;
+import com.sdxd.cms.dubbo.api.request.zhuge.ZhugePersonRequest;
 import com.sdxd.cms.dubbo.api.response.ZhugeResponse;
 import com.sdxd.framework.dubbo.DubboResponse;
 
@@ -9,6 +11,7 @@ import com.sdxd.framework.dubbo.DubboResponse;
  */
 public interface ZhugeIODubboService {
 
-  public DubboResponse<ZhugeResponse> RecordParams(ZhugeDataRequest request);
+  public DubboResponse<ZhugeResponse> RecordParams(ZhugeEventRequest request);
+  public DubboResponse<ZhugeResponse> RecordParams(ZhugePersonRequest request);
 
 }

@@ -15,7 +15,7 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class ZhugeBaseRequest<T>{
+public class ZhugeBaseRequest<T> extends BaseRequest{
 
   @NotNull(message = "上报时间不能为空")
   private String ts;
