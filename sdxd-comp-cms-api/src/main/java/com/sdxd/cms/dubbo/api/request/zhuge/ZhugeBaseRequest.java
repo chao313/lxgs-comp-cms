@@ -25,6 +25,7 @@ public class ZhugeBaseRequest<T> extends BaseRequest{
   private String ak = "dfb87d9e3e7a43189959f77789f3fd38";
   @NotNull(message = "平台信息不能为空")
   private String sdk = "web";
+  private String apiCode = "ZHUGE_API";
 //  private T[] data;
 
 }

@@ -2,16 +2,14 @@ package com.sdxd.cms.zhuge.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.sdxd.admin.service.SystemVariableService;
 import com.sdxd.cms.dubbo.api.response.ZhugeResponse;
-import com.sdxd.cms.zhuge.config.ZhugeConfig;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.Base64;
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -88,10 +86,13 @@ public class ZhugeUtil {
    *
    * @param apiUrl 地址
    * @param params 参数的JSON字符串
+   * @param keys 校验  appKey:secretKey
    * @return
    */
 
-  public static ZhugeResponse invoke(String apiUrl,String params) {
+  public static ZhugeResponse invoke(String apiUrl,String params,String keys) {
+
+    JSONObject jsonObject = JSONObject.parseObject(params);
     ZhugeResponse response = null;
     //验证
     String key = null;
@@ -99,8 +100,9 @@ public class ZhugeUtil {
     HttpURLConnection connection = null;
     try {
       key =
-          Base64.getEncoder().encodeToString((ZhugeConfig.appKey+":"+ZhugeConfig.secretKey).getBytes("UTF-8"));
-
+          Base64.getEncoder().encodeToString(keys.getBytes("UTF-8"));
+          jsonObject.remove("apiCode");
+      params = jsonObject.toJSONString();
 //      url = new URL("http://localhost:8080/Zhuge/Test");
       url = new URL(apiUrl);
       connection = (HttpURLConnection)url.openConnection();
@@ -150,6 +152,7 @@ public class ZhugeUtil {
       if(connection != null)
       connection.disconnect();
     }
+    System.out.println(response);
     return response;
   }
 

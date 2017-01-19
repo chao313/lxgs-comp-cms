@@ -34,7 +34,7 @@ public class AppTest
         //data中的per属性
         EventPr eventPer = new EventPr();
         //data属性值
-        ZhugeEventData<EventPr> zhugeEventData = new ZhugeEventData<>();
+        ZhugeEventData zhugeEventData = new ZhugeEventData();
         zhugeEventData.setTs(ZhugeUtil.getTime(new Date()));
         zhugeEventData.setEid("click");
 //      eventPer.setPer("click");
@@ -45,7 +45,7 @@ public class AppTest
         PersonPr personPer = new PersonPr();
         personPer.setName("hello");
         personPer.setMobile("13816978397");
-        ZhugePersonData<PersonPr> zhugePersonData = new ZhugePersonData<>();
+        ZhugePersonData zhugePersonData = new ZhugePersonData();
         zhugePersonData.setTs(ZhugeUtil.getTime(new Date()));
         zhugePersonData.setCuid("hello@zhuge.io");
         zhugePersonData.setPr(personPer);
@@ -68,12 +68,12 @@ public class AppTest
 //      System.out.println(jsonObject.toJSONString());
 //        ZhugeResponse response = ZhugeUtil.invoke(ZhugeConfig.apiUrl, jsonObject);
 //      for (int i = 0; i < 50; i++) {
-        ZhugeResponse response = ZhugeUtil.invoke(ZhugeConfig.apiUrl, json);
-        System.out.println(response);
+//        ZhugeResponse response = ZhugeUtil.invoke(ZhugeConfig.apiUrl, json);
+//        System.out.println(response);
 //      }
 
-        ZhugeResponse response2 = ZhugeUtil.invoke(ZhugeConfig.apiUrl, json1);
-        System.out.println(response2);
+//        ZhugeResponse response2 = ZhugeUtil.invoke(ZhugeConfig.apiUrl, json1);
+//        System.out.println(response2);
 
 //      for(Map.Entry set : jsonObject.entrySet()){
 //        System.out.println(set.getKey());

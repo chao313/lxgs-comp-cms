@@ -14,7 +14,7 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class ZhugeEventData<T> implements Serializable {
+public class ZhugeEventData implements Serializable {
 
   private EventPr pr;
   @NotNull(message = "自定义事件不可为空")

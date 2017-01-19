@@ -18,11 +18,11 @@ public class ZhugeService {
   @Reference(version = "1.0.0")
   private ZhugeIODubboService zhugeIODubboService;
 
-  public DubboResponse<ZhugeResponse> RecordParams(ZhugeEventRequest request){
-    return zhugeIODubboService.RecordParams(request);
+  public DubboResponse<ZhugeResponse> RecordEventParams(ZhugeEventRequest request){
+    return zhugeIODubboService.RecordEventParams(request);
   }
-  public DubboResponse<ZhugeResponse> RecordParams(ZhugePersonRequest request){
-    return zhugeIODubboService.RecordParams(request);
+  public DubboResponse<ZhugeResponse> RecordPerParams(ZhugePersonRequest request){
+    return zhugeIODubboService.RecordPerParams(request);
   }
 
 }

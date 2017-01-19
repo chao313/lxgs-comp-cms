@@ -14,7 +14,7 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class ZhugePersonData<T> implements Serializable {
+public class ZhugePersonData implements Serializable {
 
   private PersonPr pr;
 @NotNull(message = "用户信息不可为空")
