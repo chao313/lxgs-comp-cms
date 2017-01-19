@@ -34,7 +34,7 @@ public class ApproveDoneEventServiceImpl implements ApproveDoneEventService {
 		// data中的per属性
 		EventPr eventPer = new EventPr();
 		// data属性值
-		ZhugeEventData<EventPr> zhugeEventData = new ZhugeEventData<>();
+		ZhugeEventData zhugeEventData = new ZhugeEventData();
 		zhugeEventData.setTs(time);
 		if (approveDone.getResult() == 1) {
 			zhugeEventData.setEid(EventType.APPROVE_ENT_PASS.getDesc());
@@ -46,7 +46,7 @@ public class ApproveDoneEventServiceImpl implements ApproveDoneEventService {
 		eventRequest.setData(new ZhugeEventData[] { zhugeEventData });
 		String apiUrl = outApiCustomer.getZhgUrl();
 		String json = JSON.toJSONString(eventRequest);
-		ZhugeResponse response = ZhugeUtil.invoke(apiUrl, json);
+		ZhugeResponse response = ZhugeUtil.invoke(apiUrl, json,"");
 		LOGGER.info(JSONObject.toJSONString(response));
 		return response;
 	}
@@ -60,7 +60,7 @@ public class ApproveDoneEventServiceImpl implements ApproveDoneEventService {
 		// data中的per属性
 		EventPr eventPer = new EventPr();
 		// data属性值
-		ZhugeEventData<EventPr> zhugeEventData = new ZhugeEventData<>();
+		ZhugeEventData zhugeEventData = new ZhugeEventData();
 		zhugeEventData.setTs(time);
 		zhugeEventData.setEid(evenType.getDesc());
 		zhugeEventData.setPr(eventPer);
@@ -68,7 +68,7 @@ public class ApproveDoneEventServiceImpl implements ApproveDoneEventService {
 		eventRequest.setData(new ZhugeEventData[] { zhugeEventData });
 		String apiUrl = outApiCustomer.getZhgUrl();
 		String json = JSON.toJSONString(eventRequest);
-		ZhugeResponse response = ZhugeUtil.invoke(apiUrl, json);
+		ZhugeResponse response = ZhugeUtil.invoke(apiUrl, json,"");
 		LOGGER.info(JSONObject.toJSONString(response));
 		return response;
 	}

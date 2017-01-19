@@ -15,17 +15,16 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class ZhugeBaseRequest<T> extends BaseRequest{
+public class ZhugeBaseRequest extends BaseRequest{
 
   @NotNull(message = "上报时间不能为空")
   private String ts;            //10位毫秒数
   @NotNull(message = "用户id不能为空")
   private String cuid;
   @NotNull(message = "AppKey不能为空")
-  private String ak = "dfb87d9e3e7a43189959f77789f3fd38";
+  private String ak ;
   @NotNull(message = "平台信息不能为空")
   private String sdk = "web";
-  private String apiCode = "ZHUGE_API";
 //  private T[] data;
 
 }

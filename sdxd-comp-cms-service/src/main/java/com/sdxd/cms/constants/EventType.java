@@ -9,7 +9,6 @@ public enum EventType {
 	,LOAN_COMPLETED(21,"放款成功")
 	,LOAN_REJECTED(22,"放款拒绝")
 	,LOAN_FAILURE(23,"放款失败")
-	
 	;
 	
 	private int value;

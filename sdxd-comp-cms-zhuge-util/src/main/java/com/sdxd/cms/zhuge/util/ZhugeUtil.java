@@ -101,8 +101,7 @@ public class ZhugeUtil {
     try {
       key =
           Base64.getEncoder().encodeToString(keys.getBytes("UTF-8"));
-          jsonObject.remove("apiCode");
-      params = jsonObject.toJSONString();
+           params = jsonObject.toJSONString();
 //      url = new URL("http://localhost:8080/Zhuge/Test");
       url = new URL(apiUrl);
       connection = (HttpURLConnection)url.openConnection();
