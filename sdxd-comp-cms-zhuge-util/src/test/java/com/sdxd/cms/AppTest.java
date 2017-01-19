@@ -1,6 +1,7 @@
 package com.sdxd.cms;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.sdxd.cms.dubbo.api.request.zhuge.EventPr;
 import com.sdxd.cms.dubbo.api.request.zhuge.ZhugeEventRequest;
 import com.sdxd.cms.dubbo.api.request.zhuge.PersonPr;
@@ -10,6 +11,7 @@ import com.sdxd.cms.dubbo.api.request.zhuge.ZhugePersonData;
 import com.sdxd.cms.dubbo.api.response.ZhugeResponse;
 import com.sdxd.cms.zhuge.config.ZhugeConfig;
 import com.sdxd.cms.zhuge.util.ZhugeUtil;
+import com.sdxd.common.utils.BillNoUtils;
 
 import org.junit.Test;
 
@@ -26,40 +28,45 @@ public class AppTest
     @Test
     public void AppTest()
     {
-        //自定义事件
-        ZhugeEventRequest eventRequest = new ZhugeEventRequest();
-        eventRequest.setDebug(1);
-        eventRequest.setTs(ZhugeUtil.getTime(new Date()));
-        eventRequest.setCuid("hello@zhuge.io");
-        //data中的per属性
-        EventPr eventPer = new EventPr();
-        //data属性值
-        ZhugeEventData zhugeEventData = new ZhugeEventData();
-        zhugeEventData.setTs(ZhugeUtil.getTime(new Date()));
-        zhugeEventData.setEid("click");
-//      eventPer.setPer("click");
-        zhugeEventData.setPr(eventPer);
-        eventRequest.setData(new ZhugeEventData[]{zhugeEventData});
+      String time = (new Date().getTime()+"").substring(0,10);
+      //自定义事件
+      ZhugeEventRequest eventRequest = new ZhugeEventRequest();
+      eventRequest.setDebug(1);
+      eventRequest.setTs(time);
+      eventRequest.setCuid("hello@zhuge.io");
+      //data中的per属性
+      EventPr eventPer = new EventPr();
+      //data属性值
+      ZhugeEventData zhugeEventData = new ZhugeEventData();
+      zhugeEventData.setTs(time);
+      zhugeEventData.setEid("click");
+      zhugeEventData.setPr(eventPer);
+      eventRequest.setRequestId(BillNoUtils.GenerateBillNo());
+      eventRequest.setData(new ZhugeEventData[]{zhugeEventData});
 //用户per属性
 
-        PersonPr personPer = new PersonPr();
-        personPer.setName("hello");
-        personPer.setMobile("13816978397");
-        ZhugePersonData zhugePersonData = new ZhugePersonData();
-        zhugePersonData.setTs(ZhugeUtil.getTime(new Date()));
-        zhugePersonData.setCuid("hello@zhuge.io");
-        zhugePersonData.setPr(personPer);
-        //用户信息
-        ZhugePersonRequest personRequest = new ZhugePersonRequest();
-        personRequest.setCuid("hello@zhuge.io");
-        personRequest.setTs(ZhugeUtil.getTime(new Date()));
-//      personRequest.setDebug(1);
-        personRequest.setData(new ZhugePersonData[]{zhugePersonData});
-
-
-        String json = JSON.toJSONString(eventRequest);
-        String json1 = JSON.toJSONString(personRequest);
-        System.out.println(json);
+      PersonPr personPer = new PersonPr();
+      personPer.setName("hello");
+      personPer.setMobile("18710002233");
+      ZhugePersonData zhugePersonData = new ZhugePersonData();
+      zhugePersonData.setTs(time);
+      zhugePersonData.setCuid("hello@zhuge.io");
+      zhugePersonData.setPr(personPer);
+      //用户信息
+      ZhugePersonRequest personRequest = new ZhugePersonRequest();
+      personRequest.setCuid("hello@zhuge.io");
+      personRequest.setTs(time);
+      personRequest.setRequestId(BillNoUtils.GenerateBillNo());
+      personRequest.setData(new ZhugePersonData[]{zhugePersonData});
+      personRequest.setAk(ZhugeConfig.appKey);
+      eventRequest.setAk(ZhugeConfig.appKey);
+      String json = JSON.toJSONString(eventRequest);
+//      json = JSONObject.parseObject(json).remove("requestId").toString();
+      String key = ZhugeUtil.setKey(ZhugeConfig.appKey,ZhugeConfig.secretKey);
+      String test = "{\"cuid\":\"hello@zhuge.io\",\"data\":[{\"eid\":\"click\",\"et\":\"cus\",\"pr\":{},\"ts\":\"1484823139\"}],\"debug\":1,\"sdk\":\"web\",\"ts\":\"1484823139\"}";
+      ZhugeResponse response = ZhugeUtil.invoke(ZhugeConfig.apiUrl, json,key);
+        System.out.println(test);
+      System.out.println(key);
 //        JSONObject jsonObject = JSONObject.parseObject(json);
 //      jsonObject.put("data","["+jsonObject.getString("eventRequest")+","+jsonObject.getString("personRequest")+"]");
 

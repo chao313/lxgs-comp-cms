@@ -29,6 +29,11 @@
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>com.sdxd.admin</groupId>
+			<artifactId>sdxd-comp-admin-api</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>com.sdxd.cms</groupId>
 			<artifactId>sdxd-comp-cms-common</artifactId>
 			<version>1.0-SNAPSHOT</version>

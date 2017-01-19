@@ -4,8 +4,7 @@ import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
-import com.sdxd.admin.entity.SystemVariable;
-import com.sdxd.admin.service.SystemVariableService;
+import com.sdxd.admin.dubbo.api.response.SystemVariableResponse;
 import com.sdxd.cms.constants.ZhuGeVar;
 import com.sdxd.cms.dubbo.api.ZhugeIODubboService;
 import com.sdxd.cms.dubbo.api.request.zhuge.ZhugeEventRequest;
@@ -39,15 +38,15 @@ public class ZhugeIODubboServiceImpl implements ZhugeIODubboService {
     dubboResponse.setStatus(Constants.System.OK);
 
     try{
-      SystemVariable systemVariable = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_URL.getCode());
-      SystemVariable systemVariable1 = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_APPKEY.getCode());
-      SystemVariable systemVariable2 = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_SECRETKEY.getCode());
-      String apiUrl = systemVariable.getValue();
-      String appKey = systemVariable1.getValue();
-      String secretKey = systemVariable2.getValue();
+      DubboResponse<SystemVariableResponse> systemVariable = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_URL.getCode());
+      DubboResponse<SystemVariableResponse> systemVariable1 = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_APPKEY.getCode());
+      DubboResponse<SystemVariableResponse> systemVariable2 = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_SECRETKEY.getCode());
+      String apiUrl = systemVariable.getData().getValue();
+      String appKey = systemVariable1.getData().getValue();
+      String secretKey = systemVariable2.getData().getValue();
       request.setAk(appKey);
       String json = JSON.toJSONString(request);
-      String keys = appKey+":"+secretKey;
+      String keys = ZhugeUtil.setKey(appKey,secretKey);
       response = ZhugeUtil.invoke(apiUrl,json,keys);
       dubboResponse.setData(response);
       logger.debug("=============================结果{}\t"+dubboResponse);
@@ -68,15 +67,15 @@ public class ZhugeIODubboServiceImpl implements ZhugeIODubboService {
     dubboResponse.setStatus(Constants.System.OK);
 
     try{
-      SystemVariable systemVariable = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_URL.getCode());
-      SystemVariable systemVariable1 = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_APPKEY.getCode());
-      SystemVariable systemVariable2 = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_SECRETKEY.getCode());
-      String apiUrl = systemVariable.getValue();
-      String appKey = systemVariable1.getValue();
-      String secretKey = systemVariable2.getValue();
+      DubboResponse<SystemVariableResponse> systemVariable = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_URL.getCode());
+      DubboResponse<SystemVariableResponse> systemVariable1 = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_APPKEY.getCode());
+      DubboResponse<SystemVariableResponse> systemVariable2 = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_SECRETKEY.getCode());
+      String apiUrl = systemVariable.getData().getValue();
+      String appKey = systemVariable1.getData().getValue();
+      String secretKey = systemVariable2.getData().getValue();
       request.setAk(appKey);
       String json = JSON.toJSONString(request);
-      String keys = appKey+":"+secretKey;
+      String keys = ZhugeUtil.setKey(appKey,secretKey);
 
       response = ZhugeUtil.invoke(apiUrl,json,keys);
       dubboResponse.setData(response);

@@ -2,7 +2,6 @@ package com.sdxd.cms.zhuge.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.sdxd.admin.service.SystemVariableService;
 import com.sdxd.cms.dubbo.api.response.ZhugeResponse;
 
 import java.io.BufferedReader;
@@ -92,7 +91,6 @@ public class ZhugeUtil {
 
   public static ZhugeResponse invoke(String apiUrl,String params,String keys) {
 
-    JSONObject jsonObject = JSONObject.parseObject(params);
     ZhugeResponse response = null;
     //验证
     String key = null;
@@ -101,7 +99,6 @@ public class ZhugeUtil {
     try {
       key =
           Base64.getEncoder().encodeToString(keys.getBytes("UTF-8"));
-           params = jsonObject.toJSONString();
 //      url = new URL("http://localhost:8080/Zhuge/Test");
       url = new URL(apiUrl);
       connection = (HttpURLConnection)url.openConnection();
@@ -159,6 +156,10 @@ public class ZhugeUtil {
 //    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
     String time = date.getTime()+"";
     return time.substring(0,10);
+  }
+
+  public static String setKey(String appkey,String secretKey){
+    return appkey+":"+secretKey.trim();
   }
 
 }
