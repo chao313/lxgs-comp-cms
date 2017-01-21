@@ -1,5 +1,7 @@
 package com.sdxd.cms.mq;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -37,7 +39,7 @@ public class LoanMsgCustomer implements MessageListener {
 			LoanRejected loanR = Serialization.getPOJO(message.getBody(), LoanRejected.class);
 			LOGGER.info("放款拒绝消息内容,msgId={}, data={}", message.getMsgID(), JSONObject.toJSONString(loanR));
 			if(loanR!=null){
-//				approveDoneEventService.pushLoanZhuge(loanR.getUserId(),new Date(),EventType.LOAN_COMPLETED);
+				approveDoneEventService.pushLoanZhuge(loanR.getUserId(),new Date(),EventType.LOAN_REJECTED);
 			}
 			break;
 		case "TAG_LOAN_FAILURE":
