@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
        http://code.alibabatech.com/schema/dubbo
        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
@@ -21,6 +24,10 @@
     <dubbo:provider loadbalance="${dubbo.provider.loadbalance}" delay="-1" timeout="${dubbo.provider.service.timeout}" retries="0"/>
 
     <!-- 扫描注解包路径，多个包用逗号分隔，不填pacakge表示扫描当前ApplicationContext中所有的类 -->
-    <dubbo:annotation package="com.sdxd.cms.dubbo.impl"/>
+    <dubbo:annotation package="com.sdxd.cms.dubbo"/>
+    
+    <context:component-scan base-package="com.sdxd.cms.dubbo.outApi">
+		<context:include-filter type="annotation" expression="com.alibaba.dubbo.config.annotation.Reference" />
+	</context:component-scan>
     <!--<dubbo:service interface="com.sdxd.auth.dubbo.api.BankDubboServicervice" ref="bankManagerImpl" />-->
 </beans>

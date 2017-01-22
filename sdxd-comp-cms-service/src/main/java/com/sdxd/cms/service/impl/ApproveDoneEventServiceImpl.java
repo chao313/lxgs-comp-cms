@@ -51,6 +51,7 @@ public class ApproveDoneEventServiceImpl implements ApproveDoneEventService {
 		String apiUrl = outApiCustomer.getZhugeParam(ZhuGeVar.ZHUGE_API_URL.getCode());
 		String appKey = outApiCustomer.getZhugeParam(ZhuGeVar.ZHUGE_API_APPKEY.getCode());
 		String secretKey = outApiCustomer.getZhugeParam(ZhuGeVar.ZHUGE_API_SECRETKEY.getCode());
+		eventRequest.setAk(appKey);
 		String keys = ZhugeUtil.setKey(appKey, secretKey);
 		String json = JSON.toJSONString(eventRequest);
 		LOGGER.info("诸葛接口调用，param:{},keys:{}",json,keys);
@@ -65,6 +66,7 @@ public class ApproveDoneEventServiceImpl implements ApproveDoneEventService {
 		ZhugeEventRequest eventRequest = new ZhugeEventRequest();
 		eventRequest.setTs(time);
 		eventRequest.setCuid(String.valueOf(userId));
+		//eventRequest.setDebug(1);
 		// data中的per属性
 		EventPr eventPer = new EventPr();
 		// data属性值
@@ -72,11 +74,12 @@ public class ApproveDoneEventServiceImpl implements ApproveDoneEventService {
 		zhugeEventData.setTs(time);
 		zhugeEventData.setEid(evenType.getDesc());
 		zhugeEventData.setPr(eventPer);
-		eventRequest.setRequestId(BillNoUtils.GenerateBillNo());
-		eventRequest.setData(new ZhugeEventData[] { zhugeEventData });
 		String apiUrl = outApiCustomer.getZhugeParam(ZhuGeVar.ZHUGE_API_URL.getCode());
 		String appKey = outApiCustomer.getZhugeParam(ZhuGeVar.ZHUGE_API_APPKEY.getCode());
 		String secretKey = outApiCustomer.getZhugeParam(ZhuGeVar.ZHUGE_API_SECRETKEY.getCode());
+		eventRequest.setRequestId(BillNoUtils.GenerateBillNo());
+		eventRequest.setAk(appKey);
+		eventRequest.setData(new ZhugeEventData[] { zhugeEventData });
 		String keys = ZhugeUtil.setKey(appKey, secretKey);
 		String json = JSON.toJSONString(eventRequest);
 		LOGGER.info("诸葛接口调用，param:{},keys:{}",json,keys);
