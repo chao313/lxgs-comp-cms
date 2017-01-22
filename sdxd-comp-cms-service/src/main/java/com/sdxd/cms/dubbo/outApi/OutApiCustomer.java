@@ -3,10 +3,7 @@ package com.sdxd.cms.dubbo.outApi;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
 import com.sdxd.admin.dubbo.api.SystemVariableDubboService;
-import com.sdxd.admin.dubbo.api.constants.SystemVariableCode;
-import com.sdxd.admin.dubbo.api.request.AppVesionRequest;
 import com.sdxd.admin.dubbo.api.request.VariableCodeRequest;
-import com.sdxd.admin.dubbo.api.response.AppVersionResponse;
 import com.sdxd.admin.dubbo.api.response.SystemVariableResponse;
 import com.sdxd.common.utils.BillNoUtils;
 import com.sdxd.framework.constant.Constants;
@@ -22,15 +19,9 @@ public class OutApiCustomer {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(OutApiCustomer.class);
 
-  @Reference(version = "1.0.0")
-  private SystemVariableDubboService systemVariableDubboService;
+	@Reference(version = "1.0.0")
+	private SystemVariableDubboService systemVariableDubboService;
 
- /* public DubboResponse<SystemVariableResponse> getZhugeParam(String code){
-    VariableCodeRequest request = new VariableCodeRequest();
-    request.setVariableCode(code);
-    return systemVariableDubboService.getValueByCodeStr(request);
-  }*/
-  
 	public String getZhugeParam(String code) {
 		VariableCodeRequest request = new VariableCodeRequest();
 		request.setRequestId(BillNoUtils.GenerateBillNo());
@@ -45,7 +36,7 @@ public class OutApiCustomer {
 		return response.getData() != null ? response.getData().getValue() : null;
 	}
 
-	public String getZhgUrl(){
+	public String getZhgUrl() {
 		return "";
 	}
 }
