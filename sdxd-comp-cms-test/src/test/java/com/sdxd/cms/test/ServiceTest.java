@@ -4,15 +4,21 @@ import javax.annotation.Resource;
 
 import org.junit.Test;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.sdxd.cms.CmsBannerService;
 import com.sdxd.cms.CmsNoticeService;
+import com.sdxd.cms.CmsShareService;
+import com.sdxd.cms.dubbo.api.CmsBannerDubboService;
+import com.sdxd.cms.dubbo.api.CmsShareDubboService;
 import com.sdxd.cms.dubbo.api.enums.CmsBannerType;
 import com.sdxd.cms.dubbo.api.request.CmsBannerRequest;
 import com.sdxd.cms.dubbo.api.request.CmsNoticeRequest;
+import com.sdxd.cms.dubbo.api.request.CmsShareRequest;
 import com.sdxd.cms.dubbo.api.request.DeleteCmsBannerRequest;
 import com.sdxd.cms.dubbo.api.request.QueryCmsBannerRequest;
 import com.sdxd.cms.dubbo.api.response.CmsBannerResponse;
 import com.sdxd.cms.dubbo.api.response.CmsNoticeResponse;
+import com.sdxd.cms.dubbo.api.response.CmsShareResponse;
 import com.sdxd.cms.dubbo.api.response.QueryCmsBannerResponse;
 import com.sdxd.cms.dubbo.api.response.QueryCmsNoticeResponse;
 import com.sdxd.common.utils.BillNoUtils;
@@ -26,7 +32,10 @@ public class ServiceTest extends BaseTest{
 	
 	@Resource
 	private CmsNoticeService cmsNoticeService;
-	
+
+    @Resource
+    private CmsShareService cmsShareService;
+
 	@Test
 	public void testAddCmsBanner(){
 		CmsBannerRequest request = new CmsBannerRequest();
@@ -90,5 +99,16 @@ public class ServiceTest extends BaseTest{
 		request.setLink("http://www.baiddu.com");
 		DubboResponse<QueryCmsNoticeResponse> rt =	cmsNoticeService.queryCmsNotic(request);
 		System.out.println("");
+	}
+
+	@Test
+	public void testFindShare() {
+		CmsShareRequest request = new CmsShareRequest();
+		request.setSystemId("");
+		request.setRequestId("");
+		request.setId("t12345");
+        DubboResponse<CmsShareResponse> response = cmsShareService.findById(request);
+        response.getData();
+//		cmsShareDubboService.findById(request);
 	}
 }
