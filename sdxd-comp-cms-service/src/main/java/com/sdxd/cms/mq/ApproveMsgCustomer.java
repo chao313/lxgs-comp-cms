@@ -21,7 +21,7 @@ public class ApproveMsgCustomer implements MessageListener {
 
 	@Override
 	public Action consume(Message message, ConsumeContext context) {
-		LOGGER.debug("消费信审结果,key:{}", message.getKey());
+		LOGGER.debug(",key:{}", message.getKey());
 		ApproveDone approveDone = Serialization.getPOJO(message.getBody(), ApproveDone.class);
 		try {
 			approveDoneEventService.pushApproveDoneZhuge(approveDone);

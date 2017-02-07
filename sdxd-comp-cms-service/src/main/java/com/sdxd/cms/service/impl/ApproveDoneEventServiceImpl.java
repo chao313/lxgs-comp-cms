@@ -31,6 +31,9 @@ public class ApproveDoneEventServiceImpl implements ApproveDoneEventService {
 
 	@Override
 	public ZhugeResponse pushApproveDoneZhuge(ApproveDone approveDone) {
+		if(approveDone!=null && approveDone.getApproveTime() == null){
+			approveDone.setApproveTime(new Date());
+		}
 		String time = (approveDone.getApproveTime().getTime() + "").substring(0, 10);
 		ZhugeEventRequest eventRequest = new ZhugeEventRequest();
 		eventRequest.setTs(time);
@@ -62,6 +65,9 @@ public class ApproveDoneEventServiceImpl implements ApproveDoneEventService {
 
 	@Override
 	public ZhugeResponse pushLoanZhuge(Long userId, Date eventTime, EventType evenType) {
+		if(eventTime==null){
+			eventTime = new Date();
+		}
 		String time = (eventTime.getTime() + "").substring(0, 10);
 		ZhugeEventRequest eventRequest = new ZhugeEventRequest();
 		eventRequest.setTs(time);
