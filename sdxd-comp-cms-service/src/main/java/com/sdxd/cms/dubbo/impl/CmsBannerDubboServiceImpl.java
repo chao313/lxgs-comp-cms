@@ -153,6 +153,7 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 		try {
 			if(voLists==null) {
 				//从数据库查询，并保存到redis数据库
+				voLists = new ArrayList<>();
 				CmsBanner cmsBanner = new CmsBanner();
 				BeanUtils.copyOnPropertyUtils(cmsBanner, request);
 				cmsBanner.setDeleteFlag(0);
