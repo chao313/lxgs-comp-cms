@@ -147,7 +147,7 @@
 				<conf.mongodb.database.user>sdxdauth</conf.mongodb.database.user>
 				<conf.mongodb.database.password>sdxd2016</conf.mongodb.database.password>
 				<conf.mongodb.database.port>3717</conf.mongodb.database.port>
-				<conf.redis.db>9</conf.redis.db>
+				<conf.redis.db>7</conf.redis.db>
 				<conf.redis.password>sndaXD2016</conf.redis.password>
 				<conf.redis.master.host>r-tj79c532659ad844.redis.rds.aliyuncs.com</conf.redis.master.host>
 				<conf.redis.master.port>6379</conf.redis.master.port>
@@ -219,7 +219,7 @@
 				<conf.mongodb.database.user>root</conf.mongodb.database.user>
 				<conf.mongodb.database.password>atppiX0xuMjj2t</conf.mongodb.database.password>
 				<conf.mongodb.database.port>3717</conf.mongodb.database.port>
-				<conf.redis.db>9</conf.redis.db>
+				<conf.redis.db>7</conf.redis.db>
 				<conf.redis.password>devredis2017</conf.redis.password>
 				<conf.redis.master.host>10.253.107.222</conf.redis.master.host>
 				<conf.redis.master.port>6379</conf.redis.master.port>
