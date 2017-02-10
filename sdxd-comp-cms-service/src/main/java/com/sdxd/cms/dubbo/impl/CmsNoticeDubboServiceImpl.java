@@ -8,16 +8,20 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sdxd.cms.dubbo.api.CmsNoticeDubboService;
+import com.sdxd.cms.dubbo.api.pojo.CmsBannerVo;
 import com.sdxd.cms.dubbo.api.pojo.CmsNoticeVo;
 import com.sdxd.cms.dubbo.api.request.CmsNoticeRequest;
 import com.sdxd.cms.dubbo.api.response.CmsNoticeResponse;
 import com.sdxd.cms.dubbo.api.response.QueryCmsNoticeResponse;
 import com.sdxd.cms.entity.CmsNotice;
 import com.sdxd.cms.service.CmsNoticeSerivce;
+import com.sdxd.common.redis.template.RedisClientTemplate;
 import com.sdxd.common.utils.BeanUtils;
 import com.sdxd.framework.constant.Constants;
 import com.sdxd.framework.dubbo.DubboResponse;
@@ -29,6 +33,11 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
 	
 	@Resource
 	private CmsNoticeSerivce cmsNoticeService;
+
+	@Autowired
+	private RedisClientTemplate redisClientTemplate;
+
+	private String REDIS_KEY_LIST="SDXD:CMS:NOTICE:LIST";
 
 	@Override
 	public DubboResponse<CmsNoticeResponse> addCmsNotic(CmsNoticeRequest request) {
@@ -48,6 +57,8 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
 			BeanUtils.copyOnPropertyUtils(cmsNotice, request);
 			cmsNoticeService.insert(cmsNotice);
 			res.setSuccess(true);
+
+			redisClientTemplate.del(REDIS_KEY_LIST);
 		} catch (Exception e) {
 			LOGGER.error("addCmsNotic error",e);
 			res.setSuccess(false);
@@ -77,6 +88,8 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
 			cmsNotice.setDeleteFlag(1);
 			cmsNoticeService.update(cmsNotice);
 			res.setSuccess(true);
+
+			redisClientTemplate.del(REDIS_KEY_LIST);
 		} catch (Exception e) {
 			LOGGER.error("deleteCmsNotic error",e);
 			res.setSuccess(false);
@@ -105,6 +118,8 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
 			BeanUtils.copyOnPropertyUtils(cmsNotice, request);
 			cmsNoticeService.update(cmsNotice);
 			res.setSuccess(true);
+
+			redisClientTemplate.del(REDIS_KEY_LIST);
 		} catch (Exception e) {
 			LOGGER.error("updataCmsNotic error",e);
 			res.setSuccess(false);
@@ -122,26 +137,48 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
 		response.setError(Constants.System.SERVER_SUCCESS);
 		response.setStatus(Constants.System.OK);
 		QueryCmsNoticeResponse res = new QueryCmsNoticeResponse();
+
+
+		List<CmsNoticeVo> voLists = null;
 		try {
-			CmsNotice cmsNotice = new CmsNotice();
-			BeanUtils.copyOnPropertyUtils(cmsNotice, request);
-			cmsNotice.setDeleteFlag(0);
-			List<CmsNotice> list = cmsNoticeService.getByObj(cmsNotice);
-			List<CmsNoticeVo> voLists = new ArrayList<CmsNoticeVo>();
-			for(CmsNotice cn:list){
-				if(cn==null){
-					continue;
-				}
-				CmsNoticeVo vo = new CmsNoticeVo();
-				BeanUtils.copyOnPropertyUtils(vo, cn);
-				voLists.add(vo);
+			String noticesInRedis = redisClientTemplate.get(REDIS_KEY_LIST);
+			if(!StringUtils.isEmpty(noticesInRedis)) {
+				voLists = JSON.parseArray(noticesInRedis, CmsNoticeVo.class);
 			}
-			res.setList(voLists);
+		} catch (Exception e) {
+			LOGGER.error("Query notice list in redis error",e);
+		}
+
+
+		try {
+			if(voLists==null) {
+				voLists = new ArrayList<CmsNoticeVo>();
+
+				CmsNotice cmsNotice = new CmsNotice();
+				BeanUtils.copyOnPropertyUtils(cmsNotice, request);
+				cmsNotice.setDeleteFlag(0);
+				List<CmsNotice> list = cmsNoticeService.getByObj(cmsNotice);
+				for (CmsNotice cn : list) {
+					if (cn == null) {
+						continue;
+					}
+					CmsNoticeVo vo = new CmsNoticeVo();
+					BeanUtils.copyOnPropertyUtils(vo, cn);
+					voLists.add(vo);
+				}
+
+				redisClientTemplate.set(REDIS_KEY_LIST, JSON.toJSONString(voLists));
+				redisClientTemplate.expire(REDIS_KEY_LIST, 1 * 60 * 60);
+			}else {
+				LOGGER.info("Find notice list in redis.");
+			}
 		} catch (Exception e) {
 			LOGGER.error("queryCmsNotic error",e);
 			response.setError(Constants.System.SYSTEM_ERROR_CODE);
 			response.setMsg(Constants.System.SYSTEM_ERROR_MSG);
 		}
+
+		res.setList(voLists);
 		response.setData(res);
 		return response;
 	}
