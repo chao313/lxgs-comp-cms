@@ -8,8 +8,10 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sdxd.cms.dubbo.api.CmsBannerDubboService;
 import com.sdxd.cms.dubbo.api.pojo.CmsBannerVo;
@@ -20,6 +22,7 @@ import com.sdxd.cms.dubbo.api.response.CmsBannerResponse;
 import com.sdxd.cms.dubbo.api.response.QueryCmsBannerResponse;
 import com.sdxd.cms.entity.CmsBanner;
 import com.sdxd.cms.service.CmsBannerService;
+import com.sdxd.common.redis.template.RedisClientTemplate;
 import com.sdxd.common.utils.BeanUtils;
 import com.sdxd.framework.constant.Constants;
 import com.sdxd.framework.dubbo.DubboResponse;
@@ -29,6 +32,12 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CmsBannerDubboServiceImpl.class);
 	@Resource
 	private CmsBannerService cmsBannerService;
+
+	@Autowired
+	private RedisClientTemplate redisClientTemplate;
+
+	private String REDIS_KEY_LIST="SDXD:CMS:BANNER:LIST";
+
 
 	@Override
 	public DubboResponse<CmsBannerResponse> addCmsBanner(CmsBannerRequest request) {
@@ -49,6 +58,8 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 			BeanUtils.copyOnPropertyUtils(cmsBanner, request);
 			cmsBannerService.insert(cmsBanner);
 			res.setSuccess(true);
+
+			redisClientTemplate.del(REDIS_KEY_LIST);
 		} catch (Exception e) {
 			LOGGER.error("addCmsBanner error",e);
 			res.setSuccess(false);
@@ -77,6 +88,8 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 			BeanUtils.copyOnPropertyUtils(cmsBanner, request);
 			cmsBannerService.update(cmsBanner);
 			res.setSuccess(true);
+
+			redisClientTemplate.del(REDIS_KEY_LIST);
 		} catch (Exception e) {
 			LOGGER.error("updataCmsBanner error",e);
 			res.setSuccess(false);
@@ -106,6 +119,8 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 			cmsBanner.setDeleteFlag(1);
 			cmsBannerService.update(cmsBanner);
 			res.setSuccess(true);
+
+			redisClientTemplate.del(REDIS_KEY_LIST);
 		} catch (Exception e) {
 			LOGGER.error("deleteCmsBanner error",e);
 			res.setSuccess(false);
@@ -123,26 +138,46 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 		response.setError(Constants.System.SERVER_SUCCESS);
 		response.setStatus(Constants.System.OK);
 		QueryCmsBannerResponse res = new QueryCmsBannerResponse();
+
+
+		List<CmsBannerVo> voLists = null;
 		try {
-			CmsBanner cmsBanner = new CmsBanner();
-			BeanUtils.copyOnPropertyUtils(cmsBanner, request);
-			cmsBanner.setDeleteFlag(0);
-			List<CmsBanner> list = cmsBannerService.getByObj(cmsBanner);
-			List<CmsBannerVo> voLists = new ArrayList<CmsBannerVo>();
-			for(CmsBanner cb:list){
-				if(cb==null){
-					continue;
+			String bannersInRedis = redisClientTemplate.get(REDIS_KEY_LIST);
+			if(!StringUtils.isEmpty(bannersInRedis)) {
+				voLists = JSON.parseArray(bannersInRedis, CmsBannerVo.class);
+            }
+		} catch (Exception e) {
+			LOGGER.error("Query banner list in redis error",e);
+		}
+
+		try {
+			if(voLists==null) {
+				//从数据库查询，并保存到redis数据库
+				CmsBanner cmsBanner = new CmsBanner();
+				BeanUtils.copyOnPropertyUtils(cmsBanner, request);
+				cmsBanner.setDeleteFlag(0);
+				List<CmsBanner> list = cmsBannerService.getByObj(cmsBanner);
+				for (CmsBanner cb : list) {
+					if (cb == null) {
+						continue;
+					}
+					CmsBannerVo vo = new CmsBannerVo();
+					BeanUtils.copyOnPropertyUtils(vo, cb);
+					voLists.add(vo);
 				}
-				CmsBannerVo vo = new CmsBannerVo();
-				BeanUtils.copyOnPropertyUtils(vo, cb);
-				voLists.add(vo);
+
+				redisClientTemplate.set(REDIS_KEY_LIST, JSON.toJSONString(voLists));
+				redisClientTemplate.expire(REDIS_KEY_LIST, 1 * 60 * 60);
+			}else {
+				LOGGER.info("Find banner list in redis.");
 			}
-			res.setList(voLists);
 		} catch (Exception e) {
 			LOGGER.error("queryCmsBanner error",e);
 			response.setError(Constants.System.SYSTEM_ERROR_CODE);
 			response.setMsg(Constants.System.SYSTEM_ERROR_MSG);
 		}
+
+		res.setList(voLists);
 		response.setData(res);
 		return response;
 	}
