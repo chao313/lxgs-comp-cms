@@ -167,6 +167,7 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
 					voLists.add(vo);
 				}
 
+				LOGGER.info("Put notice list into redis.");
 				redisClientTemplate.set(REDIS_KEY_LIST, JSON.toJSONString(voLists));
 				redisClientTemplate.expire(REDIS_KEY_LIST, 1 * 60 * 60);
 			}else {
