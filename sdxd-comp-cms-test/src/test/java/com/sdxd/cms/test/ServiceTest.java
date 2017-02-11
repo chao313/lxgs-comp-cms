@@ -96,7 +96,7 @@ public class ServiceTest extends BaseTest{
 		CmsNoticeRequest request  =new CmsNoticeRequest();
 		request.setRequestId(BillNoUtils.GenerateBillNo());
 		//request.setTitle("hahah哈哈");
-		request.setLink("http://www.baiddu.com");
+//		request.setLink("http://www.baiddu.com");
 		DubboResponse<QueryCmsNoticeResponse> rt =	cmsNoticeService.queryCmsNotic(request);
 		System.out.println("");
 	}
