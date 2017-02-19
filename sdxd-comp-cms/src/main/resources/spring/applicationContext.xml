@@ -54,6 +54,7 @@
 <!--     <import resource="classpath:spring/applicationContext-mongo.xml"/> -->
     <import resource="classpath:spring/applicationContext-framework.xml"/>
     <import resource="classpath:spring/dubbo/applicationContext-dubbo-service.xml"/>
+    <import resource="classpath:spring/mq/applicationContext-mq.xml"/>
 <!--<import resource="classpath:spring/dubbo/applicationContext-dubbo-client.xml"/> -->
     <!-- <import resource="classpath:spring/applicationContext-redis.xml"/> -->
 
