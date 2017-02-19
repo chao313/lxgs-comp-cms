@@ -11,7 +11,7 @@ import com.sdxd.framework.dubbo.DubboResponse;
  */
 public interface ZhugeIODubboService {
 
-  public DubboResponse<ZhugeResponse> RecordParams(ZhugeEventRequest request);
-  public DubboResponse<ZhugeResponse> RecordParams(ZhugePersonRequest request);
+  public DubboResponse<ZhugeResponse> RecordEventParams(ZhugeEventRequest request);
+  public DubboResponse<ZhugeResponse> RecordPerParams(ZhugePersonRequest request);
 
 }
