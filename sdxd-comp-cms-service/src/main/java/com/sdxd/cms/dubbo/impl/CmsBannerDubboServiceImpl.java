@@ -1,6 +1,7 @@
 package com.sdxd.cms.dubbo.impl;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.alibaba.dubbo.common.utils.CollectionUtils;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -158,15 +160,25 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 				BeanUtils.copyOnPropertyUtils(cmsBanner, request);
 				cmsBanner.setDeleteFlag(0);
 				List<CmsBanner> list = cmsBannerService.getByObj(cmsBanner);
-				for (CmsBanner cb : list) {
-					if (cb == null) {
-						continue;
+				if(CollectionUtils.isNotEmpty(list)){
+					for (CmsBanner cb : list) {
+						if (cb == null) {
+							continue;
+						}
+						CmsBannerVo vo = new CmsBannerVo();
+						BeanUtils.copyOnPropertyUtils(vo, cb);
+						voLists.add(vo);
 					}
-					CmsBannerVo vo = new CmsBannerVo();
-					BeanUtils.copyOnPropertyUtils(vo, cb);
-					voLists.add(vo);
+					voLists.sort(new Comparator<CmsBannerVo>() {
+						@Override
+						public int compare(CmsBannerVo o1, CmsBannerVo o2) {
+							if(o1==null||o2==null){
+								return 0;
+							}
+							return o1.getImageOrder()-o2.getImageOrder();
+						}
+					});
 				}
-
 				LOGGER.info("Put banner list into redis.");
 				redisClientTemplate.set(REDIS_KEY_LIST, JSON.toJSONString(voLists));
 				redisClientTemplate.expire(REDIS_KEY_LIST, 1 * 60 * 60);
@@ -178,7 +190,7 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 			response.setError(Constants.System.SYSTEM_ERROR_CODE);
 			response.setMsg(Constants.System.SYSTEM_ERROR_MSG);
 		}
-
+		
 		res.setList(voLists);
 		response.setData(res);
 		return response;
