@@ -61,7 +61,7 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 			cmsBannerService.insert(cmsBanner);
 			res.setSuccess(true);
 
-			redisClientTemplate.del(REDIS_KEY_LIST);
+			redisClientTemplate.del(REDIS_KEY_LIST+":"+request.getType());
 		} catch (Exception e) {
 			LOGGER.error("addCmsBanner error",e);
 			res.setSuccess(false);
@@ -91,7 +91,7 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 			cmsBannerService.update(cmsBanner);
 			res.setSuccess(true);
 
-			redisClientTemplate.del(REDIS_KEY_LIST);
+			redisClientTemplate.del(REDIS_KEY_LIST+":"+request.getType());
 		} catch (Exception e) {
 			LOGGER.error("updataCmsBanner error",e);
 			res.setSuccess(false);
@@ -118,11 +118,11 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 		try {
 			CmsBanner cmsBanner = new CmsBanner();
 			cmsBanner.setId(id);
+			cmsBanner = cmsBannerService.getById(id);
 			cmsBanner.setDeleteFlag(1);
 			cmsBannerService.update(cmsBanner);
 			res.setSuccess(true);
-
-			redisClientTemplate.del(REDIS_KEY_LIST);
+			redisClientTemplate.del(REDIS_KEY_LIST+":" + cmsBanner.getType());
 		} catch (Exception e) {
 			LOGGER.error("deleteCmsBanner error",e);
 			res.setSuccess(false);
@@ -144,7 +144,7 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 
 		List<CmsBannerVo> voLists = null;
 		try {
-			String bannersInRedis = redisClientTemplate.get(REDIS_KEY_LIST);
+			String bannersInRedis = redisClientTemplate.get(REDIS_KEY_LIST+":"+request.getType());
 			if(!StringUtils.isEmpty(bannersInRedis)) {
 				voLists = JSON.parseArray(bannersInRedis, CmsBannerVo.class);
             }
@@ -180,8 +180,8 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 					});
 				}
 				LOGGER.info("Put banner list into redis.");
-				redisClientTemplate.set(REDIS_KEY_LIST, JSON.toJSONString(voLists));
-				redisClientTemplate.expire(REDIS_KEY_LIST, 1 * 60 * 60);
+				redisClientTemplate.set(REDIS_KEY_LIST+":"+request.getType(), JSON.toJSONString(voLists));
+				redisClientTemplate.expire(REDIS_KEY_LIST+":"+request.getType(), 1 * 60 * 60);
 			}else {
 				LOGGER.info("Find banner list in redis.");
 			}
