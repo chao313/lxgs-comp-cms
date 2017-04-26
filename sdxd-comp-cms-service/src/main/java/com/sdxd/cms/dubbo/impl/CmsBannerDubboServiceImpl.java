@@ -16,6 +16,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sdxd.cms.dubbo.api.CmsBannerDubboService;
+import com.sdxd.cms.dubbo.api.enums.CmsBannerType;
 import com.sdxd.cms.dubbo.api.pojo.CmsBannerVo;
 import com.sdxd.cms.dubbo.api.request.CmsBannerRequest;
 import com.sdxd.cms.dubbo.api.request.DeleteCmsBannerRequest;
@@ -141,7 +142,11 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 		response.setStatus(Constants.System.OK);
 		QueryCmsBannerResponse res = new QueryCmsBannerResponse();
 
-
+		//TODO 临时
+		if(StringUtils.isBlank(request.getType())){
+			request.setType(CmsBannerType.APP.toString());
+		}
+		
 		List<CmsBannerVo> voLists = null;
 		try {
 			String bannersInRedis = redisClientTemplate.get(REDIS_KEY_LIST+":"+request.getType());
@@ -151,6 +156,7 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 		} catch (Exception e) {
 			LOGGER.error("Query banner list in redis error",e);
 		}
+		
 
 		try {
 			if(voLists==null) {
