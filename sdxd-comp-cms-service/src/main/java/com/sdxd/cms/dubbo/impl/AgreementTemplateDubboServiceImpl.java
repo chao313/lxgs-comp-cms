@@ -133,7 +133,7 @@ public class AgreementTemplateDubboServiceImpl implements AgreementTemplateDubbo
     }
 
     @Override
-    public DubboResponse<Integer> queryAgreementTemplateCount(BaseRequest request) {
+    public DubboResponse<Integer> queryAgreementTemplateCount(QueryAgreementTemplateRequest request) {
         DubboResponse<Integer> response = new DubboResponse<>();
         response.setStatus(Constants.System.OK);
         response.setError(Constants.System.SERVER_SUCCESS);

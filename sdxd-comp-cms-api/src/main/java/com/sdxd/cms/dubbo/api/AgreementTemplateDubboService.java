@@ -26,5 +26,6 @@ public interface AgreementTemplateDubboService {
     //协议列表
     public DubboResponse<PaginationSupport<AgreementTemplateVo>> queryAgreementTemplate(QueryAgreementTemplateRequest request);
 
-    public DubboResponse<Integer> queryAgreementTemplateCount(BaseRequest request);
+    //协议总条数
+    public DubboResponse<Integer> queryAgreementTemplateCount(QueryAgreementTemplateRequest request);
 }
