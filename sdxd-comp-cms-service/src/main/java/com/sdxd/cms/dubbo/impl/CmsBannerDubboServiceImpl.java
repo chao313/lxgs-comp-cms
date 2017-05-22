@@ -143,9 +143,9 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 		QueryCmsBannerResponse res = new QueryCmsBannerResponse();
 
 		//TODO 临时
-		if(StringUtils.isBlank(request.getType())){
+		/*if(StringUtils.isBlank(request.getType())){
 			request.setType(CmsBannerType.APP.toString());
-		}
+		}*/
 		
 		List<CmsBannerVo> voLists = null;
 		try {
