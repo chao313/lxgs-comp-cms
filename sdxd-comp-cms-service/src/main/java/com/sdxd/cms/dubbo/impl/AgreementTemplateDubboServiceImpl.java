@@ -150,6 +150,28 @@ public class AgreementTemplateDubboServiceImpl implements AgreementTemplateDubbo
         return response;
     }
 
+    @Override
+    public DubboResponse<List<AgreementTemplateVo>> queryAll() {
+        DubboResponse<List<AgreementTemplateVo>>  response = new DubboResponse<>();
+        response.setStatus(Constants.System.OK);
+        response.setError(Constants.System.SERVER_SUCCESS);
+        try{
+            List<AgreementTemplateManage> list  = agreementTemplateService.queryAll();
+            LOGGER.error("【协议模板】 ====================================>> 协议列表总数 {}", list.size());
+            List<AgreementTemplateVo> voList = new ArrayList<>(list.size());
+            for(AgreementTemplateManage manage :list){
+                voList.add(convert(manage));
+            }
+            response.setData(voList);
+        }catch (Exception e){
+            LOGGER.error("【协议模板】 ====================================>> 协议列表总数  bean copy error",e);
+            response.setStatus(Constants.System.FAIL);
+            response.setError(Constants.System.SYSTEM_ERROR_CODE);
+            response.setMsg(Constants.System.SYSTEM_ERROR_MSG);
+        }
+        return response;
+    }
+
     private AgreementTemplateVo convert(AgreementTemplateManage manage) {
         AgreementTemplateVo pojo = new AgreementTemplateVo();
         try {

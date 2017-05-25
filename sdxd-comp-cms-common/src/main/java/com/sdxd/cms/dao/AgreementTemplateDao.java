@@ -28,4 +28,6 @@ public interface AgreementTemplateDao extends BaseDao<AgreementTemplateManage> {
     AgreementTemplateManage queryByAgreementTitle (@Param("agreementTitle") String agreementTitle);
 
     AgreementTemplateManage queryById (@Param("id") Integer id );
+
+    List<AgreementTemplateManage> getAllAgreement ();
 }

@@ -13,6 +13,7 @@ import com.sdxd.framework.dubbo.DubboResponse;
 import org.junit.Test;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author liujie
@@ -51,7 +52,7 @@ public class AgreementTemplateTest extends BaseTest {
         request.setRequestId(BillNoUtils.GenerateBillNo());
         DubboResponse<PaginationSupport<AgreementTemplateVo>> c =  agreementTemplateService.list(request);
         DubboResponse<Integer> d = agreementTemplateService.count(request);
-
+        DubboResponse<List<AgreementTemplateVo>> all = agreementTemplateService.queryAll(request);
         System.out.println(c);
         System.out.println(d);
     }

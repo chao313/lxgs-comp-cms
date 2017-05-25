@@ -9,9 +9,12 @@ import com.sdxd.cms.dubbo.api.request.QueryAgreementTemplateRequest;
 import com.sdxd.cms.dubbo.api.response.AgreementTemplateResponse;
 import com.sdxd.cms.dubbo.api.response.DeleteAgreementTemplateResponse;
 import com.sdxd.framework.dto.PaginationSupport;
+import com.sdxd.framework.dubbo.BaseRequest;
 import com.sdxd.framework.dubbo.DubboResponse;
 import javafx.scene.control.Pagination;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author liujie
@@ -38,5 +41,9 @@ public class AgreementTemplateService {
 
     public DubboResponse<Integer> count (QueryAgreementTemplateRequest request){
         return agreementTemplateDubboService.queryAgreementTemplateCount(request);
+    }
+
+    public DubboResponse<List<AgreementTemplateVo>> queryAll(BaseRequest request){
+        return agreementTemplateDubboService.queryAll();
     }
 }

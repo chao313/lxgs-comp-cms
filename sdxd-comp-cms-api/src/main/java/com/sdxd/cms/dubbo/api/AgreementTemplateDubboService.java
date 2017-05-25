@@ -10,6 +10,8 @@ import com.sdxd.framework.dto.PaginationSupport;
 import com.sdxd.framework.dubbo.BaseRequest;
 import com.sdxd.framework.dubbo.DubboResponse;
 
+import java.util.List;
+
 /**
  * @author liujie
  * @Date 2017/5/4
@@ -28,4 +30,7 @@ public interface AgreementTemplateDubboService {
 
     //协议总条数
     public DubboResponse<Integer> queryAgreementTemplateCount(QueryAgreementTemplateRequest request);
+
+    //查询所有协议
+    public DubboResponse<List<AgreementTemplateVo>> queryAll();
 }

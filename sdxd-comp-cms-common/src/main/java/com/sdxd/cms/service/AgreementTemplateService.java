@@ -24,4 +24,7 @@ public interface AgreementTemplateService  extends BaseService<AgreementTemplate
     AgreementTemplateManage queryByAgreementTitle(String agreementTitle);
     //根据协议模板id查询
     AgreementTemplateManage queryById (Integer id );
+
+    //查询所有
+    List<AgreementTemplateManage> queryAll();
 }

@@ -62,4 +62,11 @@
     <select id="queryAgreementTemplateCount" resultType="java.lang.Integer">
         SELECT count(1) FROM  t_agreement_template_manage WHERE `delete_flag` =0;
     </select>
+
+    <!-- 查询所有 -->
+    <select id="getAllAgreement" resultMap="getMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM  t_agreement_template_manage WHERE `delete_flag` =0  ORDER BY  create_time
+    </select>
 </mapper>

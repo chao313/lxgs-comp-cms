@@ -58,4 +58,10 @@ public class AgreementTemplateServiceImpl extends BaseServiceImpl<AgreementTempl
         AgreementTemplateManage manage = dao.queryById(id);
         return manage;
     }
+
+    @Override
+    public List<AgreementTemplateManage> queryAll() {
+        List<AgreementTemplateManage> list = dao.getAllAgreement();
+        return list;
+    }
 }
