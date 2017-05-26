@@ -20,20 +20,20 @@ import java.util.List;
 public interface OtherChannelDetailDubboService {
 
     //创建
-    DubboResponse<OtherChannelDetailResponse> save(OtherChannelDetailRequest request);
+    public DubboResponse<OtherChannelDetailResponse> save(OtherChannelDetailRequest request);
 
     //修改
-    DubboResponse<OtherChannelDetailResponse> update(UpdateOtherChannelDetailRequest request);
+    public DubboResponse<OtherChannelDetailResponse> update(UpdateOtherChannelDetailRequest request);
 
     //删除
-    DubboResponse<OtherChannelDetailResponse> delete(DeleteOtherChannelDetailRequest request);
+    public DubboResponse<OtherChannelDetailResponse> updateDeleteFlag(DeleteOtherChannelDetailRequest request);
 
     //查询总数
-    DubboResponse<Integer> queryCount(BaseRequest request);
+    public DubboResponse<Integer> queryCount(BaseRequest request);
 
     //查询所有
-    DubboResponse<List<OtherChannelDetailVo>> queryAll(BaseRequest request);
+    public DubboResponse<List<OtherChannelDetailVo>> queryAll(BaseRequest request);
 
     //分页查询
-    DubboResponse<PaginationSupport<OtherChannelDetailVo>> query(QueryOtherChannelDetailRequest request);
+    public DubboResponse<PaginationSupport<OtherChannelDetailVo>> query(QueryOtherChannelDetailRequest request);
 }

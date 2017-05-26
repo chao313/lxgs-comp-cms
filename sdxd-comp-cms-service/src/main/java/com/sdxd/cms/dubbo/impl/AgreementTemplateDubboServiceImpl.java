@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,12 +33,11 @@ import java.util.List;
  * 盛大小贷
  */
 @Service(interfaceName = "com.sdxd.cms.dubbo.api.AgreementTemplateDubboService", validation = "true", version = "1.0.0", timeout = 30000)
-
 public class AgreementTemplateDubboServiceImpl implements AgreementTemplateDubboService {
 
     private Logger LOGGER = LoggerFactory.getLogger(AgreementTemplateDubboServiceImpl.class);
 
-    @Autowired
+    @Resource
     private AgreementTemplateService agreementTemplateService ;
 
     @Override

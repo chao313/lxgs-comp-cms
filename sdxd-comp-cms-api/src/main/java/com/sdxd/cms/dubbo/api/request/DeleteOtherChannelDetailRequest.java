@@ -14,4 +14,6 @@ import lombok.EqualsAndHashCode;
 public class DeleteOtherChannelDetailRequest extends BaseRequest {
 
     private String id ;
+
+    private Integer deleteFlag ;
 }

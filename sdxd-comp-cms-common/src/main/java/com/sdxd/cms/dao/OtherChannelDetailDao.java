@@ -34,7 +34,7 @@ public interface OtherChannelDetailDao extends BaseDao<OtherChannelDetail> {
     int queryCount();
 
     //查询未删除平台列表(分页)
-    List<OtherChannelDetail> query(@Param("pageStart") int pageStart, @Param("pageSize") int pageSize);
+    List<OtherChannelDetail> queryByPage(@Param("pageStart") int pageStart, @Param("pageSize") int pageSize);
 
     OtherChannelDetail queryByChannelIndex(@Param("channelIndex") Integer channelIndex);
 

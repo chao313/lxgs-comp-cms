@@ -137,7 +137,7 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
     }
 
     @Override
-    public DubboResponse<OtherChannelDetailResponse> delete(DeleteOtherChannelDetailRequest request) {
+    public DubboResponse<OtherChannelDetailResponse> updateDeleteFlag(DeleteOtherChannelDetailRequest request) {
         DubboResponse<OtherChannelDetailResponse> response = new DubboResponse<>();
         response.setError(Constants.System.SERVER_SUCCESS);
         response.setStatus(Constants.System.OK);

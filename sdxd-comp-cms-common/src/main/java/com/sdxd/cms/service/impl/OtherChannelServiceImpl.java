@@ -49,7 +49,7 @@ public class OtherChannelServiceImpl extends BaseServiceImpl<OtherChannelDetail>
 
     @Override
     public List<OtherChannelDetail> query(int pageStart,int pageSize) {
-        List<OtherChannelDetail> list = otherChannelDetailDao.query(pageStart,pageSize);
+        List<OtherChannelDetail> list = otherChannelDetailDao.queryByPage(pageStart,pageSize);
         if(list.size() == 0){
             return null ;
         }
