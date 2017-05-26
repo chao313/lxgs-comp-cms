@@ -18,23 +18,23 @@ import java.util.List;
 public class AgreementTemplateServiceImpl extends BaseServiceImpl<AgreementTemplateManage> implements AgreementTemplateService {
 
     @Autowired
-    private AgreementTemplateDao dao ;
+    private AgreementTemplateDao agreementTemplateDao ;
 
     @Override
     public boolean createAgreementTemplate(AgreementTemplateManage param) {
-        int count = dao.createAgreementTemplate(param);
+        int count = agreementTemplateDao.createAgreementTemplate(param);
         return count == 1;
     }
 
     @Override
     public boolean deleteAgreementTemplate(Integer id) {
-        int count = dao.deleteAgreementTemplate(id);
+        int count = agreementTemplateDao.deleteAgreementTemplate(id);
         return count == 1;
     }
 
     @Override
     public List<AgreementTemplateManage> queryAgreementTemplate(int pageStart, int pageSize) {
-        List<AgreementTemplateManage> list = dao.queryAgreementTemplate(pageStart,pageSize);
+        List<AgreementTemplateManage> list = agreementTemplateDao.queryAgreementTemplate(pageStart,pageSize);
         if(list.size() == 0){
             return null;
         }
@@ -43,25 +43,25 @@ public class AgreementTemplateServiceImpl extends BaseServiceImpl<AgreementTempl
 
     @Override
     public int queryAgreementTemplateCount() {
-        int count = dao.queryAgreementTemplateCount();
+        int count = agreementTemplateDao.queryAgreementTemplateCount();
         return count ;
     }
 
     @Override
     public AgreementTemplateManage queryByAgreementTitle(String agreementTitle) {
-        AgreementTemplateManage manage = dao.queryByAgreementTitle(agreementTitle);
+        AgreementTemplateManage manage = agreementTemplateDao.queryByAgreementTitle(agreementTitle);
         return manage;
     }
 
     @Override
     public AgreementTemplateManage queryById(Integer id) {
-        AgreementTemplateManage manage = dao.queryById(id);
+        AgreementTemplateManage manage = agreementTemplateDao.queryById(id);
         return manage;
     }
 
     @Override
     public List<AgreementTemplateManage> queryAll() {
-        List<AgreementTemplateManage> list = dao.getAllAgreement();
+        List<AgreementTemplateManage> list = agreementTemplateDao.getAllAgreement();
         return list;
     }
 }
