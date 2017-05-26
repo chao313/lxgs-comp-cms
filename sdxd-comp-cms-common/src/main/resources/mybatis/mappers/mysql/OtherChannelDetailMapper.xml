@@ -10,8 +10,9 @@
         <result column="channel_url" property="channelUrl" jdbcType="VARCHAR" />
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="delete_flag" property="deleteFlag" javaType="TINYINT"/>
         <result column="channel_index" property="channelIndex" jdbcType="TINYINT" />
-        <result column="channel_type" property="channelType" jdbcType="TINYINT" />
+        <result column="channel_type" property="channelType" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="Base_Column_List" >
