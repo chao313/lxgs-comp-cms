@@ -1,15 +1,21 @@
 package com.sdxd.cms.test;
 
 import com.sdxd.cms.OtherChannelService;
+import com.sdxd.cms.dubbo.api.pojo.OtherChannelDetailVo;
 import com.sdxd.cms.dubbo.api.request.DeleteOtherChannelDetailRequest;
 import com.sdxd.cms.dubbo.api.request.OtherChannelDetailRequest;
+import com.sdxd.cms.dubbo.api.request.QueryOtherChannelDetailRequest;
 import com.sdxd.cms.dubbo.api.request.UpdateOtherChannelDetailRequest;
 import com.sdxd.cms.dubbo.api.response.OtherChannelDetailResponse;
 import com.sdxd.common.utils.BillNoUtils;
+import com.sdxd.framework.dto.PaginationSupport;
+import com.sdxd.framework.dubbo.BaseRequest;
 import com.sdxd.framework.dubbo.DubboResponse;
+import org.hyperic.sigar.cmd.Du;
 import org.junit.Test;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author liujie
@@ -51,13 +57,29 @@ public class ChannelDubboTest extends BaseTest {
         System.out.println(c);
     }
 
+    @Test
     public void updateDeleteFlag(){
         DeleteOtherChannelDetailRequest request = new DeleteOtherChannelDetailRequest();
         request.setId("2017052618192156502");
         request.setRequestId(BillNoUtils.GenerateBillNo());
-        request.setDeleteFlag(0);
-        otherChannelService.updateDeleteFlag(request);
+        request.setDeleteFlag(1);
+        DubboResponse<OtherChannelDetailResponse> response = otherChannelService.updateDeleteFlag(request);
+        System.out.println(response);
     }
 
+
+    @Test
+    public void query(){
+        BaseRequest request = new BaseRequest();
+        request.setRequestId(BillNoUtils.GenerateBillNo());
+        DubboResponse<List<OtherChannelDetailVo>> response = otherChannelService.queryAll(request);
+        DubboResponse<Integer> c = otherChannelService.queryCount(request);
+
+        QueryOtherChannelDetailRequest request1 = new QueryOtherChannelDetailRequest();
+        request1.setRequestId(BillNoUtils.GenerateBillNo());
+        DubboResponse<PaginationSupport<OtherChannelDetailVo>> b = otherChannelService.query(request1);
+
+        System.out.println(c);
+    }
 
 }

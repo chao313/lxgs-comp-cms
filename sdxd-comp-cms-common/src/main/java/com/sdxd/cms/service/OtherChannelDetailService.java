@@ -18,7 +18,7 @@ public interface OtherChannelDetailService extends BaseService<OtherChannelDetai
     boolean updateOtherChannelDetail (OtherChannelDetail detail);
 
     //删除平台
-    boolean deleteOtherChannelDetail(String id);
+    boolean updateDeleteFlag(String id,Integer deleteFlag);
 
     //查询平台
     OtherChannelDetail queryByChannelName(String channelName,String channelType);

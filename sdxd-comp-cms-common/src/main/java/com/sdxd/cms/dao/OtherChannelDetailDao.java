@@ -21,7 +21,7 @@ public interface OtherChannelDetailDao extends BaseDao<OtherChannelDetail> {
     int updateOtherChannelDetail (OtherChannelDetail detail);
 
     //删除平台
-    int deleteOtherChannelDetail(@Param("id") String id);
+    int updateDeleteFlag(@Param("id") String id,@Param("deleteFlag") Integer deleteFlag);
 
     //查询平台
     OtherChannelDetail queryByChannelName(@Param("channelName") String channelName,@Param("channelType") String channelType);

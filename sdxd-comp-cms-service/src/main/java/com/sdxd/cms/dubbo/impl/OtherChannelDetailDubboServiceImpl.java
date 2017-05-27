@@ -32,7 +32,7 @@ import java.util.List;
  * @Date 2017/5/26
  * 盛大小贷
  */
-@Service(interfaceName = "com.sdxd.cms.dubbo.api.OtherChannelDetailDubboService", validation = "true", version = "1.0.1", timeout = 30000)
+@Service(interfaceName = "com.sdxd.cms.dubbo.api.OtherChannelDetailDubboService", validation = "true", version = "1.0.0", timeout = 30000)
 public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDubboService{
 
     private Logger LOGGER = LoggerFactory.getLogger(OtherChannelDetailDubboServiceImpl.class);
@@ -150,7 +150,7 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
                 return response ;
             }
             LOGGER.error("【合作平台】 ====================================>> 删除参数 {}",request);
-            boolean bool = otherChannelDetailService.deleteOtherChannelDetail(request.getId());
+            boolean bool = otherChannelDetailService.updateDeleteFlag(request.getId(),request.getDeleteFlag());
             LOGGER.error("【合作平台】 ====================================>> 删除返回消息 {}",bool);
             OtherChannelDetailResponse t =  new OtherChannelDetailResponse() ;
             t.setSuccess(bool);
@@ -195,11 +195,13 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
             LOGGER.error("【合作平台】 ====================================>> 查询总列表参数 {}",request);
             List<OtherChannelDetail> list = otherChannelDetailService.queryAll();
             LOGGER.error("【合作平台】 ====================================>> 查询总列表返回消息 {}",list.size());
-            List<OtherChannelDetailVo> voList = new ArrayList<>(list.size());
-            for(OtherChannelDetail vo :list){
-                voList.add(convert(vo));
+            if(list != null){
+                List<OtherChannelDetailVo> voList = new ArrayList<>(list.size());
+                for(OtherChannelDetail vo :list){
+                    voList.add(convert(vo));
+                }
+                response.setData(voList);
             }
-            response.setData(voList);
         }catch (Exception e){
             LOGGER.error("【合作平台】 ====================================>> 查询总数平台 bean copy error",e);
             response.setStatus(Constants.System.FAIL);

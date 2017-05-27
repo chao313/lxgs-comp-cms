@@ -33,8 +33,8 @@ public class OtherChannelServiceImpl extends BaseServiceImpl<OtherChannelDetail>
     }
 
     @Override
-    public boolean deleteOtherChannelDetail(String id) {
-        int count  = otherChannelDetailDao.deleteOtherChannelDetail(id);
+    public boolean updateDeleteFlag(String id,Integer deleteFlag) {
+        int count  = otherChannelDetailDao.updateDeleteFlag(id,deleteFlag);
         return count == 1;
     }
 
