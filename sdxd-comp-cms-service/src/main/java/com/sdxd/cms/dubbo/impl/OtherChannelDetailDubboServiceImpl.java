@@ -186,13 +186,12 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
     }
 
     @Override
-    public DubboResponse<List<OtherChannelDetailVo>> queryAll(BaseRequest request) {
+    public DubboResponse<List<OtherChannelDetailVo>> queryAll() {
         DubboResponse<List<OtherChannelDetailVo>> response = new DubboResponse<>();
         response.setError(Constants.System.SERVER_SUCCESS);
         response.setStatus(Constants.System.OK);
         try{
 
-            LOGGER.error("【合作平台】 ====================================>> 查询总列表参数 {}",request);
             List<OtherChannelDetail> list = otherChannelDetailService.queryAll();
             LOGGER.error("【合作平台】 ====================================>> 查询总列表返回消息 {}",list.size());
             if(list != null){

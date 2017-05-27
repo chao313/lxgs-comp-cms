@@ -47,8 +47,8 @@ public class OtherChannelService {
     }
 
     //查询所有
-    public DubboResponse<List<OtherChannelDetailVo>> queryAll(BaseRequest request){
-        DubboResponse<List<OtherChannelDetailVo>> response = otherChannelDetailDubboService.queryAll(request);
+    public DubboResponse<List<OtherChannelDetailVo>> queryAll(){
+        DubboResponse<List<OtherChannelDetailVo>> response = otherChannelDetailDubboService.queryAll();
         return response ;
     }
 

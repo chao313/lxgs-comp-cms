@@ -32,7 +32,7 @@ public interface OtherChannelDetailDubboService {
     public DubboResponse<Integer> queryCount(BaseRequest request);
 
     //查询所有
-    public DubboResponse<List<OtherChannelDetailVo>> queryAll(BaseRequest request);
+    public DubboResponse<List<OtherChannelDetailVo>> queryAll();
 
     //分页查询
     public DubboResponse<PaginationSupport<OtherChannelDetailVo>> query(QueryOtherChannelDetailRequest request);
