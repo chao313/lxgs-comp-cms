@@ -59,6 +59,7 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
             //平台已存在
             OtherChannelDetail otherChannelDetail = otherChannelDetailService.queryByChannelName(request.getChannelName(),request.getChannelType());
             if (otherChannelDetail != null){
+                response.setError(Constants.System.PARAMS_INVALID);
                 response.setMsg(Constants.System.PARAMS_INVALID_MSG);
                 return response ;
             }
@@ -66,6 +67,7 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
                 OtherChannelDetail  otherDetail =   otherChannelDetailService.queryByChannelIndex(request.getChannelIndex());
                 if (otherDetail != null){
                     //当前位置已存在
+                    response.setError(Constants.System.PARAMS_INVALID);
                     response.setMsg(Constants.System.PARAMS_INVALID_MSG);
                     return response ;
                 }else{
