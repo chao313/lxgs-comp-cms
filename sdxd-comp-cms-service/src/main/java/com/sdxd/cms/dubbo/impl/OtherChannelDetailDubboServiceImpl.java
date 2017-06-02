@@ -4,10 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.sdxd.cms.dubbo.api.OtherChannelDetailDubboService;
 import com.sdxd.cms.dubbo.api.pojo.AgreementTemplateVo;
 import com.sdxd.cms.dubbo.api.pojo.OtherChannelDetailVo;
-import com.sdxd.cms.dubbo.api.request.DeleteOtherChannelDetailRequest;
-import com.sdxd.cms.dubbo.api.request.OtherChannelDetailRequest;
-import com.sdxd.cms.dubbo.api.request.QueryOtherChannelDetailRequest;
-import com.sdxd.cms.dubbo.api.request.UpdateOtherChannelDetailRequest;
+import com.sdxd.cms.dubbo.api.request.*;
 import com.sdxd.cms.dubbo.api.response.OtherChannelDetailResponse;
 import com.sdxd.cms.entity.AgreementTemplateManage;
 import com.sdxd.cms.entity.OtherChannelDetail;
@@ -188,13 +185,14 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
     }
 
     @Override
-    public DubboResponse<List<OtherChannelDetailVo>> queryAll() {
+    public DubboResponse<List<OtherChannelDetailVo>> queryAll(QueryAllOtherChannelsRequest request) {
         DubboResponse<List<OtherChannelDetailVo>> response = new DubboResponse<>();
         response.setError(Constants.System.SERVER_SUCCESS);
         response.setStatus(Constants.System.OK);
+        String channelType = request.getChannelType();
         try{
 
-            List<OtherChannelDetail> list = otherChannelDetailService.queryAll();
+            List<OtherChannelDetail> list = otherChannelDetailService.queryAll(channelType);
             LOGGER.error("【合作平台】 ====================================>> 查询总列表返回消息 {}",list.size());
             if(list != null){
                 List<OtherChannelDetailVo> voList = new ArrayList<>(list.size());

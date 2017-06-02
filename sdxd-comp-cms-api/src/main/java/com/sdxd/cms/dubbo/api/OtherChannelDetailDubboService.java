@@ -1,10 +1,7 @@
 package com.sdxd.cms.dubbo.api;
 
 import com.sdxd.cms.dubbo.api.pojo.OtherChannelDetailVo;
-import com.sdxd.cms.dubbo.api.request.DeleteOtherChannelDetailRequest;
-import com.sdxd.cms.dubbo.api.request.OtherChannelDetailRequest;
-import com.sdxd.cms.dubbo.api.request.QueryOtherChannelDetailRequest;
-import com.sdxd.cms.dubbo.api.request.UpdateOtherChannelDetailRequest;
+import com.sdxd.cms.dubbo.api.request.*;
 import com.sdxd.cms.dubbo.api.response.OtherChannelDetailResponse;
 import com.sdxd.framework.dto.PaginationSupport;
 import com.sdxd.framework.dubbo.BaseRequest;
@@ -32,7 +29,7 @@ public interface OtherChannelDetailDubboService {
     public DubboResponse<Integer> queryCount(BaseRequest request);
 
     //查询所有
-    public DubboResponse<List<OtherChannelDetailVo>> queryAll();
+    public DubboResponse<List<OtherChannelDetailVo>> queryAll(QueryAllOtherChannelsRequest request);
 
     //分页查询
     public DubboResponse<PaginationSupport<OtherChannelDetailVo>> query(QueryOtherChannelDetailRequest request);

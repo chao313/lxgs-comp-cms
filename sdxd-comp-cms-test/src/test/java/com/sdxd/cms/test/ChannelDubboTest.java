@@ -2,10 +2,7 @@ package com.sdxd.cms.test;
 
 import com.sdxd.cms.OtherChannelService;
 import com.sdxd.cms.dubbo.api.pojo.OtherChannelDetailVo;
-import com.sdxd.cms.dubbo.api.request.DeleteOtherChannelDetailRequest;
-import com.sdxd.cms.dubbo.api.request.OtherChannelDetailRequest;
-import com.sdxd.cms.dubbo.api.request.QueryOtherChannelDetailRequest;
-import com.sdxd.cms.dubbo.api.request.UpdateOtherChannelDetailRequest;
+import com.sdxd.cms.dubbo.api.request.*;
 import com.sdxd.cms.dubbo.api.response.OtherChannelDetailResponse;
 import com.sdxd.common.utils.BillNoUtils;
 import com.sdxd.framework.dto.PaginationSupport;
@@ -70,16 +67,17 @@ public class ChannelDubboTest extends BaseTest {
 
     @Test
     public void query(){
-        BaseRequest request = new BaseRequest();
+        QueryAllOtherChannelsRequest request = new QueryAllOtherChannelsRequest();
         request.setRequestId(BillNoUtils.GenerateBillNo());
+//        request.setChannelType("APP");
         DubboResponse<List<OtherChannelDetailVo>> response = otherChannelService.queryAll(request);
-        DubboResponse<Integer> c = otherChannelService.queryCount(request);
+//        DubboResponse<Integer> c = otherChannelService.queryCount(request);
+//
+//        QueryOtherChannelDetailRequest request1 = new QueryOtherChannelDetailRequest();
+//        request1.setRequestId(BillNoUtils.GenerateBillNo());
+//        DubboResponse<PaginationSupport<OtherChannelDetailVo>> b = otherChannelService.query(request1);
 
-        QueryOtherChannelDetailRequest request1 = new QueryOtherChannelDetailRequest();
-        request1.setRequestId(BillNoUtils.GenerateBillNo());
-        DubboResponse<PaginationSupport<OtherChannelDetailVo>> b = otherChannelService.query(request1);
-
-        System.out.println(c);
+        System.out.println(response);
     }
 
 }

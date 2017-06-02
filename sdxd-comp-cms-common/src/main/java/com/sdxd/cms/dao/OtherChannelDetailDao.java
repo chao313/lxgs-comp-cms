@@ -29,7 +29,7 @@ public interface OtherChannelDetailDao extends BaseDao<OtherChannelDetail> {
     OtherChannelDetail queryById(@Param("id")String id);
 
     //查询所有未删除平台
-    List<OtherChannelDetail> queryAll();
+    List<OtherChannelDetail> queryAll(@Param("channelType") String channelType);
 
     int queryCount();
 

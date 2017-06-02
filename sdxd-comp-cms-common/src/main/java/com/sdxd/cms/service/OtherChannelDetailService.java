@@ -27,7 +27,7 @@ public interface OtherChannelDetailService extends BaseService<OtherChannelDetai
     OtherChannelDetail queryById(String id);
 
     //查询所有未删除平台
-    List<OtherChannelDetail> queryAll();
+    List<OtherChannelDetail> queryAll(String channelType);
 
     //平台总数
     int queryCount();

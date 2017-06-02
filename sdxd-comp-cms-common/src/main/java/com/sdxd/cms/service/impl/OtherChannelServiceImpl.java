@@ -39,8 +39,8 @@ public class OtherChannelServiceImpl extends BaseServiceImpl<OtherChannelDetail>
     }
 
     @Override
-    public List<OtherChannelDetail> queryAll() {
-        List<OtherChannelDetail> list = otherChannelDetailDao.queryAll();
+    public List<OtherChannelDetail> queryAll(String type) {
+        List<OtherChannelDetail> list = otherChannelDetailDao.queryAll(type);
         if(list.size() == 0){
             return null;
         }

@@ -3,17 +3,16 @@ package com.sdxd.cms;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.sdxd.cms.dubbo.api.OtherChannelDetailDubboService;
 import com.sdxd.cms.dubbo.api.pojo.OtherChannelDetailVo;
-import com.sdxd.cms.dubbo.api.request.DeleteOtherChannelDetailRequest;
-import com.sdxd.cms.dubbo.api.request.OtherChannelDetailRequest;
-import com.sdxd.cms.dubbo.api.request.QueryOtherChannelDetailRequest;
-import com.sdxd.cms.dubbo.api.request.UpdateOtherChannelDetailRequest;
+import com.sdxd.cms.dubbo.api.request.*;
 import com.sdxd.cms.dubbo.api.response.OtherChannelDetailResponse;
+import com.sdxd.common.utils.BillNoUtils;
 import com.sdxd.framework.dto.PaginationSupport;
 import com.sdxd.framework.dubbo.BaseRequest;
 import com.sdxd.framework.dubbo.DubboResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 
 /**
  * @author liujie
@@ -47,8 +46,8 @@ public class OtherChannelService {
     }
 
     //查询所有
-    public DubboResponse<List<OtherChannelDetailVo>> queryAll(){
-        DubboResponse<List<OtherChannelDetailVo>> response = otherChannelDetailDubboService.queryAll();
+    public DubboResponse<List<OtherChannelDetailVo>> queryAll(QueryAllOtherChannelsRequest request){
+        DubboResponse<List<OtherChannelDetailVo>> response = otherChannelDetailDubboService.queryAll(request);
         return response ;
     }
 
