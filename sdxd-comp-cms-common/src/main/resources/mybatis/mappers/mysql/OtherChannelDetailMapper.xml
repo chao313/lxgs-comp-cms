@@ -67,7 +67,7 @@
     <select id="queryByPage" resultMap="getMap" parameterType="java.lang.Integer">
         SELECT
         <include refid="Base_Column_List" />
-        FROM  t_other_channel_detail WHERE `delete_flag` =0 ORDER BY  channel_index ASC
+        FROM  t_other_channel_detail WHERE `delete_flag` =0 ORDER BY  channel_index ASC,create_time DESC
         <if test="pageStart!=null and pageSize!=null">
             limit #{pageStart},#{pageSize}
         </if>
@@ -86,7 +86,7 @@
         <if test="channelType!=null">
             and  channel_type = #{channelType}
         </if>
-        ORDER BY  channel_index ASC
+        ORDER BY  channel_index ASC ,create_time DESC
     </select>
 
     <!-- 根据位置查询 -->

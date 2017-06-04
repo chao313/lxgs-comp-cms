@@ -52,6 +52,7 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
         detail.setChannelUrl(request.getChannelUrl());
         detail.setChannelType(request.getChannelType());
         detail.setId(BillNoUtils.GenerateBillNo());
+        detail.setChannelIndex(request.getChannelIndex());
         try {
             //平台已存在
             OtherChannelDetail otherChannelDetail = otherChannelDetailService.queryByChannelName(request.getChannelName(),request.getChannelType());
@@ -60,17 +61,18 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
                 response.setMsg(Constants.System.PARAMS_INVALID_MSG);
                 return response ;
             }
-            if(request.getChannelIndex() != null){
-                OtherChannelDetail  otherDetail =   otherChannelDetailService.queryByChannelIndex(request.getChannelIndex());
-                if (otherDetail != null){
-                    //当前位置已存在
-                    response.setError(Constants.System.PARAMS_INVALID);
-                    response.setMsg(Constants.System.PARAMS_INVALID_MSG);
-                    return response ;
-                }else{
-                    detail.setChannelIndex(request.getChannelIndex());
-                }
-            }
+            //TODO 同一位置不能重复站位
+//            if(request.getChannelIndex() != null){
+//                OtherChannelDetail  otherDetail =   otherChannelDetailService.queryByChannelIndex(request.getChannelIndex());
+//                if (otherDetail != null){
+//                    //当前位置已存在
+//                    response.setError(Constants.System.PARAMS_INVALID);
+//                    response.setMsg(Constants.System.PARAMS_INVALID_MSG);
+//                    return response ;
+//                }else{
+//                    detail.setChannelIndex(request.getChannelIndex());
+//                }
+//            }
             LOGGER.error("【合作平台】 ====================================>> 创建平台参数 {}",request);
             boolean bool = otherChannelDetailService.saveOtherChannelDetail(detail);
             LOGGER.error("【合作平台】 ====================================>> 创建平台返回消息 {}",bool);
@@ -101,25 +103,29 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
         detail.setChannelUrl(request.getChannelUrl());
         detail.setChannelType(request.getChannelType());
         detail.setId(request.getId());
+        detail.setChannelIndex(request.getChannelIndex());
         try {
             OtherChannelDetail otherChannelDetail = null;
             //平台已存在
             otherChannelDetail = otherChannelDetailService.queryById(request.getId());
             if (otherChannelDetail == null){
+                response.setError(Constants.System.PARAMS_INVALID);
                 response.setMsg(Constants.System.PARAMS_INVALID_MSG);
                 return response ;
             }
 
-            if(request.getChannelIndex() != null){
-                otherChannelDetail =   otherChannelDetailService.queryByIndexAndId(request.getChannelIndex(),request.getId());
-                if (otherChannelDetail != null){
-                    //当前位置已被其他平台占领，已无坑
-                    response.setMsg(Constants.System.PARAMS_INVALID_MSG);
-                    return response ;
-                }else{
-                    detail.setChannelIndex(request.getChannelIndex());
-                }
-            }
+            //TODO 同一位置不能重复站位
+//            if(request.getChannelIndex() != null){
+//                otherChannelDetail =   otherChannelDetailService.queryByIndexAndId(request.getChannelIndex(),request.getId());
+//                if (otherChannelDetail != null){
+//                    //当前位置已被其他平台占领，已无坑
+//                    response.setError(Constants.System.PARAMS_INVALID);
+//                    response.setMsg(Constants.System.PARAMS_INVALID_MSG);
+//                    return response ;
+//                }else{
+//                    detail.setChannelIndex(request.getChannelIndex());
+//                }
+//            }
             LOGGER.error("【合作平台】 ====================================>> 修改参数 {}",request);
             boolean bool = otherChannelDetailService.updateOtherChannelDetail(detail);
             LOGGER.error("【合作平台】 ====================================>> 修改返回消息 {}",bool);

@@ -29,10 +29,10 @@ public class ChannelDubboTest extends BaseTest {
         OtherChannelDetailRequest request = new OtherChannelDetailRequest();
         request.setRequestId(BillNoUtils.GenerateBillNo());
         request.setChannelUrl("http://wwww.baidu.com");
-        request.setChannelName("芝麻");
+        request.setChannelName("芝麻花呗");
         request.setChannelIndex(2);
         request.setChannelLogo("http://wwww/baodu.com");
-        request.setChannelSlogn("我问问");
+        request.setChannelSlogn("方便");
         request.setChannelType("h5");
         DubboResponse<OtherChannelDetailResponse> c = otherChannelService.save(request);
         System.out.println(c);
