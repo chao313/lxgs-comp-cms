@@ -33,4 +33,6 @@ public interface OtherChannelDetailDubboService {
 
     //分页查询
     public DubboResponse<PaginationSupport<OtherChannelDetailVo>> query(QueryOtherChannelDetailRequest request);
+
+    public DubboResponse<Boolean> onOff(OnOffOtherChannelRequest request);
 }

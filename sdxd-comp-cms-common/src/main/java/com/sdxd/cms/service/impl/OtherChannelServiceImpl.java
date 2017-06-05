@@ -85,4 +85,10 @@ public class OtherChannelServiceImpl extends BaseServiceImpl<OtherChannelDetail>
       OtherChannelDetail detail =   otherChannelDetailDao.queryByIndexAndId(channelIndex,id);
         return detail;
     }
+
+    @Override
+    public Boolean onOff(int channelShow) {
+        int count = otherChannelDetailDao.onOff(channelShow);
+        return count >= 1;
+    }
 }

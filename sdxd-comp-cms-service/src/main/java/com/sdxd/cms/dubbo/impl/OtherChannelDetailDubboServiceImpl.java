@@ -15,6 +15,7 @@ import com.sdxd.framework.constant.Constants;
 import com.sdxd.framework.dto.PaginationSupport;
 import com.sdxd.framework.dubbo.BaseRequest;
 import com.sdxd.framework.dubbo.DubboResponse;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -236,6 +237,24 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
                 PaginationSupport paginationSupport = new PaginationSupport(voList, -1, request.getPageSize(), request.getCurrentPage());
                 response.setData(paginationSupport);
             }
+        }catch (Exception e){
+            LOGGER.error("【协议模板】 ====================================>> 平台列表  bean copy error",e);
+            response.setStatus(Constants.System.FAIL);
+            response.setError(Constants.System.SYSTEM_ERROR_CODE);
+            response.setMsg(Constants.System.SYSTEM_ERROR_MSG);
+        }
+        return response;
+    }
+
+    @Override
+    public DubboResponse<Boolean> onOff(OnOffOtherChannelRequest request) {
+        DubboResponse<Boolean> response = new DubboResponse<>();
+        response.setError(Constants.System.SERVER_SUCCESS);
+        response.setStatus(Constants.System.OK);
+        try {
+            Integer channelShow = request.getOnOff();
+           boolean onOff  = otherChannelDetailService.onOff(channelShow);
+           response.setData(onOff);
         }catch (Exception e){
             LOGGER.error("【协议模板】 ====================================>> 平台列表  bean copy error",e);
             response.setStatus(Constants.System.FAIL);

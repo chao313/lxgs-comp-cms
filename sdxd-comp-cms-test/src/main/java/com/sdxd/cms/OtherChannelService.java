@@ -57,4 +57,9 @@ public class OtherChannelService {
         return response ;
     }
 
+    public DubboResponse<Boolean> onOff(OnOffOtherChannelRequest request){
+        DubboResponse<Boolean> response = otherChannelDetailDubboService.onOff(request);
+        return  response;
+    }
+
 }

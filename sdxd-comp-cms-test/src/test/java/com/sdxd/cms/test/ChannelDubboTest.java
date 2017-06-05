@@ -10,6 +10,7 @@ import com.sdxd.framework.dubbo.BaseRequest;
 import com.sdxd.framework.dubbo.DubboResponse;
 import org.hyperic.sigar.cmd.Du;
 import org.junit.Test;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -78,6 +79,15 @@ public class ChannelDubboTest extends BaseTest {
 //        request1.setRequestId(BillNoUtils.GenerateBillNo());
 //        DubboResponse<PaginationSupport<OtherChannelDetailVo>> b = otherChannelService.query(request1);
 
+        System.out.println(response);
+    }
+
+    @Test
+    public void onOff(){
+        OnOffOtherChannelRequest request = new OnOffOtherChannelRequest();
+        request.setOnOff(0);
+        request.setRequestId(BillNoUtils.GenerateBillNo());
+        DubboResponse<Boolean> response = otherChannelService.onOff(request);
         System.out.println(response);
     }
 

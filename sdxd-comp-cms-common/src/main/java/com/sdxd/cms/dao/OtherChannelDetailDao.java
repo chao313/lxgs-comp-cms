@@ -40,4 +40,6 @@ public interface OtherChannelDetailDao extends BaseDao<OtherChannelDetail> {
 
     OtherChannelDetail queryByIndexAndId(@Param("channelIndex") Integer channelIndex,@Param("id") String id);
 
+    int onOff(@Param("channelShow") Integer channelShow);
+
 }

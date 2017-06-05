@@ -85,11 +85,11 @@
     <select id="queryAll" resultMap="getMap" parameterType="java.lang.String">
         SELECT
         <include refid="Base_Column_List" />
-        FROM  t_other_channel_detail WHERE `delete_flag` =0
+        FROM  t_other_channel_detail WHERE `delete_flag` = 0 AND channel_show = 1
         <if test="channelType!=null">
             and  channel_type = #{channelType}
         </if>
-        ORDER BY  channel_index ASC ,channel_show desc ,create_time DESC
+        ORDER BY  channel_index ASC ,create_time DESC
     </select>
 
     <!-- 根据位置查询 -->
@@ -106,4 +106,8 @@
         FROM  t_other_channel_detail
         where channel_index = #{channelIndex,jdbcType=TINYINT} and id != #{id,jdbcType=VARCHAR}
     </select>
+
+    <update id="onOff" parameterType="java.lang.Integer" >
+          UPDATE t_other_channel_detail set channel_show = #{channelShow,jdbcType=TINYINT} where `delete_flag` =  0;
+    </update>
 </mapper>
