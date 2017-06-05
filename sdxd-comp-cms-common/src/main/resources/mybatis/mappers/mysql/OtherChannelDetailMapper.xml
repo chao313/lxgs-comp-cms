@@ -108,6 +108,6 @@
     </select>
 
     <update id="onOff" parameterType="java.lang.Integer" >
-          UPDATE t_other_channel_detail set channel_show = #{channelShow,jdbcType=TINYINT} where `delete_flag` =  0;
+          UPDATE t_other_channel_detail set channel_show = #{channelShow,jdbcType=TINYINT}  ;
     </update>
 </mapper>

@@ -7,6 +7,7 @@ import com.sdxd.framework.service.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ public class OtherChannelServiceImpl extends BaseServiceImpl<OtherChannelDetail>
     public List<OtherChannelDetail> queryAll(String type) {
         List<OtherChannelDetail> list = otherChannelDetailDao.queryAll(type);
         if(list.size() == 0){
-            return null;
+            return new ArrayList<>();
         }
         return list;
     }
@@ -51,7 +52,7 @@ public class OtherChannelServiceImpl extends BaseServiceImpl<OtherChannelDetail>
     public List<OtherChannelDetail> query(int pageStart,int pageSize) {
         List<OtherChannelDetail> list = otherChannelDetailDao.queryByPage(pageStart,pageSize);
         if(list.size() == 0){
-            return null ;
+            return new ArrayList<>() ;
         }
         return list;
     }
