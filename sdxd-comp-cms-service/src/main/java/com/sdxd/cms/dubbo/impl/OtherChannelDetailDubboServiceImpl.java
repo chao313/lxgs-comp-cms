@@ -1,6 +1,7 @@
 package com.sdxd.cms.dubbo.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.fasterxml.jackson.databind.deser.Deserializers;
 import com.sdxd.cms.dubbo.api.OtherChannelDetailDubboService;
 import com.sdxd.cms.dubbo.api.pojo.AgreementTemplateVo;
 import com.sdxd.cms.dubbo.api.pojo.OtherChannelDetailVo;
@@ -21,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -54,7 +56,7 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
         detail.setChannelType(request.getChannelType());
         detail.setId(BillNoUtils.GenerateBillNo());
         detail.setChannelIndex(request.getChannelIndex());
-        detail.setChannelShow(request.getChannelShow() == null ? 1 :request.getChannelShow());
+        detail.setChannelShow(1);
         try {
             //平台已存在
             OtherChannelDetail otherChannelDetail = otherChannelDetailService.queryByChannelName(request.getChannelName(),request.getChannelType());
@@ -106,7 +108,7 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
         detail.setChannelType(request.getChannelType());
         detail.setId(request.getId());
         detail.setChannelIndex(request.getChannelIndex());
-        detail.setChannelShow(request.getChannelShow() == null ? 1 :request.getChannelShow());
+        detail.setChannelShow(1);
         try {
             OtherChannelDetail otherChannelDetail = null;
             //平台已存在
@@ -255,6 +257,23 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
             Integer channelShow = request.getOnOff();
            boolean onOff  = otherChannelDetailService.onOff(channelShow);
            response.setData(onOff);
+        }catch (Exception e){
+            LOGGER.error("【协议模板】 ====================================>> 平台列表  bean copy error",e);
+            response.setStatus(Constants.System.FAIL);
+            response.setError(Constants.System.SYSTEM_ERROR_CODE);
+            response.setMsg(Constants.System.SYSTEM_ERROR_MSG);
+        }
+        return response;
+    }
+
+    @Override
+    public DubboResponse<Integer> offStatus(BaseRequest request) {
+        DubboResponse<Integer> response = new DubboResponse<>();
+        response.setError(Constants.System.SERVER_SUCCESS);
+        response.setStatus(Constants.System.OK);
+        try {
+            int offStatus  = otherChannelDetailService.offStatus();
+            response.setData(offStatus);
         }catch (Exception e){
             LOGGER.error("【协议模板】 ====================================>> 平台列表  bean copy error",e);
             response.setStatus(Constants.System.FAIL);

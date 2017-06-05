@@ -92,4 +92,10 @@ public class OtherChannelServiceImpl extends BaseServiceImpl<OtherChannelDetail>
         int count = otherChannelDetailDao.onOff(channelShow);
         return count >= 1;
     }
+
+    @Override
+    public Integer offStatus() {
+        int offStatus = otherChannelDetailDao.offStatus();
+        return offStatus;
+    }
 }

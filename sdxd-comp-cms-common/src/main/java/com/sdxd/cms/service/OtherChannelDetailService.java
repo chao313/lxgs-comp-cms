@@ -40,4 +40,6 @@ public interface OtherChannelDetailService extends BaseService<OtherChannelDetai
     OtherChannelDetail queryByIndexAndId(int channelIndex,String id);
 
     Boolean onOff(int channelShow);
+
+    Integer offStatus();
 }

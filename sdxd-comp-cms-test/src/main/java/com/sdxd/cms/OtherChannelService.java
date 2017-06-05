@@ -62,4 +62,8 @@ public class OtherChannelService {
         return  response;
     }
 
+    public DubboResponse<Integer> offStartus(BaseRequest request){
+        DubboResponse<Integer> response = otherChannelDetailDubboService.offStatus(request);
+        return  response;
+    }
 }

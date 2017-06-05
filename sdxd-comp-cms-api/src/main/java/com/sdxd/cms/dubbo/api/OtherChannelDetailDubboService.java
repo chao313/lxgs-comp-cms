@@ -35,4 +35,6 @@ public interface OtherChannelDetailDubboService {
     public DubboResponse<PaginationSupport<OtherChannelDetailVo>> query(QueryOtherChannelDetailRequest request);
 
     public DubboResponse<Boolean> onOff(OnOffOtherChannelRequest request);
+
+    public DubboResponse<Integer> offStatus(BaseRequest request);
 }

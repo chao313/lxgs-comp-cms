@@ -1,5 +1,6 @@
 package com.sdxd.cms.test;
 
+import com.fasterxml.jackson.databind.deser.Deserializers;
 import com.sdxd.cms.OtherChannelService;
 import com.sdxd.cms.dubbo.api.pojo.OtherChannelDetailVo;
 import com.sdxd.cms.dubbo.api.request.*;
@@ -88,6 +89,15 @@ public class ChannelDubboTest extends BaseTest {
         request.setOnOff(0);
         request.setRequestId(BillNoUtils.GenerateBillNo());
         DubboResponse<Boolean> response = otherChannelService.onOff(request);
+        System.out.println(response);
+    }
+
+
+    @Test
+    public void offStatus(){
+        BaseRequest request = new BaseRequest();
+        request.setRequestId(BillNoUtils.GenerateBillNo());
+        DubboResponse<Integer> response = otherChannelService.offStartus(request);
         System.out.println(response);
     }
 
