@@ -43,13 +43,14 @@ public class ChannelDubboTest extends BaseTest {
         UpdateOtherChannelDetailRequest request = new UpdateOtherChannelDetailRequest();
         request.setRequestId(BillNoUtils.GenerateBillNo());
         request.setChannelUrl("http://wwww.baidu.com");
-        request.setChannelName("芝麻");
+        request.setChannelName("测试002");
         request.setChannelIndex(2);
         request.setDeleteFlag(1);
         request.setChannelLogo("http://wwww/baodu.com");
         request.setChannelSlogn("我问问");
         request.setChannelType("h5");
-        request.setId("2017052618192156502");
+        request.setId("2017060214204944200");
+        request.setChannelShow(0);
         DubboResponse<OtherChannelDetailResponse> c = otherChannelService.update(request);
         System.out.println(c);
     }

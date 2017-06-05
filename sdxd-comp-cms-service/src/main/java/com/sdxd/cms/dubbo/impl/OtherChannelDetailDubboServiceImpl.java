@@ -53,6 +53,7 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
         detail.setChannelType(request.getChannelType());
         detail.setId(BillNoUtils.GenerateBillNo());
         detail.setChannelIndex(request.getChannelIndex());
+        detail.setChannelShow(request.getChannelShow() == null ? 1 :request.getChannelShow());
         try {
             //平台已存在
             OtherChannelDetail otherChannelDetail = otherChannelDetailService.queryByChannelName(request.getChannelName(),request.getChannelType());
@@ -104,6 +105,7 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
         detail.setChannelType(request.getChannelType());
         detail.setId(request.getId());
         detail.setChannelIndex(request.getChannelIndex());
+        detail.setChannelShow(request.getChannelShow() == null ? 1 :request.getChannelShow());
         try {
             OtherChannelDetail otherChannelDetail = null;
             //平台已存在

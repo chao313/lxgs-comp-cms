@@ -21,4 +21,5 @@ public class UpdateOtherChannelDetailRequest extends BaseRequest {
     private String channelType ;//平台类型
     private String id ;
     private Integer deleteFlag ;
+    private Integer channelShow ;// 是否显示该平台 1：显示 ; 0 ：不显示
 }
