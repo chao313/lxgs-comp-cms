@@ -23,5 +23,6 @@ public class OtherChannelDetailVo implements Serializable {
     private Date updateTime ;
     private Integer deleteFlag  ;//删除标志: 0未删除，1已删除
     private String channelType ; //平台类型
+    private Integer channelShow ;//平台是否显示 1：显示 0：不显示
 
 }
