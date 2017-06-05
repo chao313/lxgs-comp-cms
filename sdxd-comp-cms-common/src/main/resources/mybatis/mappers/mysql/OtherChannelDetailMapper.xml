@@ -17,7 +17,7 @@
     </resultMap>
 
     <sql id="Base_Column_List" >
-        id, channel_logo, channel_name, channel_slogn, channel_url, create_time, update_time, delete_flag,channel_index,channel_type
+        id, channel_logo, channel_name, channel_slogn, channel_url, create_time, update_time, delete_flag,channel_index,channel_type,channel_show
     </sql>
 
     <!-- 创建平台信息 -->
