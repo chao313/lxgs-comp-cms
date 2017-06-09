@@ -42,5 +42,5 @@ public interface OtherChannelDetailDao extends BaseDao<OtherChannelDetail> {
 
     int onOff(@Param("channelShow") Integer channelShow);
 
-    int offStatus();
+    OtherChannelDetail offStatus();
 }

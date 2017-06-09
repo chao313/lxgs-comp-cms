@@ -94,8 +94,8 @@ public class OtherChannelServiceImpl extends BaseServiceImpl<OtherChannelDetail>
     }
 
     @Override
-    public Integer offStatus() {
-        int offStatus = otherChannelDetailDao.offStatus();
+    public OtherChannelDetail offStatus() {
+        OtherChannelDetail offStatus = otherChannelDetailDao.offStatus();
         return offStatus;
     }
 }

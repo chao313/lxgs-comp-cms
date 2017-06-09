@@ -111,7 +111,9 @@
           UPDATE t_other_channel_detail set channel_show = #{channelShow,jdbcType=TINYINT}  ;
     </update>
 
-    <select id="offStatus" resultType="java.lang.Integer">
-        SELECT channel_show from t_other_channel_detail limit 1;
+    <select id="offStatus" resultMap="getMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        from t_other_channel_detail limit 1;
     </select>
 </mapper>

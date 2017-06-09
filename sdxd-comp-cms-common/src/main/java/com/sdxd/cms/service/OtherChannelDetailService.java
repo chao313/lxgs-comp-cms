@@ -41,5 +41,5 @@ public interface OtherChannelDetailService extends BaseService<OtherChannelDetai
 
     Boolean onOff(int channelShow);
 
-    Integer offStatus();
+    OtherChannelDetail offStatus();
 }

@@ -56,7 +56,8 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
         detail.setChannelType(request.getChannelType());
         detail.setId(BillNoUtils.GenerateBillNo());
         detail.setChannelIndex(request.getChannelIndex());
-        detail.setChannelShow(1);
+        OtherChannelDetail offStatus = otherChannelDetailService.offStatus();
+        detail.setChannelShow(offStatus == null ? 1 : offStatus.getChannelShow());
         try {
             //平台已存在
             OtherChannelDetail otherChannelDetail = otherChannelDetailService.queryByChannelName(request.getChannelName(),request.getChannelType());
@@ -108,7 +109,8 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
         detail.setChannelType(request.getChannelType());
         detail.setId(request.getId());
         detail.setChannelIndex(request.getChannelIndex());
-        detail.setChannelShow(1);
+        OtherChannelDetail offStatus = otherChannelDetailService.offStatus();
+        detail.setChannelShow(offStatus == null ? 1 : offStatus.getChannelShow());
         try {
             OtherChannelDetail otherChannelDetail = null;
             //平台已存在
@@ -272,8 +274,8 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
         response.setError(Constants.System.SERVER_SUCCESS);
         response.setStatus(Constants.System.OK);
         try {
-            int offStatus  = otherChannelDetailService.offStatus();
-            response.setData(offStatus);
+            OtherChannelDetail offStatus  = otherChannelDetailService.offStatus();
+            response.setData(offStatus == null ? 1:offStatus.getChannelShow());
         }catch (Exception e){
             LOGGER.error("【协议模板】 ====================================>> 平台列表  bean copy error",e);
             response.setStatus(Constants.System.FAIL);
