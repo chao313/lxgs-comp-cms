@@ -1,11 +1,14 @@
 package com.sdxd.cms.service.impl;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.sdxd.cms.constants.EventType;
 import com.sdxd.cms.dubbo.api.request.zhuge.EventPr;
 import com.sdxd.cms.dubbo.api.request.zhuge.ZhugeEventData;
 import com.sdxd.cms.dubbo.api.request.zhuge.ZhugeEventRequest;
@@ -23,7 +26,7 @@ public class ApproveDoneEventServiceImpl implements ApproveDoneEventService {
 
 	private OutApiCustomer outApiCustomer;
 	@Override
-	public ZhugeResponse pushZhuGe(ApproveDone approveDone) {
+	public ZhugeResponse pushApproveDoneZhuge(ApproveDone approveDone) {
 		String time = (approveDone.getApproveTime().getTime() + "").substring(0, 10);
 		ZhugeEventRequest eventRequest = new ZhugeEventRequest();
 		eventRequest.setTs(time);
@@ -34,10 +37,32 @@ public class ApproveDoneEventServiceImpl implements ApproveDoneEventService {
 		ZhugeEventData<EventPr> zhugeEventData = new ZhugeEventData<>();
 		zhugeEventData.setTs(time);
 		if (approveDone.getResult() == 1) {
-			zhugeEventData.setEid("信审通过");
+			zhugeEventData.setEid(EventType.APPROVE_ENT_PASS.getDesc());
 		} else {
-			zhugeEventData.setEid("信审拒绝");
+			zhugeEventData.setEid(EventType.APPROVE_ENT_REF.getDesc());
 		}
+		zhugeEventData.setPr(eventPer);
+		eventRequest.setRequestId(BillNoUtils.GenerateBillNo());
+		eventRequest.setData(new ZhugeEventData[] { zhugeEventData });
+		String apiUrl = outApiCustomer.getZhgUrl();
+		String json = JSON.toJSONString(eventRequest);
+		ZhugeResponse response = ZhugeUtil.invoke(apiUrl, json);
+		LOGGER.info(JSONObject.toJSONString(response));
+		return response;
+	}
+	
+	@Override
+	public ZhugeResponse pushLoanZhuge(Long userId,Date eventTime,EventType evenType) {
+		String time = (eventTime.getTime() + "").substring(0, 10);
+		ZhugeEventRequest eventRequest = new ZhugeEventRequest();
+		eventRequest.setTs(time);
+		eventRequest.setCuid(String.valueOf(userId));
+		// data中的per属性
+		EventPr eventPer = new EventPr();
+		// data属性值
+		ZhugeEventData<EventPr> zhugeEventData = new ZhugeEventData<>();
+		zhugeEventData.setTs(time);
+		zhugeEventData.setEid(evenType.getDesc());
 		zhugeEventData.setPr(eventPer);
 		eventRequest.setRequestId(BillNoUtils.GenerateBillNo());
 		eventRequest.setData(new ZhugeEventData[] { zhugeEventData });

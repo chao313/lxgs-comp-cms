@@ -13,9 +13,9 @@ import com.sdxd.cms.service.ApproveDoneEventService;
 import com.sdxd.common.mq.pojo.approve.ApproveDone;
 import com.sdxd.common.mq.util.Serialization;
 
-public class MessageCustomer implements MessageListener {
+public class ApproveMsgCustomer implements MessageListener {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(MessageCustomer.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ApproveMsgCustomer.class);
 	@Resource
 	private ApproveDoneEventService approveDoneEventService;
 
@@ -24,7 +24,7 @@ public class MessageCustomer implements MessageListener {
 		LOGGER.debug("消费信审结果,key:{}", message.getKey());
 		ApproveDone approveDone = Serialization.getPOJO(message.getBody(), ApproveDone.class);
 		try {
-			approveDoneEventService.pushZhuGe(approveDone);
+			approveDoneEventService.pushApproveDoneZhuge(approveDone);
 		} catch (Exception e) {
 			LOGGER.error("消息消费失败", e);
 		}

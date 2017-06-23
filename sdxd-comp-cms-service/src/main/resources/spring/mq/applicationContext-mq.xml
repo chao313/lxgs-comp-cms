@@ -20,7 +20,7 @@
         </property>
         <property name="subscriptionTable">
             <map>
-                <entry value-ref="msgListener">
+                <entry value-ref="approveMsgCustomer">
                     <key>
                         <bean class="com.aliyun.openservices.ons.api.bean.Subscription">
                             <property name="topic" value="${mq.approve.topic}"/>
@@ -29,8 +29,27 @@
                     </key>
                 </entry>
                 <!--更多的订阅添加entry节点即可-->
+                 <entry value-ref="loanMsgCustomer">
+                    <key>
+                        <bean class="com.aliyun.openservices.ons.api.bean.Subscription">
+                            <property name="topic" value="${mq.loan.topic}"/>
+                            <property name="expression" value="TAG_LOAN_COMPLETED||TAG_LOAN_REJECTED||TAG_LOAN_FAILURE"/><!--expression即Tag，可以设置成具体的Tag，如 taga||tagb||tagc，也可设置成*。 *仅代表订阅所有Tag，不支持通配-->
+                        </bean>
+                    </key>
+                </entry>
+                
+                <entry value-ref="repaymentMsgListener">
+                    <key>
+                        <bean class="com.aliyun.openservices.ons.api.bean.Subscription">
+                            <property name="topic" value="${mq.repayment.topic}"/>
+                            <property name="expression" value="TAG_REPAYMENT_SUCCESS"/><!--expression即Tag，可以设置成具体的Tag，如 taga||tagb||tagc，也可设置成*。 *仅代表订阅所有Tag，不支持通配-->
+                        </bean>
+                    </key>
+                </entry>
             </map>
+            
         </property>
     </bean>
-    <bean id="msgListener" class="com.sdxd.cms.mq.MessageCustomer"></bean> <!--Listener配置-->
+    <bean id="approveMsgCustomer" class="com.sdxd.cms.mq.ApproveMsgCustomer"></bean> <!--Listener配置-->
+    <bean id="loanMsgCustomer" class="com.sdxd.cms.mq.LoanMsgCustomer"></bean> 
 </beans>
