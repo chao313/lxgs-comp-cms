@@ -38,12 +38,9 @@ public class ZhugeIODubboServiceImpl implements ZhugeIODubboService {
     dubboResponse.setStatus(Constants.System.OK);
 
     try{
-      DubboResponse<SystemVariableResponse> systemVariable = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_URL.getCode());
-      DubboResponse<SystemVariableResponse> systemVariable1 = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_APPKEY.getCode());
-      DubboResponse<SystemVariableResponse> systemVariable2 = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_SECRETKEY.getCode());
-      String apiUrl = systemVariable.getData().getValue();
-      String appKey = systemVariable1.getData().getValue();
-      String secretKey = systemVariable2.getData().getValue();
+      String apiUrl = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_URL.getCode());
+      String appKey = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_APPKEY.getCode());
+      String secretKey = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_SECRETKEY.getCode());
       request.setAk(appKey);
       String json = JSON.toJSONString(request);
       String keys = ZhugeUtil.setKey(appKey,secretKey);
@@ -67,12 +64,9 @@ public class ZhugeIODubboServiceImpl implements ZhugeIODubboService {
     dubboResponse.setStatus(Constants.System.OK);
 
     try{
-      DubboResponse<SystemVariableResponse> systemVariable = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_URL.getCode());
-      DubboResponse<SystemVariableResponse> systemVariable1 = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_APPKEY.getCode());
-      DubboResponse<SystemVariableResponse> systemVariable2 = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_SECRETKEY.getCode());
-      String apiUrl = systemVariable.getData().getValue();
-      String appKey = systemVariable1.getData().getValue();
-      String secretKey = systemVariable2.getData().getValue();
+      String apiUrl = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_URL.getCode());
+      String appKey = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_APPKEY.getCode());
+      String secretKey = customer.getZhugeParam(ZhuGeVar.ZHUGE_API_SECRETKEY.getCode());
       request.setAk(appKey);
       String json = JSON.toJSONString(request);
       String keys = ZhugeUtil.setKey(appKey,secretKey);

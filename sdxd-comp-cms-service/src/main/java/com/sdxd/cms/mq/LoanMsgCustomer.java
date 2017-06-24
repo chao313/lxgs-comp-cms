@@ -1,7 +1,5 @@
 package com.sdxd.cms.mq;
 
-import java.util.Date;
-
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;

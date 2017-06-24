@@ -2,6 +2,8 @@ package com.sdxd.cms.service.impl;
 
 import java.util.Date;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sdxd.cms.constants.EventType;
+import com.sdxd.cms.constants.ZhuGeVar;
 import com.sdxd.cms.dubbo.api.request.zhuge.EventPr;
 import com.sdxd.cms.dubbo.api.request.zhuge.ZhugeEventData;
 import com.sdxd.cms.dubbo.api.request.zhuge.ZhugeEventRequest;
@@ -21,10 +24,11 @@ import com.sdxd.common.utils.BillNoUtils;
 
 @Service
 public class ApproveDoneEventServiceImpl implements ApproveDoneEventService {
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(ApproveDoneEventServiceImpl.class);
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(ApproveDoneEventServiceImpl.class);
+	@Resource
 	private OutApiCustomer outApiCustomer;
+
 	@Override
 	public ZhugeResponse pushApproveDoneZhuge(ApproveDone approveDone) {
 		String time = (approveDone.getApproveTime().getTime() + "").substring(0, 10);
@@ -44,15 +48,18 @@ public class ApproveDoneEventServiceImpl implements ApproveDoneEventService {
 		zhugeEventData.setPr(eventPer);
 		eventRequest.setRequestId(BillNoUtils.GenerateBillNo());
 		eventRequest.setData(new ZhugeEventData[] { zhugeEventData });
-		String apiUrl = outApiCustomer.getZhgUrl();
+		String apiUrl = outApiCustomer.getZhugeParam(ZhuGeVar.ZHUGE_API_URL.getCode());
+		String appKey = outApiCustomer.getZhugeParam(ZhuGeVar.ZHUGE_API_APPKEY.getCode());
+		String secretKey = outApiCustomer.getZhugeParam(ZhuGeVar.ZHUGE_API_SECRETKEY.getCode());
+		String keys = ZhugeUtil.setKey(appKey, secretKey);
 		String json = JSON.toJSONString(eventRequest);
-		ZhugeResponse response = ZhugeUtil.invoke(apiUrl, json,"");
+		ZhugeResponse response = ZhugeUtil.invoke(apiUrl, json, keys);
 		LOGGER.info(JSONObject.toJSONString(response));
 		return response;
 	}
-	
+
 	@Override
-	public ZhugeResponse pushLoanZhuge(Long userId,Date eventTime,EventType evenType) {
+	public ZhugeResponse pushLoanZhuge(Long userId, Date eventTime, EventType evenType) {
 		String time = (eventTime.getTime() + "").substring(0, 10);
 		ZhugeEventRequest eventRequest = new ZhugeEventRequest();
 		eventRequest.setTs(time);
@@ -66,9 +73,12 @@ public class ApproveDoneEventServiceImpl implements ApproveDoneEventService {
 		zhugeEventData.setPr(eventPer);
 		eventRequest.setRequestId(BillNoUtils.GenerateBillNo());
 		eventRequest.setData(new ZhugeEventData[] { zhugeEventData });
-		String apiUrl = outApiCustomer.getZhgUrl();
+		String apiUrl = outApiCustomer.getZhugeParam(ZhuGeVar.ZHUGE_API_URL.getCode());
+		String appKey = outApiCustomer.getZhugeParam(ZhuGeVar.ZHUGE_API_APPKEY.getCode());
+		String secretKey = outApiCustomer.getZhugeParam(ZhuGeVar.ZHUGE_API_SECRETKEY.getCode());
+		String keys = ZhugeUtil.setKey(appKey, secretKey);
 		String json = JSON.toJSONString(eventRequest);
-		ZhugeResponse response = ZhugeUtil.invoke(apiUrl, json,"");
+		ZhugeResponse response = ZhugeUtil.invoke(apiUrl, json, keys);
 		LOGGER.info(JSONObject.toJSONString(response));
 		return response;
 	}
