@@ -53,8 +53,9 @@ public class ApproveDoneEventServiceImpl implements ApproveDoneEventService {
 		String secretKey = outApiCustomer.getZhugeParam(ZhuGeVar.ZHUGE_API_SECRETKEY.getCode());
 		String keys = ZhugeUtil.setKey(appKey, secretKey);
 		String json = JSON.toJSONString(eventRequest);
+		LOGGER.info("诸葛接口调用，param:{},keys:{}",json,keys);
 		ZhugeResponse response = ZhugeUtil.invoke(apiUrl, json, keys);
-		LOGGER.info(JSONObject.toJSONString(response));
+		LOGGER.info("诸葛接口调用，response:{}",JSONObject.toJSONString(response));
 		return response;
 	}
 
@@ -78,8 +79,9 @@ public class ApproveDoneEventServiceImpl implements ApproveDoneEventService {
 		String secretKey = outApiCustomer.getZhugeParam(ZhuGeVar.ZHUGE_API_SECRETKEY.getCode());
 		String keys = ZhugeUtil.setKey(appKey, secretKey);
 		String json = JSON.toJSONString(eventRequest);
+		LOGGER.info("诸葛接口调用，param:{},keys:{}",json,keys);
 		ZhugeResponse response = ZhugeUtil.invoke(apiUrl, json, keys);
-		LOGGER.info(JSONObject.toJSONString(response));
+		LOGGER.info("诸葛接口调用，response:{}",JSONObject.toJSONString(response));
 		return response;
 	}
 
