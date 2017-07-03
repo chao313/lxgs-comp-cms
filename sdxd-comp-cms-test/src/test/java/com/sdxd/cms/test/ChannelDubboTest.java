@@ -30,11 +30,11 @@ public class ChannelDubboTest extends BaseTest {
     public void create(){
         OtherChannelDetailRequest request = new OtherChannelDetailRequest();
         request.setRequestId(BillNoUtils.GenerateBillNo());
-        request.setChannelUrl("http://wwww.baidu.com");
-        request.setChannelName("芝麻花呗");
+        request.setChannelUrl("http://wwww.baidu.com1");
+        request.setChannelName("芝麻花呗2");
         request.setChannelIndex(2);
-        request.setChannelLogo("http://wwww/baodu.com");
-        request.setChannelSlogn("方便");
+        request.setChannelLogo("http://wwww/baodu.com.cn");
+        request.setChannelSlogn("方便22");
         request.setChannelType("h5");
         DubboResponse<OtherChannelDetailResponse> c = otherChannelService.save(request);
         System.out.println(c);
@@ -72,7 +72,7 @@ public class ChannelDubboTest extends BaseTest {
     public void query(){
         QueryAllOtherChannelsRequest request = new QueryAllOtherChannelsRequest();
         request.setRequestId(BillNoUtils.GenerateBillNo());
-//        request.setChannelType("APP");
+        request.setChannelType("h5");
         DubboResponse<List<OtherChannelDetailVo>> response = otherChannelService.queryAll(request);
 //        DubboResponse<Integer> c = otherChannelService.queryCount(request);
 //

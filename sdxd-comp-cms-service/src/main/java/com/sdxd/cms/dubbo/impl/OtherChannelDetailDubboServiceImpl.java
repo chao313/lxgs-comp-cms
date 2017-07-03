@@ -53,7 +53,7 @@ public class OtherChannelDetailDubboServiceImpl  implements OtherChannelDetailDu
         detail.setChannelName(request.getChannelName());
         detail.setChannelSlogn(request.getChannelSlogn());
         detail.setChannelUrl(request.getChannelUrl());
-        detail.setChannelType(request.getChannelType());
+        detail.setChannelType(request.getChannelType().toUpperCase());
         detail.setId(BillNoUtils.GenerateBillNo());
         detail.setChannelIndex(request.getChannelIndex());
         OtherChannelDetail offStatus = otherChannelDetailService.offStatus();

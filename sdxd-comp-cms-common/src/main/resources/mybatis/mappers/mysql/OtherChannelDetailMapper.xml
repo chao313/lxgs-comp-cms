@@ -87,7 +87,7 @@
         <include refid="Base_Column_List" />
         FROM  t_other_channel_detail WHERE `delete_flag` = 0 AND channel_show = 1
         <if test="channelType!=null">
-            and  channel_type = #{channelType}
+            and  channel_type = upper( #{channelType})
         </if>
         ORDER BY  channel_index ASC ,create_time DESC
     </select>
