@@ -46,7 +46,7 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
 		response.setError(Constants.System.SERVER_SUCCESS);
 		response.setStatus(Constants.System.OK);
 		CmsNoticeResponse res = new CmsNoticeResponse();
-		if(StringUtils.isBlank(request.getLink())||StringUtils.isBlank(request.getTitle())){
+		if(StringUtils.isBlank(request.getTitle())){
 			res.setSuccess(false);
 			response.setError(Constants.System.PARAMS_INVALID);
 			response.setMsg(Constants.System.PARAMS_INVALID_MSG);
