@@ -33,4 +33,5 @@ public interface AgreementTemplateDubboService {
 
     //查询所有协议
     public DubboResponse<List<AgreementTemplateVo>> queryAll();
+
 }
