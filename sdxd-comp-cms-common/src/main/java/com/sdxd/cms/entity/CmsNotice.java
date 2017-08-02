@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.util.Date;
+
 @Data
 @EqualsAndHashCode(callSuper = false)
 @ToString(callSuper = true)
@@ -17,4 +19,5 @@ public class CmsNotice extends BaseEntity {
 	private String title;
 	private String link;
 	private Integer deleteFlag;
+	private Date offlineTime;
 }

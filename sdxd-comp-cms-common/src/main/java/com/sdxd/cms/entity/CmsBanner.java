@@ -19,5 +19,6 @@ public class CmsBanner extends BaseEntity{
 	private String imageLink;//图片连接地址
 	private Integer  imageOrder;//图片的顺序，
 	private Integer deleteFlag;
- 
+	private String pageId;//页面id
+	private String position;//页面位置
 }

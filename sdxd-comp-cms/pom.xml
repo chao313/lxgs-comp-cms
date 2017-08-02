@@ -169,7 +169,7 @@
 		<profile>
 			<id>test</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
 				<conf.database.driverClassName>com.mysql.jdbc.Driver</conf.database.driverClassName>
@@ -205,7 +205,7 @@
 		<profile>
 			<id>dev</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
 				<conf.database.driverClassName>com.mysql.jdbc.Driver</conf.database.driverClassName>

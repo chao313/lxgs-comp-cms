@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sdxd.cms.dao.AgreementTemplateDao" >
     <resultMap id="getMap" type="com.sdxd.cms.entity.AgreementTemplateManage" >
-
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="page_id" property="pageId" jdbcType="VARCHAR" />
         <result column="use_type" property="useType" jdbcType="VARCHAR" />

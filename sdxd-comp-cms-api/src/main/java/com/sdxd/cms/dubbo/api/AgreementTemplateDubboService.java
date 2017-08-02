@@ -7,7 +7,6 @@ import com.sdxd.cms.dubbo.api.request.QueryAgreementTemplateRequest;
 import com.sdxd.cms.dubbo.api.response.AgreementTemplateResponse;
 import com.sdxd.cms.dubbo.api.response.DeleteAgreementTemplateResponse;
 import com.sdxd.framework.dto.PaginationSupport;
-import com.sdxd.framework.dubbo.BaseRequest;
 import com.sdxd.framework.dubbo.DubboResponse;
 
 import java.util.List;

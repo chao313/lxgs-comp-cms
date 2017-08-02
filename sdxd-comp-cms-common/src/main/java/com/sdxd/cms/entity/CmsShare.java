@@ -20,5 +20,5 @@ public class CmsShare extends BaseEntity{
 	private String link;//连接地址
 	private String description;
 	private Integer deleteFlag;
- 
+
 }
