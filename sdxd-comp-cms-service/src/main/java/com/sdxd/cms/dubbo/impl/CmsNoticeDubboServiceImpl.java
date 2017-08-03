@@ -88,8 +88,8 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
             cmsNotice.setDeleteFlag(1);
             cmsNoticeService.update(cmsNotice);
             res.setSuccess(true);
+            redisClientTemplate.del(id);
 
-            redisClientTemplate.del(cmsNotice.getId());
 //            redisClientTemplate.del(REDIS_KEY_LIST);
         } catch (Exception e) {
             LOGGER.error("deleteCmsNotic error", e);
@@ -144,10 +144,13 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
         QueryCmsNoticeResponse res = new QueryCmsNoticeResponse();
         List<CmsNoticeVo> voLists = null;
         try {
-            String noticesInRedis = redisClientTemplate.get(REDIS_KEY_LIST);
-            if (!StringUtils.isEmpty(noticesInRedis)) {
-                voLists = JSON.parseArray(noticesInRedis, CmsNoticeVo.class);
-            }
+
+//            redisClientTemplate
+
+//            String noticesInRedis = redisClientTemplate.getRedisDataSource().getRedisClient().get("*");
+//            if (!StringUtils.isEmpty(noticesInRedis)) {
+//                voLists = JSON.parseArray(noticesInRedis, CmsNoticeVo.class);
+//            }
         } catch (Exception e) {
             LOGGER.error("Query notice list in redis error", e);
         }
@@ -155,7 +158,6 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
         try {
             if (voLists == null) {
                 voLists = new ArrayList<CmsNoticeVo>();
-
                 CmsNotice cmsNotice = new CmsNotice();
                 BeanUtils.copyOnPropertyUtils(cmsNotice, request);
                 cmsNotice.setDeleteFlag(0);
