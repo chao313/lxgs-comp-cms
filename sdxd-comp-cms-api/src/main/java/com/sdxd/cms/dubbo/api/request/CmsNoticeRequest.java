@@ -15,4 +15,5 @@ public class CmsNoticeRequest extends BaseRequest {
     private String title;
     private String link;
     private Date offlineTime;
+    private Boolean status;//true 线上  false 下线
 }

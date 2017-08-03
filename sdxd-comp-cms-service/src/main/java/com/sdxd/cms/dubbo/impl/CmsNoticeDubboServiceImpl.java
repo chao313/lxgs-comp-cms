@@ -1,13 +1,18 @@
 package com.sdxd.cms.dubbo.impl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 import javax.annotation.Resource;
 
+import com.sdxd.cms.utils.TransformUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -55,10 +60,7 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
             cmsNoticeService.insert(cmsNotice);
             res.setSuccess(true);
 
-            String key = cmsNotice.getId();
-            redisClientTemplate.set(key, cmsNotice.toString());
-            redisClientTemplate.expireAt(key, request.getOfflineTime().getTime());
-//            redisClientTemplate.del(REDIS_KEY_LIST);
+            redisClientTemplate.del(REDIS_KEY_LIST);
         } catch (Exception e) {
             LOGGER.error("addCmsNotic error", e);
             res.setSuccess(false);
@@ -88,9 +90,8 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
             cmsNotice.setDeleteFlag(1);
             cmsNoticeService.update(cmsNotice);
             res.setSuccess(true);
-            redisClientTemplate.del(id);
 
-//            redisClientTemplate.del(REDIS_KEY_LIST);
+            redisClientTemplate.del(REDIS_KEY_LIST);
         } catch (Exception e) {
             LOGGER.error("deleteCmsNotic error", e);
             res.setSuccess(false);
@@ -120,11 +121,7 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
             cmsNoticeService.update(cmsNotice);
             res.setSuccess(true);
 
-            String key = cmsNotice.getId();
-            redisClientTemplate.set(key, cmsNotice.toString());
-            redisClientTemplate.expireAt(key, request.getOfflineTime().getTime());
-
-//            redisClientTemplate.del(REDIS_KEY_LIST);
+            redisClientTemplate.del(REDIS_KEY_LIST);
         } catch (Exception e) {
             LOGGER.error("updataCmsNotic error", e);
             res.setSuccess(false);
@@ -142,28 +139,27 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
         response.setError(Constants.System.SERVER_SUCCESS);
         response.setStatus(Constants.System.OK);
         QueryCmsNoticeResponse res = new QueryCmsNoticeResponse();
+
+
         List<CmsNoticeVo> voLists = null;
         try {
-
-//            redisClientTemplate
-
-//            String noticesInRedis = redisClientTemplate.getRedisDataSource().getRedisClient().get("*");
-//            if (!StringUtils.isEmpty(noticesInRedis)) {
-//                voLists = JSON.parseArray(noticesInRedis, CmsNoticeVo.class);
-//            }
+            String noticesInRedis = redisClientTemplate.get(REDIS_KEY_LIST);
+            if (!StringUtils.isEmpty(noticesInRedis)) {
+                voLists = JSON.parseArray(noticesInRedis, CmsNoticeVo.class);
+            }
         } catch (Exception e) {
             LOGGER.error("Query notice list in redis error", e);
         }
 
+
         try {
             if (voLists == null) {
                 voLists = new ArrayList<CmsNoticeVo>();
+
                 CmsNotice cmsNotice = new CmsNotice();
                 BeanUtils.copyOnPropertyUtils(cmsNotice, request);
                 cmsNotice.setDeleteFlag(0);
                 List<CmsNotice> list = cmsNoticeService.getByObj(cmsNotice);
-                LOGGER.info("{}", list.toString());
-                System.out.println(list);
                 for (CmsNotice cn : list) {
                     if (cn == null) {
                         continue;
@@ -190,5 +186,37 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
         return response;
     }
 
+    @Override
+    public DubboResponse<QueryCmsNoticeResponse> queryCmsNoticeStatus(CmsNoticeRequest request) {
+        DubboResponse<QueryCmsNoticeResponse> response = new DubboResponse<>();
+        QueryCmsNoticeResponse res = new QueryCmsNoticeResponse();
+        response.setError(Constants.System.SERVER_SUCCESS);
+        response.setStatus(Constants.System.OK);
 
+        Boolean status = request.getStatus();
+        if (null == status) {
+            response.setError(Constants.System.PARAMS_INVALID);
+            response.setMsg(Constants.System.PARAMS_INVALID_MSG);
+            return response;
+        }
+        try {
+            Date time = new Date();
+            List<CmsNotice> list = null;
+            if (true == status) {
+                list = cmsNoticeService.getAllOnline(time);
+            } else {
+                list = cmsNoticeService.getAllOffline(time);
+            }
+            List<CmsNoticeVo> list1 = TransformUtil.toList(list, CmsNoticeVo.class);
+            res.setList(list1);
+        } catch (Exception e) {
+            LOGGER.error("queryCmsNoticeStatus error", e);
+            response.setError(Constants.System.SYSTEM_ERROR_CODE);
+            response.setMsg(Constants.System.SYSTEM_ERROR_MSG);
+        }
+        response.setData(res);
+        return response;
+    }
 }
+
+

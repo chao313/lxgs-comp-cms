@@ -14,4 +14,6 @@ public interface CmsNoticeDubboService {
 	DubboResponse<CmsNoticeResponse> updataCmsNotic(CmsNoticeRequest request);
 	
 	DubboResponse<QueryCmsNoticeResponse> queryCmsNotic(CmsNoticeRequest request);
+
+	DubboResponse<QueryCmsNoticeResponse> queryCmsNoticeStatus(CmsNoticeRequest request);
 }

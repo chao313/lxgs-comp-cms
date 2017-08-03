@@ -2,9 +2,11 @@ package com.sdxd.cms.test;
 
 import com.fasterxml.jackson.databind.deser.Deserializers;
 import com.sdxd.cms.OtherChannelService;
+import com.sdxd.cms.dubbo.api.CmsNoticeDubboService;
 import com.sdxd.cms.dubbo.api.pojo.OtherChannelDetailVo;
 import com.sdxd.cms.dubbo.api.request.*;
 import com.sdxd.cms.dubbo.api.response.OtherChannelDetailResponse;
+import com.sdxd.cms.dubbo.api.response.QueryCmsNoticeResponse;
 import com.sdxd.common.utils.BillNoUtils;
 import com.sdxd.framework.dto.PaginationSupport;
 import com.sdxd.framework.dubbo.BaseRequest;
@@ -15,6 +17,7 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * @author liujie

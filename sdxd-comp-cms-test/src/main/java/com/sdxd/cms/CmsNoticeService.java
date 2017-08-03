@@ -11,6 +11,7 @@ import com.sdxd.framework.dubbo.DubboResponse;
 
 @Service
 public class CmsNoticeService {
+
 	@Reference(version = "1.0.0")
 	private CmsNoticeDubboService cmsNoticeDubboService;
 
@@ -28,5 +29,9 @@ public class CmsNoticeService {
 
 	public DubboResponse<QueryCmsNoticeResponse> queryCmsNotic(CmsNoticeRequest request){
 		return cmsNoticeDubboService.queryCmsNotic(request);
+	}
+
+	public DubboResponse<QueryCmsNoticeResponse> queryCmsNoticeStatus(CmsNoticeRequest request) {
+		return cmsNoticeDubboService.queryCmsNoticeStatus(request);
 	}
 }
