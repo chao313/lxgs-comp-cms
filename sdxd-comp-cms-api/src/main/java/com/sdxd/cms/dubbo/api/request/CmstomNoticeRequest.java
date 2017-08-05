@@ -10,5 +10,5 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class CmstomNoticeRequest extends BaseRequest {
-    private Boolean status;//true 线上  false 下线
+    private Boolean status;//true 线上  false 全部
 }
