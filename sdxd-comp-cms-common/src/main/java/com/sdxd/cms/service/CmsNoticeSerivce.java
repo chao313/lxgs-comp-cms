@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface CmsNoticeSerivce extends BaseService<CmsNotice> {
     List<CmsNotice> getAllOnline(Date onlineTime);
-    List<CmsNotice> getAllOffline(Date offlineTime);
+    List<CmsNotice> getAllNotice(Date offlineTime);
 }

@@ -1,6 +1,7 @@
 package com.sdxd.cms.dubbo.api;
 
 import com.sdxd.cms.dubbo.api.request.CmsNoticeRequest;
+import com.sdxd.cms.dubbo.api.request.CmstomNoticeRequest;
 import com.sdxd.cms.dubbo.api.response.CmsNoticeResponse;
 import com.sdxd.cms.dubbo.api.response.QueryCmsNoticeResponse;
 import com.sdxd.framework.dubbo.DubboResponse;
@@ -15,5 +16,5 @@ public interface CmsNoticeDubboService {
 	
 	DubboResponse<QueryCmsNoticeResponse> queryCmsNotic(CmsNoticeRequest request);
 
-	DubboResponse<QueryCmsNoticeResponse> queryCmsNoticeStatus(CmsNoticeRequest request);
+	DubboResponse<QueryCmsNoticeResponse> queryCmsNoticeStatus(CmstomNoticeRequest request);
 }

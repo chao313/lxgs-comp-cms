@@ -4,6 +4,7 @@ import com.sdxd.cms.CmsNoticeService;
 import com.sdxd.cms.dubbo.api.CmsNoticeDubboService;
 import com.sdxd.cms.dubbo.api.pojo.CmsNoticeVo;
 import com.sdxd.cms.dubbo.api.request.CmsNoticeRequest;
+import com.sdxd.cms.dubbo.api.request.CmstomNoticeRequest;
 import com.sdxd.cms.dubbo.api.response.QueryCmsNoticeResponse;
 import com.sdxd.common.utils.BillNoUtils;
 import com.sdxd.framework.dubbo.DubboResponse;
@@ -23,7 +24,7 @@ public class CmsNoticeDubboServiceTest extends BaseTest{
 
     @Test
     public void testOnline(){
-        CmsNoticeRequest cmsNoticeRequest = new CmsNoticeRequest();
+        CmstomNoticeRequest cmsNoticeRequest = new CmstomNoticeRequest();
         cmsNoticeRequest.setStatus(true);
         cmsNoticeRequest.setRequestId(BillNoUtils.GenerateBillNo());
         DubboResponse<QueryCmsNoticeResponse> response = cmsNoticeService.queryCmsNoticeStatus(cmsNoticeRequest);

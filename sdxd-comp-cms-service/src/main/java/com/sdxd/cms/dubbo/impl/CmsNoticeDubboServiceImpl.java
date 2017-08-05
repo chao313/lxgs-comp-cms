@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.sdxd.cms.dubbo.api.request.CmstomNoticeRequest;
 import com.sdxd.cms.utils.TransformUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -187,7 +188,7 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
     }
 
     @Override
-    public DubboResponse<QueryCmsNoticeResponse> queryCmsNoticeStatus(CmsNoticeRequest request) {
+    public DubboResponse<QueryCmsNoticeResponse> queryCmsNoticeStatus(CmstomNoticeRequest request) {
         DubboResponse<QueryCmsNoticeResponse> response = new DubboResponse<>();
         QueryCmsNoticeResponse res = new QueryCmsNoticeResponse();
         response.setError(Constants.System.SERVER_SUCCESS);
@@ -205,7 +206,7 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
             if (true == status) {
                 list = cmsNoticeService.getAllOnline(time);
             } else {
-                list = cmsNoticeService.getAllOffline(time);
+                list = cmsNoticeService.getAllNotice(time);
             }
             List<CmsNoticeVo> list1 = TransformUtil.toList(list, CmsNoticeVo.class);
             res.setList(list1);

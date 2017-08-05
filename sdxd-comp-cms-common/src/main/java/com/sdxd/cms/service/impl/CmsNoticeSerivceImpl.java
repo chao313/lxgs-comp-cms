@@ -23,8 +23,8 @@ public class CmsNoticeSerivceImpl extends BaseServiceImpl<CmsNotice> implements 
     }
 
     @Override
-    public List<CmsNotice> getAllOffline(Date offlineTime) {
-        return cmsNoticeDao.getAllOffline(offlineTime);
+    public List<CmsNotice> getAllNotice(Date offlineTime) {
+        return cmsNoticeDao.getAllNotice(offlineTime);
     }
 
 }

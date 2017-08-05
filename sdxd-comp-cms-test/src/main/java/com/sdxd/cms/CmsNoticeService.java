@@ -1,5 +1,6 @@
 package com.sdxd.cms;
 
+import com.sdxd.cms.dubbo.api.request.CmstomNoticeRequest;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -31,7 +32,7 @@ public class CmsNoticeService {
 		return cmsNoticeDubboService.queryCmsNotic(request);
 	}
 
-	public DubboResponse<QueryCmsNoticeResponse> queryCmsNoticeStatus(CmsNoticeRequest request) {
+	public DubboResponse<QueryCmsNoticeResponse> queryCmsNoticeStatus(CmstomNoticeRequest request) {
 		return cmsNoticeDubboService.queryCmsNoticeStatus(request);
 	}
 }

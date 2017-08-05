@@ -12,10 +12,9 @@
     </select>
 
 
-    <select id="getAllOffline" resultMap="getMap">
+    <select id="getAllNotice" resultMap="getMap">
         SELECT *
         FROM t_cms_notice
-        WHERE offline_time  &lt; #{onlineTime,jdbcType=DATE}
     </select>
 
 </mapper>
