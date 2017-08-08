@@ -9,6 +9,7 @@
         SELECT *
         FROM t_cms_notice
         WHERE offline_time  &gt;  #{onlineTime,jdbcType=DATE}
+        AND offline_time=NULL 
     </select>
 
 
