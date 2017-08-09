@@ -1,6 +1,5 @@
 package com.sdxd.cms.dubbo.impl;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -201,12 +200,11 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
             return response;
         }
         try {
-            Date time = new Date();
             List<CmsNotice> list = null;
             if (true == status) {
-                list = cmsNoticeService.getAllOnline(time);
+                list = cmsNoticeService.getAllOnline();
             } else {
-                list = cmsNoticeService.getAllNotice(time);
+                list = cmsNoticeService.getAllNotice();
             }
             List<CmsNoticeVo> list1 = TransformUtil.toList(list, CmsNoticeVo.class);
             res.setList(list1);

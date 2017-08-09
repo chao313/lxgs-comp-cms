@@ -11,7 +11,7 @@
         WHERE delete_flag=0
         AND
         (
-          offline_time  &gt;  #{onlineTime,jdbcType=DATE}
+          offline_time  &gt;  NOW()
           OR offline_time IS NULL
         )
     </select>

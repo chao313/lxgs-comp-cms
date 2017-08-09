@@ -7,6 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 public interface CmsNoticeDao extends BaseDao<CmsNotice> {
-    List<CmsNotice> getAllOnline(Date onlineTime);
-    List<CmsNotice> getAllNotice(Date offlineTime);
+    List<CmsNotice> getAllOnline();
+    List<CmsNotice> getAllNotice();
 }
