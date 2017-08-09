@@ -8,14 +8,19 @@
     <select id="getAllOnline" resultMap="getMap">
         SELECT *
         FROM t_cms_notice
-        WHERE offline_time  &gt;  #{onlineTime,jdbcType=DATE}
-        OR offline_time IS NULL
+        WHERE delete_flag=0
+        AND
+        (
+          offline_time  &gt;  #{onlineTime,jdbcType=DATE}
+          OR offline_time IS NULL
+        )
     </select>
 
 
     <select id="getAllNotice" resultMap="getMap">
         SELECT *
         FROM t_cms_notice
+        WHERE delete_flag=0
     </select>
 
 </mapper>
