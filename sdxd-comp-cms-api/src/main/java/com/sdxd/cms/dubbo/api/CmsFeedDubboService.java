@@ -18,7 +18,7 @@ import com.sdxd.framework.dubbo.PageRequest;
  * ----------  ----------------------  -----------------------------------------
  * 2017/8/17    wenzhou.xu              Created
  */
-public interface CmcFeedDubboService {
+public interface CmsFeedDubboService {
 
     /**
      * 查询Feed素材列表

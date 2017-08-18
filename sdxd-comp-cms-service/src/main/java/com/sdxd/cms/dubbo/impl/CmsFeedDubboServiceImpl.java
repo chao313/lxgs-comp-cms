@@ -2,7 +2,7 @@ package com.sdxd.cms.dubbo.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSONObject;
-import com.sdxd.cms.dubbo.api.CmcFeedDubboService;
+import com.sdxd.cms.dubbo.api.CmsFeedDubboService;
 import com.sdxd.cms.dubbo.api.pojo.CmsFeedVo;
 import com.sdxd.cms.dubbo.api.request.CmsFeedRequest;
 import com.sdxd.cms.dubbo.api.response.CmsFeedResponse;
@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
  * 2017/8/18    wenzhou.xu              Created
  */
 @Service(interfaceName = "com.sdxd.cms.dubbo.api.CmcFeedDubboService", validation = "true", version = "1.0.0", timeout = 30000)
-public class CmsFeedDubboServiceImpl implements CmcFeedDubboService {
+public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CmsFeedDubboServiceImpl.class);
 
