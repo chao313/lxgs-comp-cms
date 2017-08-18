@@ -1,9 +1,13 @@
 package com.sdxd.cms.service.impl;
 
+import com.sdxd.cms.dao.CmsFeedDao;
 import com.sdxd.cms.entity.CmsFeed;
 import com.sdxd.cms.service.CmsFeedService;
 import com.sdxd.framework.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * *****************************************************************************
@@ -20,4 +24,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CmsFeedServiceImpl extends BaseServiceImpl<CmsFeed> implements CmsFeedService {
+
+    @Resource
+    private CmsFeedDao cmsFeedDao;
+
+    @Override
+    public List<CmsFeed> searchPage(Integer currentPage, Integer pageSize) {
+        return cmsFeedDao.searchPage(currentPage, pageSize);
+    }
 }

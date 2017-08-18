@@ -1,14 +1,14 @@
-package com.sdxd.cms.service;
+package com.sdxd.cms.dubbo.api.pojo;
 
-import com.sdxd.cms.entity.CmsFeed;
-import com.sdxd.framework.service.BaseService;
+import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * *****************************************************************************
  * <p>
- * 功能名           ：com.sdxd.cms.service
+ * 功能名           ：com.sdxd.cms.dubbo.api.pojo
  * 系统名           ：
  * <p>
  * *****************************************************************************
@@ -18,7 +18,14 @@ import java.util.List;
  * ----------  ----------------------  -----------------------------------------
  * 2017/8/17    wenzhou.xu              Created
  */
-public interface CmsFeedService extends BaseService<CmsFeed> {
-
-    List<CmsFeed> searchPage(Integer currentPage, Integer pageSize);
+@Data
+public class CmsFeedVo implements Serializable {
+    private String id;
+    private String title;
+    private String tag;
+    private Integer display;
+    private List<String> imgList;
+    private String feedUrl;
+    private String from;
+    private Integer comment;
 }

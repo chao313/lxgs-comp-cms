@@ -4,5 +4,15 @@
     <resultMap id="getMap" type="com.sdxd.cms.entity.CmsFeed" >
     </resultMap>
 
+    <!-- 分页查询 -->
+    <select id="searchPage" resultMap="getMap" >
+        SELECT *
+        FROM  t_cms_feed
+        WHERE delete_flag = 0
+        ORDER BY create_time DESC
+        <if test="currentPage!=null and currentPage!=null">
+            limit #{currentPage},#{pageSize}
+        </if>
+    </select>
 
 </mapper>

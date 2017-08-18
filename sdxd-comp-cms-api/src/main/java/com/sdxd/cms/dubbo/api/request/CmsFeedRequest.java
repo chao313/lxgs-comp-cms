@@ -1,10 +1,8 @@
 package com.sdxd.cms.dubbo.api.request;
 
+import com.sdxd.cms.dubbo.api.pojo.CmsFeedVo;
 import com.sdxd.framework.dubbo.BaseRequest;
 import lombok.Data;
-
-import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * *****************************************************************************
@@ -20,13 +18,7 @@ import java.util.List;
  * 2017/8/17    wenzhou.xu              Created
  */
 @Data
-public class FeedRequest extends BaseRequest {
+public class CmsFeedRequest extends BaseRequest {
     private String id;
-    private String title;
-    private String tag;
-    private Integer display;
-    private List<String> imgList;
-    private String feedUrl;
-    private String from;
-    private Integer comment;
+    private CmsFeedVo cmsFeedVo;
 }

@@ -32,7 +32,7 @@ public class CmsFeed extends BaseEntity {
     private String image3Url;
     private String from;
     private String tag;
-    private String isCommont;
-    private String isDisplay;
+    private Integer isCommont;
+    private Integer isDisplay;
     private Integer deleteFlag;
 }
