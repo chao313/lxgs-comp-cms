@@ -136,10 +136,9 @@
 			</activation>
 			<properties>
 				<conf.database.driverClassName>com.mysql.jdbc.Driver</conf.database.driverClassName>
-				<conf.database.url><![CDATA[jdbc:mysql://rm-bp1a224o5dj0p5g1e.mysql.rds.aliyuncs.com:3306/sdxd?useUnicode=true&characterEncoding=UTF-8]]></conf.database.url>
-				<conf.database.user>xd</conf.database.user>
-				<conf.database.password>UGc90iexspvdzu</conf.database.password>
-				
+				<conf.database.url><![CDATA[jdbc:mysql://rm-bp1a224o5dj0p5g1e.mysql.rds.aliyuncs.com:3306/dev_sdxd?useUnicode=true&characterEncoding=UTF-8]]></conf.database.url>
+				<conf.database.user>dev</conf.database.user>
+				<conf.database.password>Ururoto2017</conf.database.password>
 				<conf.system.check.permission>true</conf.system.check.permission>
 				<conf.system.timeout>1800</conf.system.timeout>
 				<conf.activitemq.brokerURL.host>failover://(ttp://192.168.4.166:7777/)</conf.activitemq.brokerURL.host>

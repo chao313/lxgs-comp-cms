@@ -2,27 +2,22 @@ package com.sdxd.cms.test;
 
 import javax.annotation.Resource;
 
+import com.sdxd.cms.CmsFeedService;
+import com.sdxd.cms.dubbo.api.pojo.CmsFeedVo;
+import com.sdxd.cms.dubbo.api.request.*;
+import com.sdxd.cms.dubbo.api.response.*;
+import com.sdxd.framework.dubbo.PageRequest;
 import org.junit.Test;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.sdxd.cms.CmsBannerService;
 import com.sdxd.cms.CmsNoticeService;
 import com.sdxd.cms.CmsShareService;
-import com.sdxd.cms.dubbo.api.CmsBannerDubboService;
-import com.sdxd.cms.dubbo.api.CmsShareDubboService;
 import com.sdxd.cms.dubbo.api.enums.CmsBannerType;
-import com.sdxd.cms.dubbo.api.request.CmsBannerRequest;
-import com.sdxd.cms.dubbo.api.request.CmsNoticeRequest;
-import com.sdxd.cms.dubbo.api.request.CmsShareRequest;
-import com.sdxd.cms.dubbo.api.request.DeleteCmsBannerRequest;
-import com.sdxd.cms.dubbo.api.request.QueryCmsBannerRequest;
-import com.sdxd.cms.dubbo.api.response.CmsBannerResponse;
-import com.sdxd.cms.dubbo.api.response.CmsNoticeResponse;
-import com.sdxd.cms.dubbo.api.response.CmsShareResponse;
-import com.sdxd.cms.dubbo.api.response.QueryCmsBannerResponse;
-import com.sdxd.cms.dubbo.api.response.QueryCmsNoticeResponse;
 import com.sdxd.common.utils.BillNoUtils;
 import com.sdxd.framework.dubbo.DubboResponse;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ServiceTest extends BaseTest{
@@ -35,6 +30,9 @@ public class ServiceTest extends BaseTest{
 
     @Resource
     private CmsShareService cmsShareService;
+
+    @Resource
+	private CmsFeedService cmsFeedService;
 
 	@Test
 	public void testAddCmsBanner(){
@@ -110,5 +108,64 @@ public class ServiceTest extends BaseTest{
         DubboResponse<CmsShareResponse> response = cmsShareService.findById(request);
         response.getData();
 //		cmsShareDubboService.findById(request);
+	}
+
+	@Test
+	public void test_searchCmsFeedList(){
+		PageRequest request = new PageRequest();
+		request.setSystemId("test");
+		request.setRequestId("test");
+		request.setCurrentPage(1);
+		request.setPageSize(10);
+
+		DubboResponse<CmsFeedResponse> response = cmsFeedService.searchCmsFeedList(request);
+	}
+
+	@Test
+	public void test_queryCmsFeed(){
+		CmsFeedRequest request = new CmsFeedRequest();
+		request.setSystemId("test");
+		request.setRequestId("test");
+		request.setId("201708181814520000000001");
+
+		DubboResponse<CmsFeedResponse> response = cmsFeedService.queryCmsFeed(request);
+	}
+
+	@Test
+	public void test_saveCmsFeed(){
+		CmsFeedRequest request = new CmsFeedRequest();
+		request.setSystemId("test");
+		request.setRequestId("test");
+		request.setCmsFeedVo(buildFeed());
+
+		DubboResponse<CmsFeedResponse> response = cmsFeedService.saveCmsFeed(request);
+
+	}
+
+	@Test
+	public void test_deleteCmsFeed(){
+		CmsFeedRequest request = new CmsFeedRequest();
+		request.setSystemId("test");
+		request.setRequestId("test");
+
+		request.setId("201708181814520000000001");
+		DubboResponse<CmsFeedResponse> response = cmsFeedService.deleteCmsFeed(request);
+	}
+
+	private CmsFeedVo buildFeed(){
+		CmsFeedVo feed = new CmsFeedVo();
+		feed.setId("201708181814520000000001");
+		feed.setTitle("盛大小贷");
+		feed.setTag("热门");
+		feed.setDisplay(1);
+		List<String> imgList = new ArrayList<>();
+		imgList.add("http://sdxd-oss-public.oss-cn-hzfinance.aliyuncs.com/2017081815382886548_H5-%E5%BE%AE%E4%BF%A1%E5%AF%BC%E6%B5%81-1.png");
+		imgList.add("http://sdxd-oss-public.oss-cn-hzfinance.aliyuncs.com/2017081815382886548_H5-%E5%BE%AE%E4%BF%A1%E5%AF%BC%E6%B5%81-1.png");
+		imgList.add("http://sdxd-oss-public.oss-cn-hzfinance.aliyuncs.com/2017081815382886548_H5-%E5%BE%AE%E4%BF%A1%E5%AF%BC%E6%B5%81-1.png");
+		feed.setImgList(imgList);
+		feed.setFeedUrl("www.baidu.com");
+		feed.setFrom("盛大小贷");;
+		feed.setComment(0);
+		return feed;
 	}
 }

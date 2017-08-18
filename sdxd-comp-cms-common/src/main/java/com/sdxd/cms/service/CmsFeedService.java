@@ -20,5 +20,5 @@ import java.util.List;
  */
 public interface CmsFeedService extends BaseService<CmsFeed> {
 
-    List<CmsFeed> searchPage(Integer currentPage, Integer pageSize);
+    List<CmsFeed> searchPage(Integer startIndex, Integer pageSize);
 }

@@ -1,5 +1,6 @@
 package com.sdxd.cms.dubbo.impl;
 
+import com.alibaba.dubbo.common.utils.CollectionUtils;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.sdxd.cms.dubbo.api.CmsFeedDubboService;
@@ -19,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * *****************************************************************************
@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
  * ----------  ----------------------  -----------------------------------------
  * 2017/8/18    wenzhou.xu              Created
  */
-@Service(interfaceName = "com.sdxd.cms.dubbo.api.CmcFeedDubboService", validation = "true", version = "1.0.0", timeout = 30000)
+@Service(interfaceName = "com.sdxd.cms.dubbo.api.CmsFeedDubboService", version = "1.0.0", timeout = 30000)
 public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CmsFeedDubboServiceImpl.class);
@@ -61,9 +61,13 @@ public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
             //查询总数
             Integer count = cmsFeedService.count(cmsFeed);
             //分页查询
-            List<CmsFeed> cmsFeedList = cmsFeedService.searchPage(request.getCurrentPage(), request.getPageSize());
+            List<CmsFeed> cmsFeedList = cmsFeedService.searchPage(request.getStartItem(), request.getPageSize());
             //重新封装
-            List<CmsFeedVo> voList = cmsFeedList.stream().map(this::buildCmsFeedVo).collect(Collectors.toList());
+            List<CmsFeedVo> voList = new ArrayList<>();
+            for (CmsFeed feed : cmsFeedList) {
+                CmsFeedVo cmsFeedVo = buildCmsFeedVo(feed);
+                voList.add(cmsFeedVo);
+            }
             //构建Page
             PaginationSupport<CmsFeedVo> page = new PaginationSupport<>(voList, count, request.getPageSize(), request.getStartItem());
             CmsFeedResponse cmsFeedResponse = new CmsFeedResponse();
@@ -183,8 +187,8 @@ public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
         vo.setTitle(feed.getTitle());
         vo.setTag(feed.getTag());
         vo.setFeedUrl(feed.getFeedUrl());
-        vo.setFrom(feed.getFrom());
-        vo.setComment(feed.getIsCommont());
+        vo.setFrom(feed.getSource());
+        vo.setComment(feed.getIsComment());
         vo.setDisplay(feed.getIsDisplay());
         List<String> imgList = new ArrayList<>();
         imgList.add(feed.getImage1Url());
@@ -201,8 +205,8 @@ public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
         cmsFeed.setTitle(vo.getTitle());
         cmsFeed.setTag(vo.getTag());
         cmsFeed.setFeedUrl(vo.getFeedUrl());
-        cmsFeed.setFrom(vo.getFrom());
-        cmsFeed.setIsCommont(vo.getComment());
+        cmsFeed.setSource(vo.getFrom());
+        cmsFeed.setIsComment(vo.getComment());
         cmsFeed.setIsDisplay(vo.getDisplay());
         cmsFeed.setImage1Url(vo.getImgList().get(0));
         cmsFeed.setImage2Url(vo.getImgList().get(1));
@@ -219,8 +223,16 @@ public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
             params.setDeleteFlag(0);//未删除
             List<CmsFeed> cmsFeedList = cmsFeedService.getByObj(params);
 
-            cmsFeedList.stream().filter(value -> !value.getId().equals(cmsFeed.getId())).forEach(value -> value.setIsDisplay(0));//过滤自己，其他置为不显示
-            cmsFeedService.update(cmsFeedList);//批量更新
+            if(CollectionUtils.isNotEmpty(cmsFeedList)){
+                List<CmsFeed> list = new ArrayList<>();
+                for (CmsFeed value : cmsFeedList) {
+                    if (!value.getId().equals(cmsFeed.getId())) {
+                        value.setIsDisplay(0);
+                        list.add(value);
+                    }
+                }
+                cmsFeedService.update(list);//批量更新
+            }
         }
 
         //根据是否包含主键确认调用方法
