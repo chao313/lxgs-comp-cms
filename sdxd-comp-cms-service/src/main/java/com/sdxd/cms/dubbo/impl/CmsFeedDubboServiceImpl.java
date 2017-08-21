@@ -101,11 +101,17 @@ public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
         try {
             CmsFeed cmsFeed = cmsFeedService.getById(request.getId());
 
-            CmsFeedResponse cmsFeedResponse = new CmsFeedResponse();
-            cmsFeedResponse.setRequestId(request.getRequestId());
-            cmsFeedResponse.setCmsFeedVo(buildCmsFeedVo(cmsFeed));
+            if(cmsFeed.getDeleteFlag() == 1){
+                response.setError(Constants.System.NO_REQUEST_MATCH);
+                response.setMsg(Constants.System.NO_REQUEST_MATCH_MSG);
+            }
+            else {
+                CmsFeedResponse cmsFeedResponse = new CmsFeedResponse();
+                cmsFeedResponse.setRequestId(request.getRequestId());
+                cmsFeedResponse.setCmsFeedVo(buildCmsFeedVo(cmsFeed));
 
-            response.setData(cmsFeedResponse);
+                response.setData(cmsFeedResponse);
+            }
         }
         catch (Exception e){
             LOGGER.error("queryCmsFeed", e);
