@@ -25,6 +25,7 @@ import javax.persistence.Table;
 @ToString(callSuper = true)
 @Table(name="T_CMS_FEED")
 public class CmsFeed extends BaseEntity {
+    private Integer template;
     private String title;
     private String feedUrl;
     private String image1Url;

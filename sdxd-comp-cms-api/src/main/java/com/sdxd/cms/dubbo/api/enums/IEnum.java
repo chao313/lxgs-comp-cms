@@ -1,14 +1,9 @@
-package com.sdxd.cms.dubbo.api.request;
-
-import com.sdxd.framework.dubbo.PageRequest;
-import lombok.Data;
-
-import java.util.List;
+package com.sdxd.cms.dubbo.api.enums;
 
 /**
  * *****************************************************************************
  * <p>
- * 功能名           ：com.sdxd.cms.dubbo.api.request
+ * 功能名           ：com.sdxd.cms.dubbo.api.enums
  * 系统名           ：
  * <p>
  * *****************************************************************************
@@ -16,10 +11,9 @@ import java.util.List;
  * <p>
  * Date        Name                    Reason for Change
  * ----------  ----------------------  -----------------------------------------
- * 2017/8/21    wenzhou.xu              Created
+ * 2017/8/22    wenzhou.xu              Created
  */
-@Data
-public class CmsFeedPageRequest extends PageRequest {
-    private List<Integer> templateList;
-    private Integer display;
+public interface IEnum {
+    Integer getCode();
+    String getDesc();
 }

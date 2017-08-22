@@ -29,7 +29,7 @@ public class CmsFeedServiceImpl extends BaseServiceImpl<CmsFeed> implements CmsF
     private CmsFeedDao cmsFeedDao;
 
     @Override
-    public List<CmsFeed> searchPage(Integer startIndex, Integer pageSize, Integer isDisplay) {
-        return cmsFeedDao.searchPage(startIndex, pageSize, isDisplay);
+    public List<CmsFeed> searchPage(List<Integer> templateList, Integer isDisplay, Integer startIndex, Integer pageSize) {
+        return cmsFeedDao.searchPage(templateList, isDisplay, startIndex, pageSize);
     }
 }

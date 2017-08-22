@@ -21,6 +21,7 @@ import java.util.List;
 @Data
 public class CmsFeedVo implements Serializable {
     private String id;
+    private Integer template;
     private String title;
     private String tag;
     private Integer display;

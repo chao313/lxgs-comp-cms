@@ -61,7 +61,8 @@ public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
             //查询总数
             Integer count = cmsFeedService.count(cmsFeed);
             //分页查询
-            List<CmsFeed> cmsFeedList = cmsFeedService.searchPage(request.getStartItem(), request.getPageSize(), request.getDisplay());
+            List<CmsFeed> cmsFeedList = cmsFeedService.searchPage(request.getTemplateList(),
+                    request.getDisplay(), request.getStartItem(), request.getPageSize());
             //重新封装
             List<CmsFeedVo> voList = new ArrayList<>();
             for (CmsFeed feed : cmsFeedList) {
@@ -75,8 +76,7 @@ public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
             cmsFeedResponse.setPage(page);
 
             response.setData(cmsFeedResponse);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             LOGGER.error("searchCmsFeedList", e);
             response.setError(Constants.System.SYSTEM_ERROR_CODE);
             response.setMsg(Constants.System.SYSTEM_ERROR_MSG);
@@ -101,19 +101,17 @@ public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
         try {
             CmsFeed cmsFeed = cmsFeedService.getById(request.getId());
 
-            if(cmsFeed.getDeleteFlag() == 1){
+            if (cmsFeed.getDeleteFlag() == 1) {
                 response.setError(Constants.System.NO_REQUEST_MATCH);
                 response.setMsg(Constants.System.NO_REQUEST_MATCH_MSG);
-            }
-            else {
+            } else {
                 CmsFeedResponse cmsFeedResponse = new CmsFeedResponse();
                 cmsFeedResponse.setRequestId(request.getRequestId());
                 cmsFeedResponse.setCmsFeedVo(buildCmsFeedVo(cmsFeed));
 
                 response.setData(cmsFeedResponse);
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             LOGGER.error("queryCmsFeed", e);
             response.setError(Constants.System.SYSTEM_ERROR_CODE);
             response.setMsg(Constants.System.SYSTEM_ERROR_MSG);
@@ -144,8 +142,7 @@ public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
             cmsFeedResponse.setSuccess(true);
 
             response.setData(cmsFeedResponse);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             LOGGER.error("updateCmsFeed", e);
             response.setError(Constants.System.SYSTEM_ERROR_CODE);
             response.setMsg(Constants.System.SYSTEM_ERROR_MSG);
@@ -177,8 +174,7 @@ public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
             cmsFeedResponse.setSuccess(true);
 
             response.setData(cmsFeedResponse);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             LOGGER.error("deleteCmsFeed", e);
             response.setError(Constants.System.SYSTEM_ERROR_CODE);
             response.setMsg(Constants.System.SYSTEM_ERROR_MSG);
@@ -190,6 +186,7 @@ public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
     private CmsFeedVo buildCmsFeedVo(CmsFeed feed) {
         CmsFeedVo vo = new CmsFeedVo();
         vo.setId(feed.getId());
+        vo.setTemplate(feed.getTemplate());
         vo.setTitle(feed.getTitle());
         vo.setTag(feed.getTag());
         vo.setFeedUrl(feed.getFeedUrl());
@@ -204,10 +201,10 @@ public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
         return vo;
     }
 
-    private CmsFeed buildCmsFeed(CmsFeedVo vo){
+    private CmsFeed buildCmsFeed(CmsFeedVo vo) {
         CmsFeed cmsFeed = new CmsFeed();
         cmsFeed.setId(vo.getId());
-
+        cmsFeed.setTemplate(vo.getTemplate());
         cmsFeed.setTitle(vo.getTitle());
         cmsFeed.setTag(vo.getTag());
         cmsFeed.setFeedUrl(vo.getFeedUrl());
@@ -221,15 +218,15 @@ public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
         return cmsFeed;
     }
 
-    private void saveCmsFeed(CmsFeed cmsFeed){
+    private void saveCmsFeed(CmsFeed cmsFeed) {
         //如果此Feed显示，则其他所有的素材置为不显示
-        if(cmsFeed.getIsDisplay() == 1){
+        if (cmsFeed.getIsDisplay() == 1) {
             CmsFeed params = new CmsFeed();
             params.setIsDisplay(1);//显示
             params.setDeleteFlag(0);//未删除
             List<CmsFeed> cmsFeedList = cmsFeedService.getByObj(params);
 
-            if(CollectionUtils.isNotEmpty(cmsFeedList)){
+            if (CollectionUtils.isNotEmpty(cmsFeedList)) {
                 List<CmsFeed> list = new ArrayList<>();
                 for (CmsFeed value : cmsFeedList) {
                     if (!value.getId().equals(cmsFeed.getId())) {
@@ -242,7 +239,7 @@ public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
         }
 
         //根据是否包含主键确认调用方法
-        if(StringUtils.isBlank(cmsFeed.getId()))
+        if (StringUtils.isBlank(cmsFeed.getId()))
             cmsFeedService.insert(cmsFeed);
         else
             cmsFeedService.update(cmsFeed);

@@ -21,7 +21,8 @@ import java.util.List;
  */
 public interface CmsFeedDao extends BaseDao<CmsFeed> {
 
-    List<CmsFeed> searchPage(@Param("startIndex") Integer startIndex,
-                             @Param("pageSize") Integer pageSize,
-                             @Param("isDisplay") Integer isDisplay);
+    List<CmsFeed> searchPage(@Param("templateList") List<Integer> templateList,
+                             @Param("isDisplay") Integer isDisplay,
+                             @Param("startIndex") Integer startIndex,
+                             @Param("pageSize") Integer pageSize);
 }
