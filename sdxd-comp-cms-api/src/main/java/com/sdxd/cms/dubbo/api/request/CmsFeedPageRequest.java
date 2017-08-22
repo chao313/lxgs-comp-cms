@@ -1,14 +1,12 @@
-package com.sdxd.cms.service;
+package com.sdxd.cms.dubbo.api.request;
 
-import com.sdxd.cms.entity.CmsFeed;
-import com.sdxd.framework.service.BaseService;
-
-import java.util.List;
+import com.sdxd.framework.dubbo.PageRequest;
+import lombok.Data;
 
 /**
  * *****************************************************************************
  * <p>
- * 功能名           ：com.sdxd.cms.service
+ * 功能名           ：com.sdxd.cms.dubbo.api.request
  * 系统名           ：
  * <p>
  * *****************************************************************************
@@ -16,9 +14,9 @@ import java.util.List;
  * <p>
  * Date        Name                    Reason for Change
  * ----------  ----------------------  -----------------------------------------
- * 2017/8/17    wenzhou.xu              Created
+ * 2017/8/21    wenzhou.xu              Created
  */
-public interface CmsFeedService extends BaseService<CmsFeed> {
-
-    List<CmsFeed> searchPage(Integer startIndex, Integer pageSize, Integer isDisplay);
+@Data
+public class CmsFeedPageRequest extends PageRequest {
+    private Integer display;
 }

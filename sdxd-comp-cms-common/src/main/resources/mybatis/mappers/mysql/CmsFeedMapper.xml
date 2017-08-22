@@ -9,6 +9,9 @@
         SELECT *
         FROM  t_cms_feed
         WHERE delete_flag = 0
+        <if test="isDisplay!=null">
+            AND is_display = #{isDisplay}
+        </if>
         ORDER BY create_time DESC
         <if test="startIndex!=null and pageSize!=null">
             limit #{startIndex},#{pageSize}

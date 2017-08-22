@@ -1,9 +1,9 @@
 package com.sdxd.cms.dubbo.api;
 
+import com.sdxd.cms.dubbo.api.request.CmsFeedPageRequest;
 import com.sdxd.cms.dubbo.api.request.CmsFeedRequest;
 import com.sdxd.cms.dubbo.api.response.CmsFeedResponse;
 import com.sdxd.framework.dubbo.DubboResponse;
-import com.sdxd.framework.dubbo.PageRequest;
 
 /**
  * *****************************************************************************
@@ -25,7 +25,7 @@ public interface CmsFeedDubboService {
      * @param request
      * @return
      */
-    DubboResponse<CmsFeedResponse> searchCmsFeedList(PageRequest request);
+    DubboResponse<CmsFeedResponse> searchCmsFeedList(CmsFeedPageRequest request);
 
     /**
      * 查询Feed素材明细

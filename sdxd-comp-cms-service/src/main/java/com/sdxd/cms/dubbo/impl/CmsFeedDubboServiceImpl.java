@@ -5,6 +5,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.sdxd.cms.dubbo.api.CmsFeedDubboService;
 import com.sdxd.cms.dubbo.api.pojo.CmsFeedVo;
+import com.sdxd.cms.dubbo.api.request.CmsFeedPageRequest;
 import com.sdxd.cms.dubbo.api.request.CmsFeedRequest;
 import com.sdxd.cms.dubbo.api.response.CmsFeedResponse;
 import com.sdxd.cms.entity.CmsFeed;
@@ -12,7 +13,6 @@ import com.sdxd.cms.service.CmsFeedService;
 import com.sdxd.framework.constant.Constants;
 import com.sdxd.framework.dto.PaginationSupport;
 import com.sdxd.framework.dubbo.DubboResponse;
-import com.sdxd.framework.dubbo.PageRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +49,7 @@ public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
      * @return
      */
     @Override
-    public DubboResponse<CmsFeedResponse> searchCmsFeedList(PageRequest request) {
+    public DubboResponse<CmsFeedResponse> searchCmsFeedList(CmsFeedPageRequest request) {
         LOGGER.debug("searchCmsFeedList,requestParam:{}", JSONObject.toJSONString(request));
         DubboResponse<CmsFeedResponse> response = new DubboResponse<>();
         response.setError(Constants.System.SERVER_SUCCESS);
@@ -61,7 +61,7 @@ public class CmsFeedDubboServiceImpl implements CmsFeedDubboService {
             //查询总数
             Integer count = cmsFeedService.count(cmsFeed);
             //分页查询
-            List<CmsFeed> cmsFeedList = cmsFeedService.searchPage(request.getStartItem(), request.getPageSize());
+            List<CmsFeed> cmsFeedList = cmsFeedService.searchPage(request.getStartItem(), request.getPageSize(), request.getDisplay());
             //重新封装
             List<CmsFeedVo> voList = new ArrayList<>();
             for (CmsFeed feed : cmsFeedList) {

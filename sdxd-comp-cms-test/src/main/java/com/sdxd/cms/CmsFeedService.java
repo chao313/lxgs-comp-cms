@@ -2,10 +2,10 @@ package com.sdxd.cms;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.sdxd.cms.dubbo.api.CmsFeedDubboService;
+import com.sdxd.cms.dubbo.api.request.CmsFeedPageRequest;
 import com.sdxd.cms.dubbo.api.request.CmsFeedRequest;
 import com.sdxd.cms.dubbo.api.response.CmsFeedResponse;
 import com.sdxd.framework.dubbo.DubboResponse;
-import com.sdxd.framework.dubbo.PageRequest;
 import org.springframework.stereotype.Service;
 
 /**
@@ -32,7 +32,7 @@ public class CmsFeedService {
      * @param request
      * @return
      */
-    public DubboResponse<CmsFeedResponse> searchCmsFeedList(PageRequest request){
+    public DubboResponse<CmsFeedResponse> searchCmsFeedList(CmsFeedPageRequest request){
         return cmsFeedDubboService.searchCmsFeedList(request);
     }
 

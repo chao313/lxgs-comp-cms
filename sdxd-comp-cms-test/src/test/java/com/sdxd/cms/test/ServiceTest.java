@@ -112,11 +112,12 @@ public class ServiceTest extends BaseTest{
 
 	@Test
 	public void test_searchCmsFeedList(){
-		PageRequest request = new PageRequest();
+		CmsFeedPageRequest request = new CmsFeedPageRequest();
 		request.setSystemId("test");
 		request.setRequestId("test");
 		request.setCurrentPage(1);
 		request.setPageSize(10);
+		request.setDisplay(1);
 
 		DubboResponse<CmsFeedResponse> response = cmsFeedService.searchCmsFeedList(request);
 	}
