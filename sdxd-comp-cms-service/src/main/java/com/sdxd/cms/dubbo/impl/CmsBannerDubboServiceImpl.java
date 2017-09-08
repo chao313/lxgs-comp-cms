@@ -1,22 +1,10 @@
 package com.sdxd.cms.dubbo.impl;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.dubbo.common.utils.CollectionUtils;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sdxd.cms.dubbo.api.CmsBannerDubboService;
-import com.sdxd.cms.dubbo.api.enums.CmsBannerType;
 import com.sdxd.cms.dubbo.api.pojo.CmsBannerVo;
 import com.sdxd.cms.dubbo.api.request.CmsBannerRequest;
 import com.sdxd.cms.dubbo.api.request.DeleteCmsBannerRequest;
@@ -29,6 +17,15 @@ import com.sdxd.common.redis.template.RedisClientTemplate;
 import com.sdxd.common.utils.BeanUtils;
 import com.sdxd.framework.constant.Constants;
 import com.sdxd.framework.dubbo.DubboResponse;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 @Service(interfaceName = "com.sdxd.cms.dubbo.api.CmsBannerDubboService", validation = "true", version = "1.0.0", timeout = 30000)
 public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 	
@@ -62,7 +59,7 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 			cmsBannerService.insert(cmsBanner);
 			res.setSuccess(true);
 
-			redisClientTemplate.del(REDIS_KEY_LIST+":"+request.getType());
+			clearBannerValue(request.getType());
 		} catch (Exception e) {
 			LOGGER.error("addCmsBanner error",e);
 			res.setSuccess(false);
@@ -92,7 +89,7 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 			cmsBannerService.update(cmsBanner);
 			res.setSuccess(true);
 
-			redisClientTemplate.del(REDIS_KEY_LIST+":"+request.getType());
+			clearBannerValue(request.getType());
 		} catch (Exception e) {
 			LOGGER.error("updataCmsBanner error",e);
 			res.setSuccess(false);
@@ -123,7 +120,7 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 			cmsBanner.setDeleteFlag(1);
 			cmsBannerService.update(cmsBanner);
 			res.setSuccess(true);
-			redisClientTemplate.del(REDIS_KEY_LIST+":" + cmsBanner.getType());
+			clearBannerValue(cmsBanner.getType());
 		} catch (Exception e) {
 			LOGGER.error("deleteCmsBanner error",e);
 			res.setSuccess(false);
@@ -149,7 +146,7 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 		
 		List<CmsBannerVo> voLists = null;
 		try {
-			String bannersInRedis = redisClientTemplate.get(REDIS_KEY_LIST+":"+request.getType());
+			String bannersInRedis = getBannerValue(request.getType());
 			if(!StringUtils.isEmpty(bannersInRedis)) {
 				voLists = JSON.parseArray(bannersInRedis, CmsBannerVo.class);
             }
@@ -186,8 +183,7 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 					});
 				}
 				LOGGER.info("Put banner list into redis.");
-				redisClientTemplate.set(REDIS_KEY_LIST+":"+request.getType(), JSON.toJSONString(voLists));
-				redisClientTemplate.expire(REDIS_KEY_LIST+":"+request.getType(), 1 * 60 * 60);
+				refreshBannerValue(request.getType(), JSON.toJSONString(voLists));
 			}else {
 				LOGGER.info("Find banner list in redis.");
 			}
@@ -202,4 +198,20 @@ public class CmsBannerDubboServiceImpl implements CmsBannerDubboService {
 		return response;
 	}
 
+	private String getBannerValue(String bannerType) {
+		String type = StringUtils.isBlank(bannerType) ? "ALL" : bannerType;
+		return redisClientTemplate.get(String.format("%s:%s", REDIS_KEY_LIST, type));
+	}
+
+	private void refreshBannerValue(String bannerType, String value) {
+		String type = StringUtils.isBlank(bannerType) ? "ALL" : bannerType;
+		String key = String.format("%s:%s", REDIS_KEY_LIST, type);
+		redisClientTemplate.set(key, value);
+		redisClientTemplate.expire(key, 60 * 60);
+	}
+
+	private void clearBannerValue(String bannerType) {
+		redisClientTemplate.del(String.format("%s:%s", REDIS_KEY_LIST, bannerType));
+		redisClientTemplate.del(String.format("%s:%s", REDIS_KEY_LIST, "ALL"));
+	}
 }
