@@ -20,5 +20,7 @@ public class OtherChannelDetailRequest extends BaseRequest {
     private Integer channelIndex ; //平台位置
     private String channelType ;//平台类型
     private Integer channelShow ;//平台是否显示 1：显示 0 ：不显示
+    private Integer channelShowWay;//渠道显示的方式
+    private String channelListLogo;//列表图片来源
 
 }
