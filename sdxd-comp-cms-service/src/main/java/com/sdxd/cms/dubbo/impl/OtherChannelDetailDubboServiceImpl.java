@@ -32,7 +32,7 @@ import java.util.List;
  * @Date 2017/5/26
  * 盛大小贷
  */
-@Service(interfaceName = "com.sdxd.cms.dubbo.api.OtherChannelDetailDubboService", validation = "true", version = "1.0.1", timeout = 30000)
+@Service(interfaceName = "com.sdxd.cms.dubbo.api.OtherChannelDetailDubboService", validation = "true", version = "1.0.0", timeout = 30000)
 public class OtherChannelDetailDubboServiceImpl implements OtherChannelDetailDubboService {
 
     private Logger LOGGER = LoggerFactory.getLogger(OtherChannelDetailDubboServiceImpl.class);
