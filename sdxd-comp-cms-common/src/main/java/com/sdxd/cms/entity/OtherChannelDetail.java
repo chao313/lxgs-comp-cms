@@ -25,6 +25,6 @@ public class OtherChannelDetail extends BaseEntity {
     private String channelType;//平台类型
     private Integer deleteFlag;//删除标志: 0未删除，1已删除
     private Integer channelShow;//是否显示  1：显示 0：不显示
-    private Integer channelShowType;//渠道显示的方式
+    private String channelShowType;//渠道显示的方式
     private String channelImage;//列表图片来源
 }

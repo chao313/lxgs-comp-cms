@@ -22,7 +22,7 @@ import java.util.function.BiConsumer;
 @Service
 public class OtherChannelService {
 
-    @Reference(version = "1.0.0")
+    @Reference(version = "1.0.1")
     private OtherChannelDetailDubboService otherChannelDetailDubboService;
 
     public DubboResponse<OtherChannelDetailResponse> save(OtherChannelDetailRequest request) {

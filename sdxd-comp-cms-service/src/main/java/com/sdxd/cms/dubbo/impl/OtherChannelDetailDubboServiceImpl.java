@@ -1,13 +1,10 @@
 package com.sdxd.cms.dubbo.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.fasterxml.jackson.databind.deser.Deserializers;
 import com.sdxd.cms.dubbo.api.OtherChannelDetailDubboService;
-import com.sdxd.cms.dubbo.api.pojo.AgreementTemplateVo;
 import com.sdxd.cms.dubbo.api.pojo.OtherChannelDetailVo;
 import com.sdxd.cms.dubbo.api.request.*;
 import com.sdxd.cms.dubbo.api.response.OtherChannelDetailResponse;
-import com.sdxd.cms.entity.AgreementTemplateManage;
 import com.sdxd.cms.entity.OtherChannelDetail;
 import com.sdxd.cms.service.OtherChannelDetailService;
 import com.sdxd.common.utils.BeanUtils;
@@ -16,12 +13,10 @@ import com.sdxd.framework.constant.Constants;
 import com.sdxd.framework.dto.PaginationSupport;
 import com.sdxd.framework.dubbo.BaseRequest;
 import com.sdxd.framework.dubbo.DubboResponse;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +26,7 @@ import java.util.List;
  * @Date 2017/5/26
  * 盛大小贷
  */
-@Service(interfaceName = "com.sdxd.cms.dubbo.api.OtherChannelDetailDubboService", validation = "true", version = "1.0.0", timeout = 30000)
+@Service(interfaceName = "com.sdxd.cms.dubbo.api.OtherChannelDetailDubboService", validation = "true", version = "1.0.1", timeout = 30000)
 public class OtherChannelDetailDubboServiceImpl implements OtherChannelDetailDubboService {
 
     private Logger LOGGER = LoggerFactory.getLogger(OtherChannelDetailDubboServiceImpl.class);

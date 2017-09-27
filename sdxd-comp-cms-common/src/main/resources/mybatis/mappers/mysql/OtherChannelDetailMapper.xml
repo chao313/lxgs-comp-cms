@@ -14,7 +14,7 @@
         <result column="channel_index" property="channelIndex" jdbcType="TINYINT"/>
         <result column="channel_type" property="channelType" jdbcType="VARCHAR"/>
         <result column="channel_show" property="channelShow" jdbcType="TINYINT"/>
-        <result column="channel_show_type" property="channelShowType" jdbcType="TINYINT"/>
+        <result column="channel_show_type" property="channelShowType" jdbcType="VARCHAR"/>
         <result column="channel_image" property="channelImage" jdbcType="VARCHAR"/>
     </resultMap>
 
@@ -31,7 +31,7 @@
         (#{id,jdbcType=VARCHAR},#{channelLogo,jdbcType=VARCHAR}, #{channelName,jdbcType=VARCHAR}, #{channelSlogn,jdbcType=VARCHAR},
         #{channelUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},
         #{deleteFlag,jdbcType=TINYINT},#{channelIndex,jdbcType=TINYINT},#{channelType,jdbcType=VARCHAR},#{channelShow,jdbcType=TINYINT},
-        #{channelShowType,jdbcType=TINYINT},#{channelImage,jdbcType=VARCHAR});
+        #{channelShowType,jdbcType=VARCHAR},#{channelImage,jdbcType=VARCHAR});
     </insert>
 
     <!-- 删除平台信息 -->
@@ -50,7 +50,7 @@
             `channel_index` =   #{channelIndex,jdbcType=TINYINT},
             `channel_type` = #{channelType,jdbcType=VARCHAR},
             `channel_show` =   #{channelShow,jdbcType=TINYINT},
-            `channel_show_type` =   #{channelShowType,jdbcType=TINYINT},
+            `channel_show_type` =   #{channelShowType,jdbcType=VARCHAR},
             `channel_image` = #{channelImage,jdbcType=VARCHAR}
          where id = #{id,jdbcType=VARCHAR}
     </update>

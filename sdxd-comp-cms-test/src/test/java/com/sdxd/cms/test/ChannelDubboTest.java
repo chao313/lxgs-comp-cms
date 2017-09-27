@@ -40,7 +40,7 @@ public class ChannelDubboTest extends BaseTest {
         request.setChannelSlogn("方便22");
         request.setChannelType("h5");
         request.setChannelImage("logo");
-        request.setChannelShowType(0);
+        request.setChannelShowType("0");
         DubboResponse<OtherChannelDetailResponse> c = otherChannelService.save(request);
         System.out.println(c);
     }
@@ -58,7 +58,7 @@ public class ChannelDubboTest extends BaseTest {
         request.setChannelType("h5");
         request.setId("2017070311092030807");
         request.setChannelShow(0);
-        request.setChannelShowType(2);
+        request.setChannelShowType("1");
         request.setChannelImage("logo");
         DubboResponse<OtherChannelDetailResponse> c = otherChannelService.update(request);
         System.out.println(c);
@@ -67,7 +67,7 @@ public class ChannelDubboTest extends BaseTest {
     @Test
     public void updateDeleteFlag() {
         DeleteOtherChannelDetailRequest request = new DeleteOtherChannelDetailRequest();
-        request.setId("2017070310590040746");
+        request.setId("2017070310533132512");
         request.setRequestId(BillNoUtils.GenerateBillNo());
         request.setDeleteFlag(1);
         DubboResponse<OtherChannelDetailResponse> response = otherChannelService.updateDeleteFlag(request);
