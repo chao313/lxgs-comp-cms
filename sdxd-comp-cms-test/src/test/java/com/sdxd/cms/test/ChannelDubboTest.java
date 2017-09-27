@@ -39,8 +39,8 @@ public class ChannelDubboTest extends BaseTest {
         request.setChannelLogo("http://wwww/baodu.com.cn");
         request.setChannelSlogn("方便22");
         request.setChannelType("h5");
-        request.setChannelListLogo("logo");
-        request.setChannelShowWay(0);
+        request.setChannelImage("logo");
+        request.setChannelShowType(0);
         DubboResponse<OtherChannelDetailResponse> c = otherChannelService.save(request);
         System.out.println(c);
     }
@@ -58,8 +58,8 @@ public class ChannelDubboTest extends BaseTest {
         request.setChannelType("h5");
         request.setId("2017070311092030807");
         request.setChannelShow(0);
-        request.setChannelShowWay(2);
-        request.setChannelListLogo("logo");
+        request.setChannelShowType(2);
+        request.setChannelImage("logo");
         DubboResponse<OtherChannelDetailResponse> c = otherChannelService.update(request);
         System.out.println(c);
     }

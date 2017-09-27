@@ -19,7 +19,6 @@ import com.sdxd.framework.dubbo.DubboResponse;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -56,8 +55,8 @@ public class OtherChannelDetailDubboServiceImpl implements OtherChannelDetailDub
         detail.setChannelType(request.getChannelType().toUpperCase());
         detail.setId(BillNoUtils.GenerateBillNo());
         detail.setChannelIndex(request.getChannelIndex());
-        detail.setChannelShowWay(request.getChannelShowWay());
-        detail.setChannelListLogo(request.getChannelListLogo());
+        detail.setChannelShowType(request.getChannelShowType());
+        detail.setChannelImage(request.getChannelImage());
         OtherChannelDetail offStatus = otherChannelDetailService.offStatus();
         detail.setChannelShow(offStatus == null ? 1 : offStatus.getChannelShow());
         try {
@@ -109,8 +108,8 @@ public class OtherChannelDetailDubboServiceImpl implements OtherChannelDetailDub
         detail.setChannelSlogn(request.getChannelSlogn());
         detail.setChannelUrl(request.getChannelUrl());
         detail.setChannelType(request.getChannelType());
-        detail.setChannelShowWay(request.getChannelShowWay());
-        detail.setChannelListLogo(request.getChannelListLogo());
+        detail.setChannelShowType(request.getChannelShowType());
+        detail.setChannelImage(request.getChannelImage());
         detail.setId(request.getId());
         detail.setChannelIndex(request.getChannelIndex());
         OtherChannelDetail offStatus = otherChannelDetailService.offStatus();

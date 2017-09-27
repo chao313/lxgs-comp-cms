@@ -14,24 +14,24 @@
         <result column="channel_index" property="channelIndex" jdbcType="TINYINT"/>
         <result column="channel_type" property="channelType" jdbcType="VARCHAR"/>
         <result column="channel_show" property="channelShow" jdbcType="TINYINT"/>
-        <result column="channel_show_way" property="channelShowWay" jdbcType="TINYINT"/>
-        <result column="channel_list_logo" property="channelListLogo" jdbcType="VARCHAR"/>
+        <result column="channel_show_type" property="channelShowType" jdbcType="TINYINT"/>
+        <result column="channel_image" property="channelImage" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, channel_logo, channel_name, channel_slogn, channel_url, create_time, update_time, delete_flag,channel_index,channel_type,channel_show,channel_show_way,channel_list_logo
+        id, channel_logo, channel_name, channel_slogn, channel_url, create_time, update_time, delete_flag,channel_index,channel_type,channel_show,channel_show_type,channel_image
     </sql>
 
     <!-- 创建平台信息 -->
     <insert id="saveOtherChannelDetail" parameterType="com.sdxd.cms.entity.OtherChannelDetail">
         INSERT  INTO
           `t_other_channel_detail` (`id`,`channel_logo`,`channel_name`,`channel_slogn`,`channel_url`,`create_time`,`update_time`,
-          `delete_flag`,`channel_index`,`channel_type`,`channel_show`,`channel_show_way`,`channel_list_logo`)
+          `delete_flag`,`channel_index`,`channel_type`,`channel_show`,`channel_show_type`,`channel_image`)
         VALUES
         (#{id,jdbcType=VARCHAR},#{channelLogo,jdbcType=VARCHAR}, #{channelName,jdbcType=VARCHAR}, #{channelSlogn,jdbcType=VARCHAR},
         #{channelUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},
         #{deleteFlag,jdbcType=TINYINT},#{channelIndex,jdbcType=TINYINT},#{channelType,jdbcType=VARCHAR},#{channelShow,jdbcType=TINYINT},
-        #{channelShowWay,jdbcType=TINYINT},#{channelListLogo,jdbcType=VARCHAR});
+        #{channelShowType,jdbcType=TINYINT},#{channelImage,jdbcType=VARCHAR});
     </insert>
 
     <!-- 删除平台信息 -->
@@ -50,8 +50,8 @@
             `channel_index` =   #{channelIndex,jdbcType=TINYINT},
             `channel_type` = #{channelType,jdbcType=VARCHAR},
             `channel_show` =   #{channelShow,jdbcType=TINYINT},
-            `channel_show_way` =   #{channelShowWay,jdbcType=TINYINT},
-            `channel_list_logo` = #{channelListLogo,jdbcType=VARCHAR}
+            `channel_show_type` =   #{channelShowType,jdbcType=TINYINT},
+            `channel_image` = #{channelImage,jdbcType=VARCHAR}
          where id = #{id,jdbcType=VARCHAR}
     </update>
 
