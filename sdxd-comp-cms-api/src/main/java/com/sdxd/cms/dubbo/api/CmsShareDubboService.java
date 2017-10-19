@@ -12,4 +12,7 @@ public interface CmsShareDubboService {
 	DubboResponse<CmsShareResponse> saveCmsShare(CmsShareUpdateRequest request);
 
 	DubboResponse<CmsShareResponse> updateCmsShare(CmsShareUpdateRequest request);
+
+	DubboResponse<CmsShareResponse> deleteCmsShare(CmsShareRequest request);
+
 }

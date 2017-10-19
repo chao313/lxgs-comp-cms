@@ -84,10 +84,39 @@ public class CmsShareDubboServiceImpl implements CmsShareDubboService {
 
         String id = request.getId();
         if(id!=null && !id.equals("")){
-            CmsShare cmsShare = cmsShareService.getById(id);
 
+            CmsShareVo cmsShareVo = request.getCmsShareVo();
+
+            CmsShare cmsShare = new CmsShare();
+            cmsShare.setId(id);
+            cmsShare.setTitle(cmsShareVo.getTitle());
+            cmsShare.setContent(cmsShareVo.getContent());
+            cmsShare.setDescription(cmsShareVo.getDescription());
+            cmsShare.setImageCode(cmsShareVo.getImageCode());
+            cmsShare.setImageUrl(cmsShareVo.getImageUrl());
+            cmsShare.setLink(cmsShareVo.getLink());
+            cmsShare.setDeleteFlag(0);
+            cmsShareService.update(cmsShare);
+
+        } else {
+            response.setError(Constants.System.PARAMS_INVALID);
+            response.setStatus(Constants.System.FAIL);
         }
-        return null;
+
+        return response;
+    }
+
+    @Override
+    public DubboResponse<CmsShareResponse> deleteCmsShare(CmsShareRequest request) {
+        DubboResponse<CmsShareResponse> response = new DubboResponse<CmsShareResponse>();
+        response.setError(Constants.System.SERVER_SUCCESS);
+        response.setStatus(Constants.System.OK);
+
+        String id = request.getId();
+        CmsShare cmsShare = cmsShareService.getById(id);
+        cmsShare.setDeleteFlag(1);  //删除
+
+        return response;
     }
 
 }
