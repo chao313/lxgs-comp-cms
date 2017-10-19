@@ -27,24 +27,26 @@ import java.util.logging.Logger;
 public class ChannelDubboTest extends BaseTest {
 
     @Resource
-    private OtherChannelService otherChannelService ;
+    private OtherChannelService otherChannelService;
 
     @Test
-    public void create(){
+    public void create() {
         OtherChannelDetailRequest request = new OtherChannelDetailRequest();
         request.setRequestId(BillNoUtils.GenerateBillNo());
-        request.setChannelUrl("http://wwww.baidu.com1");
-        request.setChannelName("芝麻花呗2");
+        request.setChannelUrl("http://wwww.baidu.com");
+        request.setChannelName("芝麻花呗222222");
         request.setChannelIndex(2);
         request.setChannelLogo("http://wwww/baodu.com.cn");
         request.setChannelSlogn("方便22");
         request.setChannelType("h5");
+        request.setChannelImage("logo");
+        request.setChannelShowType("0");
         DubboResponse<OtherChannelDetailResponse> c = otherChannelService.save(request);
         System.out.println(c);
     }
 
     @Test
-    public void update(){
+    public void update() {
         UpdateOtherChannelDetailRequest request = new UpdateOtherChannelDetailRequest();
         request.setRequestId(BillNoUtils.GenerateBillNo());
         request.setChannelUrl("http://wwww.baidu.com");
@@ -54,16 +56,18 @@ public class ChannelDubboTest extends BaseTest {
         request.setChannelLogo("http://wwww/baodu.com");
         request.setChannelSlogn("我问问");
         request.setChannelType("h5");
-        request.setId("2017060214204944200");
+        request.setId("2017070311092030807");
         request.setChannelShow(0);
+        request.setChannelShowType("1");
+        request.setChannelImage("logo");
         DubboResponse<OtherChannelDetailResponse> c = otherChannelService.update(request);
         System.out.println(c);
     }
 
     @Test
-    public void updateDeleteFlag(){
+    public void updateDeleteFlag() {
         DeleteOtherChannelDetailRequest request = new DeleteOtherChannelDetailRequest();
-        request.setId("2017052618192156502");
+        request.setId("2017070310533132512");
         request.setRequestId(BillNoUtils.GenerateBillNo());
         request.setDeleteFlag(1);
         DubboResponse<OtherChannelDetailResponse> response = otherChannelService.updateDeleteFlag(request);
@@ -72,22 +76,16 @@ public class ChannelDubboTest extends BaseTest {
 
 
     @Test
-    public void query(){
+    public void query() {
         QueryAllOtherChannelsRequest request = new QueryAllOtherChannelsRequest();
         request.setRequestId(BillNoUtils.GenerateBillNo());
         request.setChannelType("h5");
         DubboResponse<List<OtherChannelDetailVo>> response = otherChannelService.queryAll(request);
-//        DubboResponse<Integer> c = otherChannelService.queryCount(request);
-//
-//        QueryOtherChannelDetailRequest request1 = new QueryOtherChannelDetailRequest();
-//        request1.setRequestId(BillNoUtils.GenerateBillNo());
-//        DubboResponse<PaginationSupport<OtherChannelDetailVo>> b = otherChannelService.query(request1);
-
         System.out.println(response);
     }
 
     @Test
-    public void onOff(){
+    public void onOff() {
         OnOffOtherChannelRequest request = new OnOffOtherChannelRequest();
         request.setOnOff(0);
         request.setRequestId(BillNoUtils.GenerateBillNo());
@@ -97,7 +95,7 @@ public class ChannelDubboTest extends BaseTest {
 
 
     @Test
-    public void offStatus(){
+    public void offStatus() {
         BaseRequest request = new BaseRequest();
         request.setRequestId(BillNoUtils.GenerateBillNo());
         DubboResponse<Integer> response = otherChannelService.offStartus(request);
