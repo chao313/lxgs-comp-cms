@@ -23,47 +23,48 @@ import java.util.function.BiConsumer;
 public class OtherChannelService {
 
     @Reference(version = "1.0.0")
-    private OtherChannelDetailDubboService otherChannelDetailDubboService  ;
+    private OtherChannelDetailDubboService otherChannelDetailDubboService;
 
-    public DubboResponse<OtherChannelDetailResponse> save(OtherChannelDetailRequest request){
+    public DubboResponse<OtherChannelDetailResponse> save(OtherChannelDetailRequest request) {
         DubboResponse<OtherChannelDetailResponse> response = otherChannelDetailDubboService.save(request);
-        return response ;
+        return response;
     }
 
-    public DubboResponse<OtherChannelDetailResponse> update(UpdateOtherChannelDetailRequest request){
+    public DubboResponse<OtherChannelDetailResponse> update(UpdateOtherChannelDetailRequest request) {
         DubboResponse<OtherChannelDetailResponse> response = otherChannelDetailDubboService.update(request);
-        return  response;
+        return response;
     }
 
-    public DubboResponse<OtherChannelDetailResponse> updateDeleteFlag(DeleteOtherChannelDetailRequest request){
-        DubboResponse<OtherChannelDetailResponse> response =  otherChannelDetailDubboService.updateDeleteFlag(request);
-        return response ;
+    public DubboResponse<OtherChannelDetailResponse> updateDeleteFlag(DeleteOtherChannelDetailRequest request) {
+        DubboResponse<OtherChannelDetailResponse> response = otherChannelDetailDubboService.updateDeleteFlag(request);
+        return response;
     }
+
     //查询总数
-    public DubboResponse<Integer> queryCount(BaseRequest request){
+    public DubboResponse<Integer> queryCount(BaseRequest request) {
         DubboResponse<Integer> response = otherChannelDetailDubboService.queryCount(request);
-        return response ;
+        return response;
     }
 
     //查询所有
-    public DubboResponse<List<OtherChannelDetailVo>> queryAll(QueryAllOtherChannelsRequest request){
+    public DubboResponse<List<OtherChannelDetailVo>> queryAll(QueryAllOtherChannelsRequest request) {
         DubboResponse<List<OtherChannelDetailVo>> response = otherChannelDetailDubboService.queryAll(request);
-        return response ;
+        return response;
     }
 
     //分页查询
-    public DubboResponse<PaginationSupport<OtherChannelDetailVo>> query(QueryOtherChannelDetailRequest request){
+    public DubboResponse<PaginationSupport<OtherChannelDetailVo>> query(QueryOtherChannelDetailRequest request) {
         DubboResponse<PaginationSupport<OtherChannelDetailVo>> response = otherChannelDetailDubboService.query(request);
-        return response ;
+        return response;
     }
 
-    public DubboResponse<Boolean> onOff(OnOffOtherChannelRequest request){
+    public DubboResponse<Boolean> onOff(OnOffOtherChannelRequest request) {
         DubboResponse<Boolean> response = otherChannelDetailDubboService.onOff(request);
-        return  response;
+        return response;
     }
 
-    public DubboResponse<Integer> offStartus(BaseRequest request){
+    public DubboResponse<Integer> offStartus(BaseRequest request) {
         DubboResponse<Integer> response = otherChannelDetailDubboService.offStatus(request);
-        return  response;
+        return response;
     }
 }
