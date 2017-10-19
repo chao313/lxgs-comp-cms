@@ -15,9 +15,9 @@ import lombok.ToString;
 public class CmsShare extends BaseEntity{
 	private String title;
 	private String content;
-	private String imageCode;//图片code
-	private String imageUrl;//图片地址
-	private String link;//连接地址
+	private String imageCode;	//图片code
+	private String imageUrl;	//图片地址
+	private String link;		//连接地址
 	private String description;
 	private Integer deleteFlag;
 

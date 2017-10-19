@@ -4,12 +4,14 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.sdxd.cms.dubbo.api.CmsShareDubboService;
 import com.sdxd.cms.dubbo.api.pojo.CmsShareVo;
 import com.sdxd.cms.dubbo.api.request.CmsShareRequest;
+import com.sdxd.cms.dubbo.api.request.CmsShareUpdateRequest;
 import com.sdxd.cms.dubbo.api.response.CmsShareResponse;
 import com.sdxd.cms.entity.CmsShare;
 import com.sdxd.cms.service.CmsShareService;
 import com.sdxd.framework.constant.Constants;
 import com.sdxd.framework.dubbo.DubboResponse;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,5 +52,42 @@ public class CmsShareDubboServiceImpl implements CmsShareDubboService {
 
 		return response;
 	}
+
+	@Override
+	public DubboResponse<CmsShareResponse> saveCmsShare(CmsShareUpdateRequest request) {
+
+		DubboResponse<CmsShareResponse> response = new DubboResponse<CmsShareResponse>();
+		response.setError(Constants.System.SERVER_SUCCESS);
+		response.setStatus(Constants.System.OK);
+
+		CmsShareVo cmsShareVo = request.getCmsShareVo();
+
+		CmsShare cmsShare = new CmsShare();
+		cmsShare.setTitle(cmsShareVo.getTitle());
+		cmsShare.setContent(cmsShareVo.getContent());
+		cmsShare.setDescription(cmsShareVo.getDescription());
+		cmsShare.setImageCode(cmsShareVo.getImageCode());
+		cmsShare.setImageUrl(cmsShareVo.getImageUrl());
+		cmsShare.setLink(cmsShareVo.getLink());
+		cmsShare.setDeleteFlag(0);
+		cmsShareService.insert(cmsShare);
+
+		return response;
+	}
+
+    @Override
+    public DubboResponse<CmsShareResponse> updateCmsShare(CmsShareUpdateRequest request) {
+
+        DubboResponse<CmsShareResponse> response = new DubboResponse<CmsShareResponse>();
+        response.setError(Constants.System.SERVER_SUCCESS);
+        response.setStatus(Constants.System.OK);
+
+        String id = request.getId();
+        if(id!=null && !id.equals("")){
+            CmsShare cmsShare = cmsShareService.getById(id);
+
+        }
+        return null;
+    }
 
 }
