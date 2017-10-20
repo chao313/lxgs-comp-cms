@@ -10,10 +10,6 @@ import com.sdxd.framework.dubbo.DubboResponse;
 
 public interface CmsSuspensionSettingDubboService {
 
-	DubboResponse<CmsSuspensionSettingListResponse> findAll(CmsSuspensionSettingRequest request);
-
-	DubboResponse<CmsSuspensionSettingResponse> findById(CmsSuspensionSettingRequest request);
-
 	DubboResponse<CmsSuspensionSettingResponse> saveCmsSuspensionSetting(CmsSuspensionSettingRequest request);
 
 	DubboResponse<CmsSuspensionSettingResponse> updateCmsSuspensionSetting(CmsSuspensionSettingRequest request);

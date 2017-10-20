@@ -4,7 +4,6 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.sdxd.cms.dubbo.api.CmsSuspensionSettingDubboService;
 import com.sdxd.cms.dubbo.api.pojo.CmsSuspensionSettingVo;
 import com.sdxd.cms.dubbo.api.request.CmsSuspensionSettingRequest;
-import com.sdxd.cms.dubbo.api.response.CmsSuspensionSettingListResponse;
 import com.sdxd.cms.dubbo.api.response.CmsSuspensionSettingResponse;
 import com.sdxd.cms.entity.CmsSuspensionSetting;
 import com.sdxd.cms.service.CmsSuspensionSettingService;
@@ -14,8 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service(interfaceName = "com.sdxd.cms.dubbo.api.CmsSuspensionSettingDubboService", validation = "true", version = "1.0.0", timeout = 30000)
 public class CmsSuspensionSettingDubboServiceImpl implements CmsSuspensionSettingDubboService {
@@ -24,52 +21,6 @@ public class CmsSuspensionSettingDubboServiceImpl implements CmsSuspensionSettin
 
     @Resource
     private CmsSuspensionSettingService cmsSuspensionSettingService;
-
-    @Override
-    public DubboResponse<CmsSuspensionSettingListResponse> findAll(CmsSuspensionSettingRequest request) {
-        DubboResponse<CmsSuspensionSettingListResponse> response = new DubboResponse<>();
-        response.setError(Constants.System.SERVER_SUCCESS);
-        response.setStatus(Constants.System.OK);
-        List<CmsSuspensionSetting> cmsSuspensionSettingList = cmsSuspensionSettingService.getAll();
-        List<CmsSuspensionSettingVo> cmsSuspensionSettingVoList = new ArrayList<>();
-        for (CmsSuspensionSetting setting : cmsSuspensionSettingList) {
-            CmsSuspensionSettingVo vo = new CmsSuspensionSettingVo();
-            vo.setId(setting.getId());
-            vo.setActivityName(setting.getActivityName());
-            vo.setImageUrl(setting.getImageUrl());
-            vo.setRedirectUrl(setting.getRedirectUrl());
-            vo.setCreateTime(setting.getCreateTime());
-            vo.setUpdateTime(setting.getUpdateTime());
-            cmsSuspensionSettingVoList.add(vo);
-        }
-        CmsSuspensionSettingListResponse cmsSuspensionSettingListResponse = new CmsSuspensionSettingListResponse();
-        cmsSuspensionSettingListResponse.setCmsSuspensionSettingVoList(cmsSuspensionSettingVoList);
-        response.setData(cmsSuspensionSettingListResponse);
-        return response;
-    }
-
-    @Override
-    public DubboResponse<CmsSuspensionSettingResponse> findById(CmsSuspensionSettingRequest request) {
-        DubboResponse<CmsSuspensionSettingResponse> response = new DubboResponse<>();
-        response.setError(Constants.System.SERVER_SUCCESS);
-        response.setStatus(Constants.System.OK);
-
-        String id = request.getId();
-        CmsSuspensionSetting cmsSuspensionSetting = cmsSuspensionSettingService.getById(id);
-
-        CmsSuspensionSettingVo vo = request.getCmsSuspensionSettingVo();
-        vo.setId(cmsSuspensionSetting.getId());
-        vo.setActivityName(cmsSuspensionSetting.getActivityName());
-        vo.setImageUrl(cmsSuspensionSetting.getImageUrl());
-        vo.setRedirectUrl(cmsSuspensionSetting.getRedirectUrl());
-        vo.setCreateTime(cmsSuspensionSetting.getCreateTime());
-        vo.setUpdateTime(cmsSuspensionSetting.getUpdateTime());
-        CmsSuspensionSettingResponse cmsSuspensionSettingResponse = new CmsSuspensionSettingResponse();
-        cmsSuspensionSettingResponse.setCmsSuspensionSettingVo(vo);
-        response.setData(cmsSuspensionSettingResponse);
-
-        return response;
-    }
 
     @Override
     public DubboResponse<CmsSuspensionSettingResponse> saveCmsSuspensionSetting(CmsSuspensionSettingRequest request) {
