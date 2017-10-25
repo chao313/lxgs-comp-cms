@@ -1,5 +1,6 @@
 package com.sdxd.cms.dubbo.impl;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.sdxd.cms.dubbo.api.CmsShareDubboService;
 import com.sdxd.cms.dubbo.api.pojo.CmsShareVo;
@@ -9,10 +10,14 @@ import com.sdxd.cms.dubbo.api.request.CmsShareUpdateRequest;
 import com.sdxd.cms.dubbo.api.response.CmsShareResponse;
 import com.sdxd.cms.entity.CmsShare;
 import com.sdxd.cms.service.CmsShareService;
+import com.sdxd.common.utils.BillNoUtils;
 import com.sdxd.common.utils.KeyUtils;
 import com.sdxd.framework.constant.Constants;
 import com.sdxd.framework.dubbo.DubboResponse;
 
+import com.sdxd.user.api.UserService;
+import com.sdxd.user.api.request.InvitationRequest;
+import com.sdxd.user.api.request.UserBaseRequest;
 import com.sun.org.apache.regexp.internal.RE;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +33,11 @@ public class CmsShareDubboServiceImpl implements CmsShareDubboService {
 
 	@Resource
 	private CmsShareService cmsShareService;
+
+	@Reference(version = "1.0.0")
+    private UserService userService;
+
+
 
 	@Override
 	public DubboResponse<CmsShareResponse> findById(CmsShareRequest request) {
@@ -73,8 +83,6 @@ public class CmsShareDubboServiceImpl implements CmsShareDubboService {
 			return response;
 		}
 
-		Map<String, String> params = new HashMap<>();
-
 		CmsShareVo cmsShareVo = new CmsShareVo();
 		cmsShareVo.setId(cmsShare.getId());
 		cmsShareVo.setTitle(cmsShare.getTitle());
@@ -82,6 +90,24 @@ public class CmsShareDubboServiceImpl implements CmsShareDubboService {
 		cmsShareVo.setDescription(cmsShare.getDescription());
 		cmsShareVo.setImageCode(cmsShare.getImageCode());
 		cmsShareVo.setImageUrl(cmsShare.getImageUrl());
+		Map<String, String> params = new HashMap<>();
+
+		String userId = request.getUserId();
+
+        UserBaseRequest userBaseRequest = new UserBaseRequest();
+        userBaseRequest.setRequestId(BillNoUtils.GenerateBillNo());
+        DubboResponse<String> userServiceResponse = userService.queryIvtCode(userBaseRequest);
+        String inviteCode = userServiceResponse.getData();
+
+        InvitationRequest invitationRequest = new InvitationRequest();
+        invitationRequest.setRequestId(BillNoUtils.GenerateBillNo());
+        invitationRequest.setIvtCode(inviteCode);
+        DubboResponse<String> queryInviterResponse = userService.queryInviterPhone(invitationRequest);
+        String phone = queryInviterResponse.getData();
+        phone = phone.length() > 4 ? phone.substring(phone.length() - 4, phone.length()) : "0000";
+
+		params.put("1", phone); // phone
+		params.put("2", inviteCode); // InviteCode
 		cmsShareVo.setLink(KeyUtils.replaceKey(cmsShare.getLink(), params));
 
 		CmsShareResponse data = new CmsShareResponse();
