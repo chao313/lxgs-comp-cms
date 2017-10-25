@@ -37,8 +37,6 @@ public class CmsShareDubboServiceImpl implements CmsShareDubboService {
 	@Reference(version = "1.0.0")
     private UserService userService;
 
-
-
 	@Override
 	public DubboResponse<CmsShareResponse> findById(CmsShareRequest request) {
 		DubboResponse<CmsShareResponse> response = new DubboResponse<CmsShareResponse>();
@@ -92,10 +90,11 @@ public class CmsShareDubboServiceImpl implements CmsShareDubboService {
 		cmsShareVo.setImageUrl(cmsShare.getImageUrl());
 		Map<String, String> params = new HashMap<>();
 
-		String userId = request.getUserId();
+		Long userId = request.getUserId();
 
         UserBaseRequest userBaseRequest = new UserBaseRequest();
         userBaseRequest.setRequestId(BillNoUtils.GenerateBillNo());
+        userBaseRequest.setUserId(userId);
         DubboResponse<String> userServiceResponse = userService.queryIvtCode(userBaseRequest);
         String inviteCode = userServiceResponse.getData();
 
@@ -106,7 +105,7 @@ public class CmsShareDubboServiceImpl implements CmsShareDubboService {
         String phone = queryInviterResponse.getData();
         phone = phone.length() > 4 ? phone.substring(phone.length() - 4, phone.length()) : "0000";
 
-		params.put("1", phone); // phone
+		params.put("1", phone);      // phone
 		params.put("2", inviteCode); // InviteCode
 		cmsShareVo.setLink(KeyUtils.replaceKey(cmsShare.getLink(), params));
 
