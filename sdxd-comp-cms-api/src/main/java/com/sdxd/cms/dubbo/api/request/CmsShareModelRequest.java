@@ -14,7 +14,6 @@ public class CmsShareModelRequest extends BaseRequest{
     @NotNull
     private String id;
 
-    @NotNull
     private Long userId;
 
 }
