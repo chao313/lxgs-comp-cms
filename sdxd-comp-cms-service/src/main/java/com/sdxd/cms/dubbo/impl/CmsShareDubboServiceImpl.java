@@ -118,10 +118,10 @@ public class CmsShareDubboServiceImpl implements CmsShareDubboService {
         String phone = queryInviterResponse.getData();
         phone = phone.length() > 4 ? phone.substring(phone.length() - 4, phone.length()) : "0000";
 
-		params.put("1", phone);      // phone
-		params.put("2", inviteCode); // InviteCode
-		params.put("3", String.valueOf(info.getStartTime().getTime()));  // startTime
-		params.put("4", String.valueOf(info.getEndTime().getTime()));	 // endTime
+		params.put("param1", phone);      // phone
+		params.put("param2", inviteCode); // InviteCode
+		params.put("param3", String.valueOf(info.getStartTime().getTime()));  // startTime
+		params.put("param4", String.valueOf(info.getEndTime().getTime()));	 // endTime
 		cmsShareVo.setLink(KeyUtils.replaceKey(cmsShare.getLink(), params));
 
 		CmsShareResponse data = new CmsShareResponse();
