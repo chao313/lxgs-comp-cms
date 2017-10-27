@@ -14,6 +14,7 @@ import com.sdxd.cms.dubbo.api.response.CmsShareResponse;
 import com.sdxd.cms.entity.CmsShare;
 import com.sdxd.cms.service.CmsShareService;
 import com.sdxd.common.utils.BillNoUtils;
+import com.sdxd.common.utils.DateUtils;
 import com.sdxd.common.utils.KeyUtils;
 import com.sdxd.framework.constant.Constants;
 import com.sdxd.framework.dubbo.DubboResponse;
@@ -90,6 +91,9 @@ public class CmsShareDubboServiceImpl implements CmsShareDubboService {
 			return response;
 		}
 
+		DubboResponse<ActivityInfo> infoDubboResponse = activityService.getActivityByKey(req);
+		ActivityInfo info = infoDubboResponse.getData();
+
 		CmsShareVo cmsShareVo = new CmsShareVo();
 		cmsShareVo.setId(cmsShare.getId());
 		cmsShareVo.setTitle(cmsShare.getTitle());
@@ -116,6 +120,8 @@ public class CmsShareDubboServiceImpl implements CmsShareDubboService {
 
 		params.put("1", phone);      // phone
 		params.put("2", inviteCode); // InviteCode
+		params.put("3", String.valueOf(info.getStartTime().getTime()));  // startTime
+		params.put("4", String.valueOf(info.getEndTime().getTime()));	 // endTime
 		cmsShareVo.setLink(KeyUtils.replaceKey(cmsShare.getLink(), params));
 
 		CmsShareResponse data = new CmsShareResponse();
