@@ -2,6 +2,9 @@ package com.sdxd.cms.dubbo.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.sdxd.activities.api.ActivityDubboService;
+import com.sdxd.activities.api.dto.activity.ActivityInfo;
+import com.sdxd.activities.api.dto.activity.QueryByKeyReq;
 import com.sdxd.cms.dubbo.api.CmsShareDubboService;
 import com.sdxd.cms.dubbo.api.pojo.CmsShareVo;
 import com.sdxd.cms.dubbo.api.request.CmsShareModelRequest;
@@ -23,8 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Service(interfaceName = "com.sdxd.cms.dubbo.api.CmsShareDubboService", validation = "true", version = "1.0.0", timeout = 30000)
 public class CmsShareDubboServiceImpl implements CmsShareDubboService {
@@ -36,6 +38,9 @@ public class CmsShareDubboServiceImpl implements CmsShareDubboService {
 
 	@Reference(version = "1.0.0")
     private UserService userService;
+
+	@Reference(version = "1.0.0")
+	private ActivityDubboService activityService;
 
 	@Override
 	public DubboResponse<CmsShareResponse> findById(CmsShareRequest request) {
@@ -73,8 +78,12 @@ public class CmsShareDubboServiceImpl implements CmsShareDubboService {
 		response.setError(Constants.System.SERVER_SUCCESS);
 		response.setStatus(Constants.System.OK);
 
-		String id = request.getId();
-		CmsShare cmsShare = cmsShareService.getById(id);
+		String activityKey = request.getActivityKey();
+        QueryByKeyReq req = new QueryByKeyReq();
+        req.setRequestId(BillNoUtils.GenerateBillNo());
+        req.setKey(activityKey);
+		DubboResponse<String> dubboResponse = activityService.getCmsShareByActivityKey(req);
+		CmsShare cmsShare = cmsShareService.getById(dubboResponse.getData());
 		if(cmsShare==null) {
 			response.setError(Constants.System.PARAMS_INVALID);
 			response.setMsg(Constants.System.PARAMS_INVALID_MSG);

@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 public class CmsShareModelRequest extends BaseRequest{
 
     @NotNull
-    private String id;
+    private String activityKey;
 
     private Long userId;
 
