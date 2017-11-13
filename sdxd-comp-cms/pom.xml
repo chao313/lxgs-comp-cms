@@ -231,7 +231,7 @@
 				<conf.dubbo.registry.file>${user.home}/output/comp-cms.dubbo.cache</conf.dubbo.registry.file>
 				<conf.dubbo.consumer.check>true</conf.dubbo.consumer.check>
 				<conf.dubbo.protocol.name>dubbo</conf.dubbo.protocol.name>
-				<conf.dubbo.protocol.port>20880</conf.dubbo.protocol.port>
+				<conf.dubbo.protocol.port>20882</conf.dubbo.protocol.port>
 				<conf.dubbo.provider.loadbalance>roundrobin</conf.dubbo.provider.loadbalance>
 				<conf.dubbo.registry.protocol>zookeeper</conf.dubbo.registry.protocol>
 				<conf.dubbo.provider.service.timeout>6000</conf.dubbo.provider.service.timeout>
