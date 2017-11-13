@@ -60,7 +60,7 @@
         select
         <include refid="Base_Column_List"/>
         FROM t_other_channel_detail where channel_name = #{channelName,jdbcType=VARCHAR} and
-        channel_type=#{channelType,jdbcType=VARCHAR};
+        channel_type=#{channelType,jdbcType=VARCHAR} and `delete_flag` = 0;
     </select>
 
     <!-- 根据主键id 查询平台 -->
