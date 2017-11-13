@@ -1,6 +1,8 @@
 package com.sdxd.cms.dubbo.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sdxd.cms.dubbo.api.OtherChannelDetailDubboService;
 import com.sdxd.cms.dubbo.api.pojo.OtherChannelDetailVo;
 import com.sdxd.cms.dubbo.api.request.*;
@@ -36,6 +38,14 @@ public class OtherChannelDetailDubboServiceImpl implements OtherChannelDetailDub
 
     @Override
     public DubboResponse<OtherChannelDetailResponse> save(OtherChannelDetailRequest request) {
+        ObjectMapper mapper = new ObjectMapper();
+        String requestValue = null;
+        try {
+            requestValue = mapper.writeValueAsString(request);
+        } catch (JsonProcessingException e) {
+            requestValue = null;
+        }
+        LOGGER.debug("start create other channel: {}", requestValue);
         DubboResponse<OtherChannelDetailResponse> response = new DubboResponse<>();
         response.setError(Constants.System.SERVER_SUCCESS);
         response.setStatus(Constants.System.OK);
@@ -74,13 +84,14 @@ public class OtherChannelDetailDubboServiceImpl implements OtherChannelDetailDub
 //                    detail.setChannelIndex(request.getChannelIndex());
 //                }
 //            }
-            LOGGER.error("【合作平台】 ====================================>> 创建平台参数 {}", request);
+            LOGGER.debug("【合作平台】 ====================================>> 创建平台参数 {}", request);
             boolean bool = otherChannelDetailService.saveOtherChannelDetail(detail);
-            LOGGER.error("【合作平台】 ====================================>> 创建平台返回消息 {}", bool);
+            LOGGER.debug("【合作平台】 ====================================>> 创建平台返回消息 {}", bool);
             OtherChannelDetailResponse t = new OtherChannelDetailResponse();
             t.setSuccess(bool);
             response.setData(t);
         } catch (Exception e) {
+            e.printStackTrace();
             LOGGER.error("【合作平台】 ====================================>> 创建平台 bean copy error", e);
             response.setStatus(Constants.System.FAIL);
             response.setError(Constants.System.SYSTEM_ERROR_CODE);
