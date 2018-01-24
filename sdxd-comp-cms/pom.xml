@@ -221,13 +221,13 @@
 				<conf.mongodb.database.port>3717</conf.mongodb.database.port>
 				<conf.redis.db>7</conf.redis.db>
 				<conf.redis.password>devredis2017</conf.redis.password>
-				<conf.redis.master.host>devredis.dxd.in</conf.redis.master.host>
+				<conf.redis.master.host>redis.sdxd.in</conf.redis.master.host>
 				<conf.redis.master.port>6380</conf.redis.master.port>
-				<conf.redis.slaver.host>devredis.dxd.in</conf.redis.slaver.host>
+				<conf.redis.slaver.host>redis.sdxd.in</conf.redis.slaver.host>
 				<conf.redis.slaver.port>6380</conf.redis.slaver.port>
 				<conf.dubbo.application.name>cmp-cms</conf.dubbo.application.name>
 				<conf.dubbo.application.owner>wanghuamin</conf.dubbo.application.owner>
-				<conf.dubbo.registry.address>devzoo.dxd.in:3181,devzoo.dxd.in:3182,devzoo.dxd.in:3183</conf.dubbo.registry.address>
+				<conf.dubbo.registry.address>zoo.sdxd.in:3181,zoo.sdxd.in:3182,zoo.sdxd.in:3183</conf.dubbo.registry.address>
 				<conf.dubbo.registry.file>${user.home}/output/comp-cms.dubbo.cache</conf.dubbo.registry.file>
 				<conf.dubbo.consumer.check>true</conf.dubbo.consumer.check>
 				<conf.dubbo.protocol.name>dubbo</conf.dubbo.protocol.name>
