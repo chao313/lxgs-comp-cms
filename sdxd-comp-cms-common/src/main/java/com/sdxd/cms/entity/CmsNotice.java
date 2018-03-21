@@ -18,6 +18,7 @@ public class CmsNotice extends BaseEntity {
 	
 	private String title;
 	private String link;
-	private Integer deleteFlag;
 	private Date offlineTime;
+	private String merchantNo;
+	private Integer deleteFlag;
 }

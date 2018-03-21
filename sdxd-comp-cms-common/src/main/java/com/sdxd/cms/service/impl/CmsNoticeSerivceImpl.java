@@ -18,13 +18,13 @@ public class CmsNoticeSerivceImpl extends BaseServiceImpl<CmsNotice> implements 
 
 
     @Override
-    public List<CmsNotice> getAllOnline() {
-        return cmsNoticeDao.getAllOnline();
+    public List<CmsNotice> getAllOnline(String merchantNo) {
+        return cmsNoticeDao.getAllOnline(merchantNo);
     }
 
     @Override
-    public List<CmsNotice> getAllNotice() {
-        return cmsNoticeDao.getAllNotice();
+    public List<CmsNotice> getAllNotice(String merchantNo) {
+        return cmsNoticeDao.getAllNotice(merchantNo);
     }
 
 }

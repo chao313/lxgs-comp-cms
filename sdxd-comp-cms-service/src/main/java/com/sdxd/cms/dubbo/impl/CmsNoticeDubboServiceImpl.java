@@ -1,32 +1,29 @@
 package com.sdxd.cms.dubbo.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import com.sdxd.cms.dubbo.api.request.CmstomNoticeRequest;
-import com.sdxd.cms.utils.TransformUtil;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sdxd.cms.dubbo.api.CmsNoticeDubboService;
 import com.sdxd.cms.dubbo.api.pojo.CmsNoticeVo;
 import com.sdxd.cms.dubbo.api.request.CmsNoticeRequest;
+import com.sdxd.cms.dubbo.api.request.CmstomNoticeRequest;
 import com.sdxd.cms.dubbo.api.response.CmsNoticeResponse;
 import com.sdxd.cms.dubbo.api.response.QueryCmsNoticeResponse;
 import com.sdxd.cms.entity.CmsNotice;
 import com.sdxd.cms.service.CmsNoticeSerivce;
+import com.sdxd.cms.utils.TransformUtil;
 import com.sdxd.common.redis.template.RedisClientTemplate;
 import com.sdxd.common.utils.BeanUtils;
 import com.sdxd.framework.constant.Constants;
 import com.sdxd.framework.dubbo.DubboResponse;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service(interfaceName = "com.sdxd.cms.dubbo.api.CmsNoticeDubboService", validation = "true", version = "1.0.0", timeout = 30000)
 public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
@@ -202,9 +199,9 @@ public class CmsNoticeDubboServiceImpl implements CmsNoticeDubboService {
         try {
             List<CmsNotice> list = null;
             if (true == status) {
-                list = cmsNoticeService.getAllOnline();
+                list = cmsNoticeService.getAllOnline(request.getMerchantNo());
             } else {
-                list = cmsNoticeService.getAllNotice();
+                list = cmsNoticeService.getAllNotice(request.getMerchantNo());
             }
             List<CmsNoticeVo> list1 = TransformUtil.toList(list, CmsNoticeVo.class);
             res.setList(list1);

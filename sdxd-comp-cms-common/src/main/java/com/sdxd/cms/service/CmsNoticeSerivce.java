@@ -7,6 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 public interface CmsNoticeSerivce extends BaseService<CmsNotice> {
-    List<CmsNotice> getAllOnline();
-    List<CmsNotice> getAllNotice();
+    List<CmsNotice> getAllOnline(String merchantNo);
+    List<CmsNotice> getAllNotice(String merchantNo);
 }

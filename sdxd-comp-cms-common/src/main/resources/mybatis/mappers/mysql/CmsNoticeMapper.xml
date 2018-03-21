@@ -9,6 +9,9 @@
         SELECT *
         FROM t_cms_notice
         WHERE delete_flag=0
+        <if test="merchantNo!=null">
+        AND merchant_no = #{merchantNo,jdbcType=VARCHAR}
+        </if>
         AND
         (
           offline_time  &gt;  NOW()
@@ -21,6 +24,9 @@
         SELECT *
         FROM t_cms_notice
         WHERE delete_flag=0
+        <if test="merchantNo!=null">
+        AND merchant_no = #{merchantNo,jdbcType=VARCHAR}
+        </if>
     </select>
 
 </mapper>
