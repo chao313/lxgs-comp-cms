@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 提供方应用信息 -->
+    <dubbo:application name="${dubbo.application.name}" owner="${dubbo.application.owner}"/>
+
+    <!-- 注册中心 -->
+    <dubbo:registry protocol="${dubbo.registry.protocol}" address="${dubbo.registry.address}" file="${dubbo.registry.file}"/>
+
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}"/>
+    <!-- 不配置端口让dubbo自动分配,客户端在注册中心可以获取到端口 -->
+    <!-- <dubbo:protocol name="${dubbo.protocol.name}" port="-1" /> -->
+
+    <dubbo:provider loadbalance="${dubbo.provider.loadbalance}" delay="-1" timeout="${dubbo.provider.service.timeout}" retries="0"/>
+
+    <!-- 扫描注解包路径，多个包用逗号分隔，不填pacakge表示扫描当前ApplicationContext中所有的类 -->
+    <dubbo:annotation package="com.lxgs.cms.dubbo"/>
+    
+    <context:component-scan base-package="com.lxgs.cms.dubbo.outApi">
+		<context:include-filter type="annotation" expression="com.alibaba.dubbo.config.annotation.Reference" />
+	</context:component-scan>
+    <!--<dubbo:service interface="com.sdxd.auth.dubbo.api.BankDubboServicervice" ref="bankManagerImpl" />-->
+</beans>

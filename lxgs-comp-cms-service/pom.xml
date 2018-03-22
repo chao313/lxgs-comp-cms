@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.lxgs.cms</groupId>
+		<artifactId>lxgs-comp-cms-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>lxgs-comp-cms-service</artifactId>
+	<packaging>jar</packaging>
+	
+	<properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+	
+	<name>lxgs-comp-cms-service</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.lxgs.cms</groupId>
+			<artifactId>lxgs-comp-cms-api</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sdxd.admin</groupId>
+			<artifactId>sdxd-comp-admin-api</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.lxgs.cms</groupId>
+			<artifactId>lxgs-comp-cms-common</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.lxgs.cms</groupId>
+			<artifactId>lxgs-comp-cms-zhuge-util</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sdxd.activities</groupId>
+			<artifactId>activities-api</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- <dependency>
+			<groupId>com.aliyun.openservices</groupId>
+			<artifactId>ons-client</artifactId>
+			<version>1.2.5</version>
+		</dependency> -->
+		<dependency>
+			<groupId>com.sdxd.mqmock</groupId>
+			<artifactId>sdxd-comp-mqmock</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sdxd.common</groupId>
+			<artifactId>sdxd-common-redis</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sdxd.common.mq</groupId>
+			<artifactId>sdxd-common-mq</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sdxd.user</groupId>
+			<artifactId>user-api</artifactId>
+			<version>1.1.5.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+		</dependency>
+	</dependencies>
+</project>

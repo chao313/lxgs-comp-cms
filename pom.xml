@@ -6,8 +6,8 @@
 		<artifactId>sdxd-common-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<groupId>com.sdxd.cms</groupId>
-	<artifactId>sdxd-comp-cms-parent</artifactId>
+	<groupId>com.lxgs.cms</groupId>
+	<artifactId>lxgs-comp-cms-parent</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
@@ -17,15 +17,15 @@
 		<httpclient.version>4.4</httpclient.version>
 	</properties>
 
-	<name>sdxd-comp-cms-parent</name>
+	<name>lxgs-comp-cms-parent</name>
 	<url>http://maven.apache.org</url>
 	<modules>
-		<module>sdxd-comp-cms-api</module>
-    <module>sdxd-comp-cms-common</module>
-    <module>sdxd-comp-cms-service</module>
-    <module>sdxd-comp-cms</module>
-    <module>sdxd-comp-cms-test</module>
-    <module>sdxd-comp-cms-zhuge-util</module>
+		<module>lxgs-comp-cms-api</module>
+		<module>lxgs-comp-cms-common</module>
+		<module>lxgs-comp-cms-service</module>
+		<module>lxgs-comp-cms</module>
+		<module>lxgs-comp-cms-test</module>
+		<module>lxgs-comp-cms-zhuge-util</module>
   </modules>
 	
 	

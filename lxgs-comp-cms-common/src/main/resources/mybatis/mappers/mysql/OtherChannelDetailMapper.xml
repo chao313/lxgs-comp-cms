@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxgs.cms.dao.OtherChannelDetailDao">
+
+    <resultMap id="getMap" type="com.lxgs.cms.entity.OtherChannelDetail">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="channel_logo" property="channelLogo" jdbcType="VARCHAR"/>
+        <result column="channel_name" property="channelName" jdbcType="VARCHAR"/>
+        <result column="channel_slogn" property="channelSlogn" jdbcType="VARCHAR"/>
+        <result column="channel_url" property="channelUrl" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="TINYINT"/>
+        <result column="channel_index" property="channelIndex" jdbcType="TINYINT"/>
+        <result column="channel_type" property="channelType" jdbcType="VARCHAR"/>
+        <result column="channel_show" property="channelShow" jdbcType="TINYINT"/>
+        <result column="channel_show_type" property="channelShowType" jdbcType="VARCHAR"/>
+        <result column="channel_image" property="channelImage" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, channel_logo, channel_name, channel_slogn, channel_url, create_time, update_time, delete_flag,channel_index,channel_type,channel_show,channel_show_type,channel_image
+    </sql>
+
+    <!-- 创建平台信息 -->
+    <insert id="saveOtherChannelDetail" parameterType="com.lxgs.cms.entity.OtherChannelDetail">
+        INSERT  INTO
+          `t_other_channel_detail` (`id`,`channel_logo`,`channel_name`,`channel_slogn`,`channel_url`,`create_time`,`update_time`,
+          `delete_flag`,`channel_index`,`channel_type`,`channel_show`,`channel_show_type`,`channel_image`)
+        VALUES
+        (#{id,jdbcType=VARCHAR},#{channelLogo,jdbcType=VARCHAR}, #{channelName,jdbcType=VARCHAR}, #{channelSlogn,jdbcType=VARCHAR},
+        #{channelUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},
+        #{deleteFlag,jdbcType=TINYINT},#{channelIndex,jdbcType=TINYINT},#{channelType,jdbcType=VARCHAR},#{channelShow,jdbcType=TINYINT},
+        #{channelShowType,jdbcType=VARCHAR},#{channelImage,jdbcType=VARCHAR});
+    </insert>
+
+    <!-- 删除平台信息 -->
+    <update id="updateDeleteFlag">
+      UPDATE t_other_channel_detail set delete_flag =#{deleteFlag,jdbcType=TINYINT} where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 修改平台消息 -->
+    <update id="updateOtherChannelDetail" parameterType="com.lxgs.cms.entity.OtherChannelDetail">
+        UPDATE t_other_channel_detail set
+            `channel_logo` = #{channelLogo,jdbcType=VARCHAR},
+            `channel_name` = #{channelName,jdbcType=VARCHAR},
+            `channel_slogn`= #{channelSlogn,jdbcType=VARCHAR},
+            `channel_url` = #{channelUrl,jdbcType=VARCHAR},
+            `update_time` = #{updateTime,jdbcType=TIMESTAMP},
+            `channel_index` =   #{channelIndex,jdbcType=TINYINT},
+            `channel_type` = #{channelType,jdbcType=VARCHAR},
+            `channel_show` =   #{channelShow,jdbcType=TINYINT},
+            `channel_show_type` =   #{channelShowType,jdbcType=VARCHAR},
+            `channel_image` = #{channelImage,jdbcType=VARCHAR}
+         where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 根据平台name查询平台信息  -->
+    <select id="queryByChannelName" parameterType="java.lang.String" resultMap="getMap">
+        select
+        <include refid="Base_Column_List"/>
+        FROM t_other_channel_detail where channel_name = #{channelName,jdbcType=VARCHAR} and
+        channel_type=#{channelType,jdbcType=VARCHAR} and `delete_flag` = 0;
+    </select>
+
+    <!-- 根据主键id 查询平台 -->
+    <select id="queryById" parameterType="java.lang.String" resultMap="getMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_other_channel_detail
+        where id = #{id,jdbcType=VARCHAR} ;
+    </select>
+
+    <!-- 平台列表 -->
+    <select id="queryByPage" resultMap="getMap" parameterType="java.lang.Integer">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_other_channel_detail WHERE `delete_flag` =0 ORDER BY channel_index ASC,channel_show desc ,create_time
+        DESC
+        <if test="pageStart!=null and pageSize!=null">
+            limit #{pageStart},#{pageSize}
+        </if>
+    </select>
+
+    <!-- 查询总数-->
+    <select id="queryCount" resultType="java.lang.Integer">
+        SELECT count(1) FROM  t_other_channel_detail WHERE `delete_flag` =0 ;
+    </select>
+
+    <!-- 查询所有 -->
+    <select id="queryAll" resultMap="getMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_other_channel_detail WHERE `delete_flag` = 0 AND channel_show = 1
+        <if test="channelType!=null">
+            and channel_type = upper( #{channelType})
+        </if>
+        ORDER BY channel_index ASC ,create_time DESC
+    </select>
+
+    <!-- 根据位置查询 -->
+    <select id="queryByChannelIndex" parameterType="java.lang.Integer" resultMap="getMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_other_channel_detail
+        where channel_index = #{channelIndex,jdbcType=TINYINT} ;
+    </select>
+
+    <select id="queryByIndexAndId" resultMap="getMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_other_channel_detail
+        where channel_index = #{channelIndex,jdbcType=TINYINT} and id != #{id,jdbcType=VARCHAR}
+    </select>
+
+    <update id="onOff" parameterType="java.lang.Integer">
+          UPDATE t_other_channel_detail set channel_show = #{channelShow,jdbcType=TINYINT}  ;
+    </update>
+
+    <select id="offStatus" resultMap="getMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from t_other_channel_detail limit 1;
+    </select>
+</mapper>
