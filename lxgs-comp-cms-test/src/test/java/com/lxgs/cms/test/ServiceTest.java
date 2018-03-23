@@ -76,7 +76,7 @@ public class ServiceTest extends BaseTest{
 		request.setRequestId(BillNoUtils.GenerateBillNo());
 		request.setType(CmsBannerType.APP.toString());
 		DubboResponse<QueryCmsBannerResponse> rt = cmsBannerService.queryCmsBanner(request);
-		System.out.println("");
+		System.out.println("谢谢");
 	}
 	
 	@Test

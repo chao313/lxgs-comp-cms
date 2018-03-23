@@ -136,9 +136,10 @@
 			</activation>
 			<properties>
 				<conf.database.driverClassName>com.mysql.jdbc.Driver</conf.database.driverClassName>
-				<conf.database.url><![CDATA[jdbc:mysql://rm-bp1a224o5dj0p5g1e.mysql.rds.aliyuncs.com:3306/dev_sdxd?useUnicode=true&characterEncoding=UTF-8]]></conf.database.url>
-				<conf.database.user>dev</conf.database.user>
-				<conf.database.password>Ururoto2017</conf.database.password>
+				<conf.database.url>
+					<![CDATA[jdbc:mysql://10.100.12.17:3306/dev_lxgs?useUnicode=true&characterEncoding=UTF-8]]></conf.database.url>
+				<conf.database.user>lcdev</conf.database.user>
+				<conf.database.password>LCdev2017</conf.database.password>
 				<conf.system.check.permission>true</conf.system.check.permission>
 				<conf.system.timeout>1800</conf.system.timeout>
 				<conf.activitemq.brokerURL.host>failover://(ttp://192.168.4.166:7777/)</conf.activitemq.brokerURL.host>
@@ -172,9 +173,10 @@
 			</activation>
 			<properties>
 				<conf.database.driverClassName>com.mysql.jdbc.Driver</conf.database.driverClassName>
-				<conf.database.url><![CDATA[jdbc:mysql://rm-bp1a224o5dj0p5g1e.mysql.rds.aliyuncs.com:3306/sdxd?useUnicode=true&characterEncoding=UTF-8]]></conf.database.url>
-				<conf.database.user>xd</conf.database.user>
-				<conf.database.password>UGc90iexspvdzu</conf.database.password>
+				<conf.database.url>
+					<![CDATA[jdbc:mysql://10.100.12.17:3306/dev_lxgs?useUnicode=true&characterEncoding=UTF-8]]></conf.database.url>
+				<conf.database.user>lcdev</conf.database.user>
+				<conf.database.password>LCdev2017</conf.database.password>
 				<conf.system.check.permission>true</conf.system.check.permission>
 				<conf.system.timeout>1800</conf.system.timeout>
 				<conf.activitemq.brokerURL.host>failover://(ttp://192.168.4.166:7777/)</conf.activitemq.brokerURL.host>
@@ -191,7 +193,9 @@
 				<conf.redis.slaver.port>6379</conf.redis.slaver.port>
 				<conf.dubbo.application.name>cmp-cms</conf.dubbo.application.name>
 				<conf.dubbo.application.owner>wanghuamin</conf.dubbo.application.owner>
-				<conf.dubbo.registry.address>10.253.105.39:2181,10.253.105.39:2182,10.253.105.39:2183</conf.dubbo.registry.address>
+				<conf.dubbo.registry.address>
+					10.100.10.206:2181,10.100.10.65:2181,10.100.11.107:2181
+				</conf.dubbo.registry.address>
 				<conf.dubbo.registry.file>${user.home}/output/cmp-cms.dubbo.cache</conf.dubbo.registry.file>
 				<conf.dubbo.consumer.check>true</conf.dubbo.consumer.check>
 				<conf.dubbo.protocol.name>dubbo</conf.dubbo.protocol.name>
@@ -208,9 +212,10 @@
 			</activation>
 			<properties>
 				<conf.database.driverClassName>com.mysql.jdbc.Driver</conf.database.driverClassName>
-				<conf.database.url><![CDATA[jdbc:mysql://rm-bp1a224o5dj0p5g1e.mysql.rds.aliyuncs.com:3306/dev_sdxd?useUnicode=true&characterEncoding=UTF-8]]></conf.database.url>
-				<conf.database.user>dev</conf.database.user>
-				<conf.database.password>Ururoto2017</conf.database.password>
+				<conf.database.url>
+					<![CDATA[jdbc:mysql://10.100.12.17:3306/dev_lxgs?useUnicode=true&characterEncoding=UTF-8]]></conf.database.url>
+				<conf.database.user>lcdev</conf.database.user>
+				<conf.database.password>LCdev2017</conf.database.password>
 				<conf.system.check.permission>true</conf.system.check.permission>
 				<conf.system.timeout>1800</conf.system.timeout>
 				<conf.activitemq.brokerURL.host>failover://(ttp://192.168.4.166:7777/)</conf.activitemq.brokerURL.host>
@@ -227,7 +232,9 @@
 				<conf.redis.slaver.port>6380</conf.redis.slaver.port>
 				<conf.dubbo.application.name>cmp-cms</conf.dubbo.application.name>
 				<conf.dubbo.application.owner>wanghuamin</conf.dubbo.application.owner>
-				<conf.dubbo.registry.address>zoo.sdxd.in:3181,zoo.sdxd.in:3182,zoo.sdxd.in:3183</conf.dubbo.registry.address>
+				<conf.dubbo.registry.address>
+					10.100.10.206:2181,10.100.10.65:2181,10.100.11.107:2181
+				</conf.dubbo.registry.address>
 				<conf.dubbo.registry.file>${user.home}/output/comp-cms.dubbo.cache</conf.dubbo.registry.file>
 				<conf.dubbo.consumer.check>true</conf.dubbo.consumer.check>
 				<conf.dubbo.protocol.name>dubbo</conf.dubbo.protocol.name>
